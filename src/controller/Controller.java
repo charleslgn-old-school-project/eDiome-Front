@@ -3,7 +3,6 @@ package controller;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -25,6 +24,9 @@ public class Controller implements Initializable {
 
     @FXML
     private TextField textMessage;
+
+    @FXML
+    private TextField textPseudo;
 
     ServerInterface obj;
 
@@ -69,5 +71,11 @@ public class Controller implements Initializable {
     @FXML
     public void send(){
 
+        try {
+            obj.send(textPseudo.getText(), textMessage.getText());
+            textMessage.setText("");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 }
