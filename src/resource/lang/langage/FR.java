@@ -18,10 +18,10 @@ public class FR extends Lang {
 
     @Override
     protected String[] getTitleName() {
-        String languageToMorse  = "Français vers Morse";
-        String languageToL33t   = "Français vers L33t";
-        String morseToLanguage  = "Morse vers Français";
-        String directTranslate  = "Traduction directe";
+        String languageToMorse  = "Serveur 1";
+        String languageToL33t   = "Serveur 2";
+        String morseToLanguage  = "etc";
+        String directTranslate  = "...";
 
         return new String[] {languageToMorse, languageToL33t,
                 morseToLanguage, directTranslate};
@@ -29,10 +29,10 @@ public class FR extends Lang {
 
     @Override
     protected String[] getLabel() {
-        String writeRoman  = "Écrire en français";
-        String writeMorse  = "Écrire en morse";
+        String writeRoman  = "";
+        String writeMorse  = "";
         String welcome     = "Bienvenue";
-        String title       = "Traducteur";
+        String title       = "eDiome";
 
         return new String[] {writeRoman, writeMorse, welcome, title};
     }

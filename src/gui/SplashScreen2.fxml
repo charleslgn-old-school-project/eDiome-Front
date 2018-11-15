@@ -55,7 +55,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ProgressBar fx:id="progressbar" opacity="0.5" prefHeight="18.0" prefWidth="326.0" stylesheets="@css/ProgressBar.css" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <ProgressBar fx:id="progressbar" opacity="0.5" prefHeight="18.0" prefWidth="326.0" stylesheets="@css/object/ProgressBar.css" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </children>

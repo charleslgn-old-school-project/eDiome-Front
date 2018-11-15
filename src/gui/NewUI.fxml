@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="pnPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewUIController">
+<VBox fx:id="pnPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0" stylesheets="@css/main-black.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewUIController">
    <children>
       <GridPane fx:id="pnPrincipal2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="751.0" prefWidth="1332.0">
          <columnConstraints>
@@ -30,7 +30,7 @@
             <RowConstraints maxHeight="670.0" minHeight="10.0" prefHeight="657.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <MenuBar fx:id="mnuBar" prefHeight="46.0" prefWidth="266.0" style="-fx-background-color: rgb(12, 12, 13);" stylesheets="@css/Menubar.css" GridPane.rowIndex="1">
+            <MenuBar fx:id="mnuBar" prefHeight="46.0" prefWidth="266.0" style="-fx-background-color: rgb(12, 12, 13);" stylesheets="@css/object/Menubar.css" GridPane.rowIndex="1">
                <menus>
                   <Menu fx:id="mnuMenu" mnemonicParsing="false" text="Menu">
                      <items>
@@ -66,23 +66,23 @@
                   <RowConstraints minHeight="10.0" percentHeight="60.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="AffichageIRC" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#AffichageIRCClick" stylesheets="@./css/BoutonsDashBoard.css" text="Serveur 1" />
-                  <Button fx:id="btFrToLeet" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#btFrToLeetClick" stylesheets="@./css/BoutonsDashBoard.css" text="Serveur 2" GridPane.rowIndex="1" />
-                  <Button fx:id="btMorseToFr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#btMorseToFrClick" stylesheets="@./css/BoutonsDashBoard.css" text="etc.." GridPane.rowIndex="2" />
-                  <Button fx:id="btTradDirecte" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#btTradDirecteClick" stylesheets="@./css/BoutonsDashBoard.css" text="etc..." GridPane.rowIndex="3" />
+                  <Button fx:id="AffichageIRC" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#AffichageIRCClick" stylesheets="@css/object/BoutonsDashBoard.css" text="Serveur 1" />
+                  <Button fx:id="btFrToLeet" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#btFrToLeetClick" stylesheets="@css/object/BoutonsDashBoard.css" text="Serveur 2" GridPane.rowIndex="1" />
+                  <Button fx:id="btMorseToFr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#btMorseToFrClick" stylesheets="@css/object/BoutonsDashBoard.css" text="etc.." GridPane.rowIndex="2" />
+                  <Button fx:id="btTradDirecte" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#btTradDirecteClick" stylesheets="@css/object/BoutonsDashBoard.css" text="etc..." GridPane.rowIndex="3" />
                   <Label fx:id="lbBienvenu" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" textAlignment="JUSTIFY" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets bottom="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <Separator prefWidth="200.0" stylesheets="@css/BoutonsDashBoard.css" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                  <Separator prefWidth="200.0" stylesheets="@css/BoutonsDashBoard.css" GridPane.valignment="TOP" />
-                  <Separator prefWidth="200.0" stylesheets="@css/BoutonsDashBoard.css" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-                  <Separator prefWidth="200.0" stylesheets="@css/BoutonsDashBoard.css" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-                  <Separator prefWidth="200.0" stylesheets="@css/BoutonsDashBoard.css" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+                  <Separator prefWidth="200.0" stylesheets="@css/object/BoutonsDashBoard.css" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <Separator prefWidth="200.0" stylesheets="@css/object/BoutonsDashBoard.css" GridPane.valignment="TOP" />
+                  <Separator prefWidth="200.0" stylesheets="@css/object/BoutonsDashBoard.css" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+                  <Separator prefWidth="200.0" stylesheets="@css/object/BoutonsDashBoard.css" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <Separator prefWidth="200.0" stylesheets="@css/object/BoutonsDashBoard.css" GridPane.rowIndex="4" GridPane.valignment="TOP" />
                </children>
             </GridPane>
-            <Pane fx:id="pnZoneTravail" minWidth="-Infinity" styleClass="pn-zone-travail" stylesheets="@css/NewUICSS.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Pane fx:id="pnZoneTravail" minWidth="-Infinity" styleClass="pn-zone-travail" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Separator prefHeight="0.0" prefWidth="266.0" style="-fx-background-color: white;" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
             <Pane prefHeight="80.0" prefWidth="1066.0" style="-fx-background-color: rgb(32,34,37);" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="lbTitre" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
@@ -120,7 +120,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnClose" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#close" prefHeight="34.0" prefWidth="56.0" stylesheets="@css/closebutton.css" text="X" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                  <Button fx:id="btnClose" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#close" prefHeight="34.0" prefWidth="56.0" stylesheets="@css/object/closebutton.css" text="X" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>

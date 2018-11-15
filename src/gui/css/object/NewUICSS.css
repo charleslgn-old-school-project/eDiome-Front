@@ -1,0 +1,46 @@
+.label {
+    -fx-text-fill: white;
+}
+
+.text-field, .text-area .content {
+    -fx-border-color:     -text-field-color;
+    -fx-background-color: -text-field-color;
+}
+
+.text-area{
+    -fx-background-color: -text-field-color;
+}
+
+.text-input{
+    -fx-text-fill: white;
+}
+
+.pn-zone-travail {
+    -fx-background-color:  -pn-zone-principale-color;
+}
+
+.VBox{
+    -fx-background-color: -v-box-color;
+}
+
+.Pane{
+    -fx-background-color : rgb(54, 57, 63)
+}
+
+.label {
+    -fx-text-fill: -ecriture-clor;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane{
+    -fx-background-color: -text-field-color;
+}
+
+.text-input{
+    -fx-text-fill: -ecriture-clor;
+}
+
+

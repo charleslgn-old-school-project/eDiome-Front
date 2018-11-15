@@ -1,0 +1,10 @@
+@import url("object/NewUICSS.css");
+
+* {
+    -pn-zone-principale-color : rgb(54, 57, 63) ;
+    -text-field-color         : rgb(72, 75, 81);
+    -v-box-color         : rgb(32,34,37);
+    -ecriture-clor : white;
+
+}
+

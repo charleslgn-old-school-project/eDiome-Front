@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="panShadow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="600.0" style="-fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 4, 4); -fx-background-color: derive(rgb(255, 255, 255), -20%);" stylesheets="@css/a-propos.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProposController">
+<StackPane fx:id="panShadow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="600.0" style="-fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 4, 4); -fx-background-color: derive(rgb(255, 255, 255), -20%);" stylesheets="@css/object/a-propos.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProposController">
    <children>
       <GridPane prefHeight="400.0" prefWidth="600.0" style="-fx-effect: dropshadow(three-pass-box,  black, 50, 0, 0, 0); -fx-background-color: rgb(50, 50, 60);">
          <columnConstraints>
