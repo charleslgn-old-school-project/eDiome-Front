@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1010.0" stylesheets="@css/chat.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <bottom>
       <Pane prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="534.0" layoutY="15.0" mnemonicParsing="false" onAction="#send" text="Send" />
+            <Button layoutX="953.0" layoutY="15.0" mnemonicParsing="false" onAction="#send" text="Send" />
             <TextField fx:id="textMessage" layoutX="14.0" layoutY="15.0" prefHeight="25.0" prefWidth="511.0" />
          </children>
       </Pane>
@@ -24,7 +25,8 @@
    <top>
       <Pane prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="textPseudo" layoutX="437.0" layoutY="10.0" />
+            <TextField fx:id="textPseudo" layoutX="823.0" layoutY="10.0" prefHeight="25.0" prefWidth="173.0" />
+            <Label layoutX="763.0" layoutY="14.0" prefHeight="17.0" prefWidth="50.0" text="Pseudo :" />
          </children>
       </Pane>
    </top>
