@@ -259,7 +259,7 @@ public class NewUIController {
             lbTitre.setText(Translate.haveIt(titre, lang.titleName));
         }
 
-        Main.getPrimaryStage().setTitle(Translate.haveIt(LabelName.TITLE, lang.label));
+        //Main.getPrimaryStage().setTitle(Translate.haveIt(LabelName.TITLE, lang.label));
         AffichageIRC.setText(Translate.haveIt(TitleName.LANGUAGE_TO_MORSE, lang.titleName));
         btFrToLeet.setText(Translate.haveIt(TitleName.LANGUAGE_TO_L33T, lang.titleName));
         btMorseToFr.setText(Translate.haveIt(TitleName.MORSE_TO_LANGUAGE, lang.titleName));

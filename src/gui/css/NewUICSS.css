@@ -14,3 +14,12 @@
 .text-input{
     -fx-text-fill: white;
 }
+
+.pn-zone-travail {
+    -fx-background-color: rgb(54, 57, 63)
+}
+
+.VBox{
+    -fx-background-color: rgb(32,34,37);
+}
+
