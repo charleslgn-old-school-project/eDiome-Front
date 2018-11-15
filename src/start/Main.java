@@ -20,7 +20,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //Parent root = FXMLLoader.load(getClass().getResource("../gui/sample.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("../gui/IRC.fxml"));
 
         //com.sun.javafx.util.Logging.getJavaFXLogger().setLevel(sun.util.logging.PlatformLogger.Level.OFF);
 
@@ -30,7 +30,9 @@ public class Main extends Application {
         primaryStage.setTitle("IRC");
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root, 1280, 720));
-        primaryStage.getScene().getStylesheets().add("gui/css/main-black.css");
+
+        Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-black.css").toExternalForm());
+
         primaryStage.show();
     }
 

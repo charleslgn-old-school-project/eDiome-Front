@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="pnPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0" stylesheets="@css/main-black.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewUIController">
+<VBox fx:id="pnPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewUIController">
    <children>
       <GridPane fx:id="pnPrincipal2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="751.0" prefWidth="1332.0">
          <columnConstraints>
@@ -36,8 +36,8 @@
                      <items>
                         <Menu mnemonicParsing="false" text="style">
                           <items>
-                            <MenuItem fx:id="toWhite" mnemonicParsing="false" text="Blanc" />
-                              <MenuItem fx:id="toBlack" mnemonicParsing="false" text="Noir" />
+                            <MenuItem mnemonicParsing="false" onAction="#toWhite" text="Blanc" />
+                              <MenuItem mnemonicParsing="false" onAction="#toBlack" text="Noir" />
                           </items>
                         </Menu>
                         <Menu fx:id="mnuLanguage" mnemonicParsing="false" text="Langue">

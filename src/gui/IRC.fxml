@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
    <bottom>
       <Pane prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -17,7 +17,7 @@
       </Pane>
    </bottom>
    <center>
-      <ScrollPane fx:id="paneChat" prefHeight="200.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="paneChat" prefHeight="520.0" prefWidth="990.0" BorderPane.alignment="CENTER">
          <content>
          </content>
       </ScrollPane>
@@ -30,4 +30,10 @@
          </children>
       </Pane>
    </top>
+   <left>
+      <Pane prefHeight="200.0" prefWidth="10.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Pane prefHeight="200.0" prefWidth="10.0" BorderPane.alignment="CENTER" />
+   </right>
 </BorderPane>

@@ -188,7 +188,7 @@ public class NewUIController {
         this.lbTitre.setText("Français vers Morse");
         fadeout(this.pnZoneTravail);
         titre = TitleName.LANGUAGE_TO_MORSE;
-        loadFxml("..//gui/sample.fxml");
+        loadFxml("..//gui/IRC.fxml");
     }
 
     /**
@@ -327,12 +327,13 @@ public class NewUIController {
     }
 
     public void toBlack(){
+        System.out.println("hcjdhdj");
         Main.getPrimaryStage().getScene().getStylesheets().clear();
-        Main.getPrimaryStage().getScene().getStylesheets().add("gui/css/main-black.css");
+        Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-black.css").toExternalForm());
     }
     public void toWhite(){
         Main.getPrimaryStage().getScene().getStylesheets().clear();
-        Main.getPrimaryStage().getScene().getStylesheets().add("gui/css/main-white.css");
+        Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-white.css").toExternalForm());
     }
 }
 

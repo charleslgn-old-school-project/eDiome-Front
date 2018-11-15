@@ -19,7 +19,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.*;
 
-public class Controller implements Initializable {
+public class IRCController implements Initializable {
 
     @FXML
     private ScrollPane paneChat;
