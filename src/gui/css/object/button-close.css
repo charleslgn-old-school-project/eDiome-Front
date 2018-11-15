@@ -1,0 +1,11 @@
+.btn-close{
+    -fx-padding: 5 0 5 0;
+    -fx-background-radius: 0;
+    -fx-background-color: -button-close-color;
+    -fx-text-fill: -button-close-text-color;
+}
+
+.btn-close:hover{
+    -fx-background-color: -button-close-color-OVER;
+    -fx-text-fill: -button-close-text-color-OVER;
+}

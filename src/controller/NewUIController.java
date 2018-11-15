@@ -325,5 +325,14 @@ public class NewUIController {
             System.out.println(ex);
         }
     }
+
+    public void toBlack(){
+        Main.getPrimaryStage().getScene().getStylesheets().clear();
+        Main.getPrimaryStage().getScene().getStylesheets().add("gui/css/main-black.css");
+    }
+    public void toWhite(){
+        Main.getPrimaryStage().getScene().getStylesheets().clear();
+        Main.getPrimaryStage().getScene().getStylesheets().add("gui/css/main-white.css");
+    }
 }
 

@@ -1,0 +1,34 @@
+.menu-item{
+    -fx-border-color:     -menu-item-color ;
+    -fx-background-color: -menu-bar-color ;
+}
+
+
+.menu-bar, .menu{
+    -fx-background-color:  -menu-bar-color;
+    -fx-border-color:      -menu-bar-color;
+}
+
+.menu-bar {
+    -fx-border-color: -menu-item-color;
+}
+
+
+.context-menu {
+    -fx-padding: 0;
+}
+
+.menu-item:hover{
+    -fx-background-color: -menu-item-color-OVER;
+    -fx-border-color: -menu-item-color-OVER;
+}
+
+.menu-bar-2{
+    -fx-background-color: -menu-bar-2-color;
+    -fx-border-color: -menu-bar-2-color;
+}
+
+.lateral-bar{
+    -fx-background-color: -lateral-bar-color;
+}
+

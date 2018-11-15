@@ -30,6 +30,7 @@ public class Main extends Application {
         primaryStage.setTitle("IRC");
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root, 1280, 720));
+        primaryStage.getScene().getStylesheets().add("gui/css/main-black.css");
         primaryStage.show();
     }
 

@@ -30,10 +30,16 @@
             <RowConstraints maxHeight="670.0" minHeight="10.0" prefHeight="657.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <MenuBar fx:id="mnuBar" prefHeight="46.0" prefWidth="266.0" style="-fx-background-color: rgb(12, 12, 13);" stylesheets="@css/object/Menubar.css" GridPane.rowIndex="1">
+            <MenuBar fx:id="mnuBar" prefHeight="46.0" prefWidth="266.0" stylesheets="@css/object/menu-bar.css" GridPane.rowIndex="1">
                <menus>
                   <Menu fx:id="mnuMenu" mnemonicParsing="false" text="Menu">
                      <items>
+                        <Menu mnemonicParsing="false" text="style">
+                          <items>
+                            <MenuItem fx:id="toWhite" mnemonicParsing="false" text="Blanc" />
+                              <MenuItem fx:id="toBlack" mnemonicParsing="false" text="Noir" />
+                          </items>
+                        </Menu>
                         <Menu fx:id="mnuLanguage" mnemonicParsing="false" text="Langue">
                           <items>
                               <MenuItem fx:id="mnuFr" mnemonicParsing="false" onAction="#toFr" text="Français" />
@@ -54,7 +60,7 @@
                   <Insets />
                </GridPane.margin>
             </MenuBar>
-            <GridPane style="-fx-background-color: rgb(47,49,54);" GridPane.rowIndex="3">
+            <GridPane styleClass="lateral-bar" GridPane.rowIndex="3">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
@@ -66,31 +72,30 @@
                   <RowConstraints minHeight="10.0" percentHeight="60.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="AffichageIRC" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#AffichageIRCClick" stylesheets="@css/object/BoutonsDashBoard.css" text="Serveur 1" />
-                  <Button fx:id="btFrToLeet" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#btFrToLeetClick" stylesheets="@css/object/BoutonsDashBoard.css" text="Serveur 2" GridPane.rowIndex="1" />
-                  <Button fx:id="btMorseToFr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#btMorseToFrClick" stylesheets="@css/object/BoutonsDashBoard.css" text="etc.." GridPane.rowIndex="2" />
-                  <Button fx:id="btTradDirecte" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#btTradDirecteClick" stylesheets="@css/object/BoutonsDashBoard.css" text="etc..." GridPane.rowIndex="3" />
+                  <Button fx:id="AffichageIRC" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#AffichageIRCClick" styleClass="button-dashboard" text="Serveur 1" />
+                  <Button fx:id="btFrToLeet" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#btFrToLeetClick" styleClass="button-dashboard" text="Serveur 2" GridPane.rowIndex="1" />
+                  <Button fx:id="btMorseToFr" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#btMorseToFrClick" styleClass="button-dashboard" text="etc.." GridPane.rowIndex="2" />
+                  <Button fx:id="btTradDirecte" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseClicked="#btTradDirecteClick" styleClass="button-dashboard" text="etc..." GridPane.rowIndex="3" />
                   <Label fx:id="lbBienvenu" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" textAlignment="JUSTIFY" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets bottom="50.0" />
                      </GridPane.margin>
                   </Label>
-                  <Separator prefWidth="200.0" stylesheets="@css/object/BoutonsDashBoard.css" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                  <Separator prefWidth="200.0" stylesheets="@css/object/BoutonsDashBoard.css" GridPane.valignment="TOP" />
-                  <Separator prefWidth="200.0" stylesheets="@css/object/BoutonsDashBoard.css" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-                  <Separator prefWidth="200.0" stylesheets="@css/object/BoutonsDashBoard.css" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-                  <Separator prefWidth="200.0" stylesheets="@css/object/BoutonsDashBoard.css" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+                  <Separator prefWidth="200.0" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <Separator prefWidth="200.0" GridPane.valignment="TOP" />
+                  <Separator prefWidth="200.0" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+                  <Separator prefWidth="200.0" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                  <Separator prefWidth="200.0" GridPane.rowIndex="4" GridPane.valignment="TOP" />
                </children>
             </GridPane>
             <Pane fx:id="pnZoneTravail" minWidth="-Infinity" styleClass="pn-zone-travail" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Separator prefHeight="0.0" prefWidth="266.0" style="-fx-background-color: white;" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-            <Pane prefHeight="80.0" prefWidth="1066.0" style="-fx-background-color: rgb(32,34,37);" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Pane prefHeight="80.0" prefWidth="1066.0" styleClass="menu-bar-2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="lbTitre" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>
             </Label>
-            <GridPane style="-fx-background-color: rgb(32,34,37);" GridPane.rowIndex="2">
+            <GridPane styleClass="menu-bar-2" GridPane.rowIndex="2">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="123.0" minWidth="10.0" prefWidth="96.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="160.0" />
@@ -111,7 +116,7 @@
                   </Label>
                </children>
             </GridPane>
-            <GridPane fx:id="moveBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" prefWidth="1066.0" style="-fx-background-color: rgb( 12, 12, 13);" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <GridPane fx:id="moveBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" prefWidth="1066.0" styleClass="menu-bar" GridPane.columnIndex="1" GridPane.rowIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
@@ -120,7 +125,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnClose" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#close" prefHeight="34.0" prefWidth="56.0" stylesheets="@css/object/closebutton.css" text="X" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                  <Button fx:id="btnClose" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="56.0" styleClass="btn-close" text="X" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
