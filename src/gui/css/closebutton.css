@@ -1,0 +1,8 @@
+#btnClose{
+    -fx-background-color:  rgb( 12, 12, 13);
+}
+
+#btnClose:hover{
+    -fx-background-color: rgb(54,57,63);
+    -fx-text-fill: red;
+}
