@@ -1,11 +1,13 @@
 package controller;
 
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import inter.ServerInterface;
 import metier.Message;
@@ -44,6 +46,17 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
 
+        paneChat.setVvalue(paneChat.getVmax());
+
+        textMessage.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(event.getCode().getName().equalsIgnoreCase("enter")){
+                    send();
+                }
+            }
+        });
+
         new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -70,10 +83,12 @@ public class Controller implements Initializable {
 
     @FXML
     public void send(){
-
         try {
-            obj.send(textPseudo.getText(), textMessage.getText());
-            textMessage.setText("");
+            if(!textMessage.getText().equalsIgnoreCase("")) {
+                obj.send(textPseudo.getText(), textMessage.getText());
+                textMessage.setText("");
+                paneChat.setVvalue(paneChat.getVmax());
+            }
         } catch (RemoteException e) {
             e.printStackTrace();
         }
