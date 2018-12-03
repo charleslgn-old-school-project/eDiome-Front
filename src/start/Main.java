@@ -26,7 +26,7 @@ public class Main extends Application {
 
         setPrimaryStage(primaryStage);
         prStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("../gui/NewUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../gui/NewUI2.fxml"));
         primaryStage.setTitle("IRC");
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root, 1280, 720));
