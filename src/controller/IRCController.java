@@ -48,12 +48,9 @@ public class IRCController implements Initializable {
 
         paneChat.setVvalue(paneChat.getVmax());
 
-        textMessage.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if(event.getCode().getName().equalsIgnoreCase("enter")){
-                    send();
-                }
+        textMessage.setOnKeyPressed(event -> {
+            if(event.getCode().getName().equalsIgnoreCase("enter")){
+                send();
             }
         });
 

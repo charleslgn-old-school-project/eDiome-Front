@@ -1,0 +1,9 @@
+/*si splash screen mis en place*/
+
+.track{
+    -fx-background-color: grey;
+}
+
+.bar{
+    -fx-background-color: black;
+}
