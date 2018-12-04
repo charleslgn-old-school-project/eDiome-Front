@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SandwitchController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="637.0" prefWidth="300.0" styleClass="menu-bar-2" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SandwitchController">
    <children>
       <GridPane prefHeight="80.0" prefWidth="300.0">
         <columnConstraints>
@@ -34,12 +33,11 @@
             </Label>
          </children>
       </GridPane>
-      <JFXButton prefHeight="80.0" prefWidth="300.0" text="Serveur 1" />
+      <JFXButton fx:id="AffichageIRC" onMouseClicked="#AffichageIRCClick" prefHeight="80.0" prefWidth="300.0" text="Serveur 1" />
       <JFXButton prefHeight="80.0" prefWidth="300.0" text="Serveur 2" />
       <JFXButton prefHeight="80.0" prefWidth="300.0" text="Serveur 3" />
       <JFXButton prefHeight="80.0" prefWidth="300.0" text="Serveur 4" />
       <JFXButton prefHeight="80.0" prefWidth="300.0" text="Serveur 5" />
       <JFXButton prefHeight="80.0" prefWidth="300.0" text="Serveur 6" />
-      <JFXButton prefHeight="80.0" prefWidth="300.0" text="Serveur 7" />
    </children>
 </VBox>

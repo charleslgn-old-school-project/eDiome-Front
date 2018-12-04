@@ -1,73 +1,61 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
+import resource.lang.typetrad.TitleName;
 
 public class SandwitchController {
 
     @FXML
-    private JFXButton sand1;
+    private Label lblTranslate;
 
     @FXML
-    private JFXButton sand2;
+    private JFXButton AffichageIRC;
 
     @FXML
-    private JFXButton sand3;
-
-    @FXML
-    private JFXButton sand4;
-
-    @FXML
-    private JFXButton sand5;
-
-    @FXML
-    private JFXButton sand6;
-
-    @FXML
-    private JFXButton sand7;
-
-    @FXML
-    private JFXButton sand8;
-
-    @FXML
-    void sand1Click(MouseEvent event) {
-
+    void AffichageIRCClick(MouseEvent event) {
+        //this.lbTitre.setText("Français vers Morse");
+        fadeout(NewUI2Controller.getPnZone( ));
+        fadeout(NewUI2Controller.);
+        //titre = TitleName.LANGUAGE_TO_MORSE;
+        loadFxml("..//gui/IRC.fxml");
     }
 
-    @FXML
-    void sand2Click(MouseEvent event) {
+    /**
+     * Lance la fenêtre correspondante dans la pane prévue à cet effet
+     * @param form : fxml à charger
+     */
+    private void loadFxml(String form) {
+        try {
+            Pane pan = NewUI2Controller.getPanePrincipal();
 
+            pan.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource(form));
+            NewUI2Controller.getPanePrincipal().getChildren().add(newLoadedPane);
+        } catch (Exception ex) {
+            System.err.println(ex);
+        }
     }
 
-    @FXML
-    void sand3Click(MouseEvent event) {
+    public void initialize() {}
 
+    /**
+     * Effet de transition
+     * @param pane : Pane (zone de travail) où s'affichent les différentes fonctionnalités
+     */
+    private void fadeout(Pane pane) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), pane);
+        fadeTransition.setNode(pane);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.setCycleCount(2);
+        fadeTransition.setAutoReverse(true);
+        fadeTransition.play();
     }
-
-    @FXML
-    void sand4Click(MouseEvent event) {
-
-    }
-
-    @FXML
-    void sand5Click(MouseEvent event) {
-
-    }
-
-    @FXML
-    void sand6Click(MouseEvent event) {
-
-    }
-
-    @FXML
-    void sand7Click(MouseEvent event) {
-
-    }
-
-    @FXML
-    void sand8Click(MouseEvent event) {
-
-    }
-
 }

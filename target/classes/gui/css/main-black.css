@@ -40,5 +40,11 @@
 
     -button-close-color-OVER : rgb(54,57,63);
     -button-close-text-color-OVER : red;
+
+/*___ Sandwitch Menu ___*/
+
+    -jfx-hamburger-button-color : white;
 }
+
+
 

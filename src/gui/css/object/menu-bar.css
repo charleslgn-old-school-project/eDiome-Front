@@ -4,12 +4,12 @@
 }
 
 
-.menu-bar, .menu{
+.menu-bar-1, .menu{
     -fx-background-color:  -menu-bar-color;
     -fx-border-color:      -menu-bar-color;
 }
 
-.menu-bar {
+.menu-bar-1 {
     -fx-border-color: -menu-item-color;
 }
 
@@ -30,5 +30,9 @@
 
 .lateral-bar{
     -fx-background-color: -lateral-bar-color;
+}
+
+.jfx-hamburger StackPane{
+    -fx-background-color: -jfx-hamburger-button-color;
 }
 
