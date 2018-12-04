@@ -100,11 +100,19 @@
                   </Label>
                </children>
             </GridPane>
-            <Pane fx:id="pnZoneTravail" prefHeight="200.0" prefWidth="200.0" styleClass="pn-zone-travail" GridPane.rowIndex="2">
+            <GridPane GridPane.rowIndex="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="637.0" prefWidth="260.0" />
+                  <Pane fx:id="pnZoneTravail" prefHeight="637.0" prefWidth="1140.0" styleClass="pn-zone-travail" GridPane.columnIndex="1" />
+                  <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="260.0" />
                </children>
-            </Pane>
+            </GridPane>
          </children>
       </GridPane>
    </children>

@@ -1,5 +1,6 @@
 package controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -9,6 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,6 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -23,6 +28,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import metier.Message;
 import resource.lang.Lang;
 import resource.lang.Translate;
 import resource.lang.langage.DE;
@@ -35,6 +41,8 @@ import resource.lang.typetrad.TitleName;
 import start.Main;
 
 import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NewUI2Controller implements Initializable {
@@ -49,7 +57,7 @@ public class NewUI2Controller implements Initializable {
         @FXML
         private Pane pnZoneTravail;
 
-        public Pane getPnZone(){
+    public Pane getPnZone(){
             Pane pan = this.pnZoneTravail;
             return pan;
         }
@@ -133,6 +141,8 @@ public class NewUI2Controller implements Initializable {
                     }
                 }.start();
 
+                addServ();
+
                 mnuBar.setOnMousePressed(this::mousePressed);
                 mnuBar.setOnMouseDragged(this::mouseDrag);
                 mnuBar.setOnMouseReleased(this::mouseRealease);
@@ -140,6 +150,45 @@ public class NewUI2Controller implements Initializable {
                System.out.println(ex);
             }
         }
+
+    public void AffichageIRCClick() {
+        //this.lbTitre.setText("Français vers Morse");
+        fadeout(pnZoneTravail);
+        fadeout(pnZoneTravail);
+        //titre = TitleName.LANGUAGE_TO_MORSE;
+        loadFxml("..//gui/IRC.fxml");
+
+    }
+
+    /**
+     * Lance la fenêtre correspondante dans la pane prévue à cet effet
+     * @param form : fxml à charger
+     */
+    private void loadFxml(String form) {
+        try {
+            Pane pan = pnZoneTravail;
+
+            pan.getChildren().clear();
+            Pane newLoadedPane = FXMLLoader.load(getClass().getResource(form));
+            pnZoneTravail.getChildren().add(newLoadedPane);
+        } catch (Exception ex) {
+            System.err.println(ex);
+        }
+    }
+
+    /**
+     * Effet de transition
+     * @param pane : Pane (zone de travail) où s'affichent les différentes fonctionnalités
+     */
+    private void fadeout(Pane pane) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), pane);
+        fadeTransition.setNode(pane);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.setCycleCount(2);
+        fadeTransition.setAutoReverse(true);
+        fadeTransition.play();
+    }
 
     /**
      * permet de déplacer le fenettre
@@ -263,6 +312,43 @@ public class NewUI2Controller implements Initializable {
     public void toWhite(){
         Main.getPrimaryStage().getScene().getStylesheets().clear();
         Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-white.css").toExternalForm());
+    }
+
+    private void addServ(){
+            VBox vBox = new VBox();
+            //vBox.setAlignment(Pos.TOP_CENTER);
+            vBox.getStyleClass().add("menu-bar-2");
+            vBox.setSpacing(20);
+            vBox.setPadding(new Insets(10, 10, 0, 10));
+            ImageView iw = new ImageView();
+            Image logo = new Image("resource/Images/logo.png");
+            iw.setImage(logo);
+            iw.setFitHeight(50);
+            iw.setFitWidth(70);
+            vBox.getChildren().add(iw);
+
+            JFXButton jfxButton = new JFXButton("server1");
+            jfxButton.setPrefSize(Double.MAX_VALUE, 60);
+            jfxButton.setOnAction(event -> AffichageIRCClick());
+
+            JFXButton jfxButton2 = new JFXButton("server2");
+            jfxButton2.setPrefSize(Double.MAX_VALUE, 60);
+            jfxButton2.setOnAction(event -> AffichageIRCClick());
+
+            JFXButton jfxButton3 = new JFXButton("server3");
+            jfxButton3.setPrefSize(Double.MAX_VALUE, 60);
+            jfxButton3.setOnAction(event -> AffichageIRCClick());
+
+            JFXButton jfxButton4 = new JFXButton("server4");
+            jfxButton4.setPrefSize(Double.MAX_VALUE, 60);
+            jfxButton4.setOnAction(event -> AffichageIRCClick());
+
+            vBox.getChildren().add(jfxButton);
+            vBox.getChildren().add(jfxButton2);
+            vBox.getChildren().add(jfxButton3);
+            vBox.getChildren().add(jfxButton4);
+
+            drawer.setSidePane(vBox);
     }
 }
 
