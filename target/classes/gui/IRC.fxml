@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<<<<<<< HEAD
 
 <VBox fx:id="VboxMere" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
    <children>
@@ -18,11 +19,21 @@
             <AnchorPane BorderPane.alignment="CENTER">
                <children>
                   <Pane prefHeight="64.0" prefWidth="1250.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+=======
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
+   <children>
+      <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+         <children>
+            <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0">
+               <bottom>
+                  <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="64.0" prefWidth="1250.0" BorderPane.alignment="CENTER">
+>>>>>>> eacbefdbac95d4f9dc23aa5a7710ae7501af1ce7
                      <children>
                         <TextField fx:id="textMessage" layoutX="39.0" layoutY="12.0" prefHeight="31.0" prefWidth="1072.0" />
                         <JFXButton layoutX="1120.0" layoutY="12.0" onAction="#send" prefHeight="30.0" prefWidth="119.0" text="Envoyer" />
                      </children>
                   </Pane>
+<<<<<<< HEAD
                </children>
             </AnchorPane>
          </bottom>
@@ -33,9 +44,15 @@
                </BorderPane.margin>
                <children>
                   <ScrollPane fx:id="paneChat" prefHeight="294.0" prefWidth="1200.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+=======
+               </bottom>
+               <center>
+                  <ScrollPane fx:id="paneChat" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="294.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+>>>>>>> eacbefdbac95d4f9dc23aa5a7710ae7501af1ce7
                      <content>
          </content>
                   </ScrollPane>
+<<<<<<< HEAD
                </children>
             </AnchorPane>
          </center>
@@ -43,11 +60,17 @@
             <AnchorPane BorderPane.alignment="CENTER">
                <children>
                   <Pane prefHeight="45.0" prefWidth="600.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+=======
+               </center>
+               <top>
+                  <Pane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+>>>>>>> eacbefdbac95d4f9dc23aa5a7710ae7501af1ce7
                      <children>
                         <TextField fx:id="textPseudo" layoutX="1044.0" layoutY="10.0" prefHeight="26.0" prefWidth="196.0" />
                         <Label layoutX="982.0" layoutY="14.0" prefHeight="17.0" prefWidth="62.0" text="Pseudo :" />
                      </children>
                   </Pane>
+<<<<<<< HEAD
                </children>
             </AnchorPane>
          </top>
@@ -66,5 +89,17 @@
             </AnchorPane>
          </right>
       </BorderPane>
+=======
+               </top>
+               <left>
+                  <Pane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="10.0" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <Pane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="10.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+         </children>
+      </Pane>
+>>>>>>> eacbefdbac95d4f9dc23aa5a7710ae7501af1ce7
    </children>
 </VBox>

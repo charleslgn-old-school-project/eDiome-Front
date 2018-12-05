@@ -13,7 +13,7 @@
 
 <VBox fx:id="VboxMere" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
    <children>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" style="-fx-background-color: green;" VBox.vgrow="ALWAYS">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" style="-fx-background-color: lightgreen;" VBox.vgrow="ALWAYS">
          <bottom>
             <AnchorPane BorderPane.alignment="CENTER">
                <children>
