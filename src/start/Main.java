@@ -43,43 +43,23 @@ public class Main extends Application {
         prStage.getIcons().add(new Image("/resource/Images/ediome2.png"));
 
         primaryStage.setScene(new Scene(root, 1280, 720));
-        Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-white.css").toExternalForm());
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("./src/resource/css.txt"));
-            String line;
-            while ((line = br.readLine()) != null) {
-                Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-"+line.trim().toLowerCase()+".css").toExternalForm());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Font.loadFont("..//resource/emojione.ttf", 10);
-
-        primaryStage.setResizable(true);
-
-        primaryStage.setMinWidth(800);
-        primaryStage.setMinHeight(600);
+        Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-black.css").toExternalForm());
 
         primaryStage.show();
 
-        String os = System.getProperty("os.name").toLowerCase();
+        String OS = System.getProperty("os.name").toLowerCase();
 
-        if(os.contains("win")) {
+        if(OS.indexOf("win") >= 0) {
             long lhwnd = com.sun.glass.ui.Window.getWindows().get(0).getNativeWindow();
             Pointer lpVoid = new Pointer(lhwnd);
             WinDef.HWND hwnd = new WinDef.HWND(lpVoid);
             final User32 user32 = User32.INSTANCE;
-
             int oldStyle = user32.GetWindowLong(hwnd, WinUser.GWL_STYLE);
             System.out.println(Integer.toBinaryString(oldStyle));
             int newStyle = oldStyle | 0x00020000;//WS_MINIMIZEBOX
             System.out.println(Integer.toBinaryString(newStyle));
             user32.SetWindowLong(hwnd, WinUser.GWL_STYLE, newStyle);
         }
-
-        ResizeHelper.addResizeListener(getPrimaryStage());
     }
 
     public static Stage getPrimaryStage() {
