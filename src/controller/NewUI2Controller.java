@@ -227,6 +227,17 @@ public class NewUI2Controller implements Initializable {
         ((Stage)pnPrincipal.getScene().getWindow()).close();
     }
 
+    public void Maximize(){
+        if(((Stage)pnPrincipal.getScene().getWindow()).isMaximized()) {
+            ((Stage) pnPrincipal.getScene().getWindow()).setMaximized(false);
+        }else{
+            ((Stage) pnPrincipal.getScene().getWindow()).setMaximized(true);
+        }
+    }
+
+    public void Shrink() {
+        ((Stage) pnPrincipal.getScene().getWindow()).setIconified(true);
+    }
     /**
      * Traduction des composants
      */
@@ -321,10 +332,10 @@ public class NewUI2Controller implements Initializable {
             vBox.setSpacing(20);
             vBox.setPadding(new Insets(10, 10, 0, 10));
             ImageView iw = new ImageView();
-            Image logo = new Image("resource/Images/logo.png");
+            Image logo = new Image("resource/Images/logov2.png");
             iw.setImage(logo);
-            iw.setFitHeight(50);
-            iw.setFitWidth(70);
+            iw.setFitHeight(100);
+            iw.setFitWidth(100);
             vBox.getChildren().add(iw);
 
             JFXButton jfxButton = new JFXButton("server1");

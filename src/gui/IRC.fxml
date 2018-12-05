@@ -1,39 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
-   <bottom>
-      <Pane prefHeight="55.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
+   <children>
+      <Pane AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
          <children>
-            <Button layoutX="953.0" layoutY="15.0" mnemonicParsing="false" onAction="#send" text="Send" />
-            <TextField fx:id="textMessage" layoutX="14.0" layoutY="15.0" prefHeight="31.0" prefWidth="935.0" />
-         </children>
-      </Pane>
-   </bottom>
-   <center>
-      <ScrollPane fx:id="paneChat" prefHeight="520.0" prefWidth="990.0" BorderPane.alignment="CENTER">
-         <content>
+            <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1250.0">
+               <bottom>
+                  <Pane prefHeight="64.0" prefWidth="1250.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TextField fx:id="textMessage" layoutX="39.0" layoutY="12.0" prefHeight="31.0" prefWidth="1072.0" />
+                        <JFXButton layoutX="1120.0" layoutY="12.0" onAction="#send" prefHeight="30.0" prefWidth="119.0" text="Envoyer" />
+                     </children>
+                  </Pane>
+               </bottom>
+               <center>
+                  <ScrollPane fx:id="paneChat" prefHeight="294.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+                     <content>
          </content>
-      </ScrollPane>
-   </center>
-   <top>
-      <Pane prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextField fx:id="textPseudo" layoutX="823.0" layoutY="10.0" prefHeight="25.0" prefWidth="173.0" />
-            <Label layoutX="763.0" layoutY="14.0" prefHeight="17.0" prefWidth="50.0" text="Pseudo :" />
+                     <BorderPane.margin>
+                        <Insets left="30.0" />
+                     </BorderPane.margin>
+                  </ScrollPane>
+               </center>
+               <top>
+                  <Pane prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <TextField fx:id="textPseudo" layoutX="1044.0" layoutY="10.0" prefHeight="26.0" prefWidth="196.0" />
+                        <Label layoutX="982.0" layoutY="14.0" prefHeight="17.0" prefWidth="62.0" text="Pseudo :" />
+                     </children>
+                  </Pane>
+               </top>
+               <left>
+                  <Pane prefHeight="200.0" prefWidth="10.0" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <Pane prefHeight="200.0" prefWidth="10.0" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
          </children>
       </Pane>
-   </top>
-   <left>
-      <Pane prefHeight="200.0" prefWidth="10.0" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <Pane prefHeight="200.0" prefWidth="10.0" BorderPane.alignment="CENTER" />
-   </right>
-</BorderPane>
+   </children>
+</AnchorPane>
