@@ -34,21 +34,23 @@ public class Main extends Application {
         primaryStage.setTitle("IRC");
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root, 1280, 720));
-        primaryStage.setOnHiding(event -> {primaryStage.setIconified(true);});
         Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-black.css").toExternalForm());
 
         primaryStage.show();
 
-        long lhwnd = com.sun.glass.ui.Window.getWindows().get(0).getNativeWindow();
-        Pointer lpVoid = new Pointer(lhwnd);
-        WinDef.HWND hwnd = new WinDef.HWND(lpVoid);
-        final User32 user32 = User32.INSTANCE;
-        int oldStyle = user32.GetWindowLong(hwnd, WinUser.GWL_STYLE);
-        System.out.println(Integer.toBinaryString(oldStyle));
-        int newStyle = oldStyle | 0x00020000;//WS_MINIMIZEBOX
-        System.out.println(Integer.toBinaryString(newStyle));
-        user32.SetWindowLong(hwnd, WinUser.GWL_STYLE, newStyle);
+        String OS = System.getProperty("os.name").toLowerCase();
 
+        if(OS.indexOf("win") >= 0) {
+            long lhwnd = com.sun.glass.ui.Window.getWindows().get(0).getNativeWindow();
+            Pointer lpVoid = new Pointer(lhwnd);
+            WinDef.HWND hwnd = new WinDef.HWND(lpVoid);
+            final User32 user32 = User32.INSTANCE;
+            int oldStyle = user32.GetWindowLong(hwnd, WinUser.GWL_STYLE);
+            System.out.println(Integer.toBinaryString(oldStyle));
+            int newStyle = oldStyle | 0x00020000;//WS_MINIMIZEBOX
+            System.out.println(Integer.toBinaryString(newStyle));
+            user32.SetWindowLong(hwnd, WinUser.GWL_STYLE, newStyle);
+        }
     }
 
     public static Stage getPrimaryStage() {

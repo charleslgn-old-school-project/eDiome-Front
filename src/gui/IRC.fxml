@@ -32,7 +32,7 @@
                   <Insets left="30.0" />
                </BorderPane.margin>
                <children>
-                  <ScrollPane fx:id="paneChat" prefHeight="294.0" prefWidth="1200.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+                  <ScrollPane fx:id="paneChat" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
                      <content>
          </content>
                   </ScrollPane>
