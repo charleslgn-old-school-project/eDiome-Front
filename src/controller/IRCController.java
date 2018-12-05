@@ -10,7 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import inter.ServerInterface;
+import javafx.stage.Stage;
 import metier.Message;
+import start.Main;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,6 +32,9 @@ public class IRCController implements Initializable {
     @FXML
     private TextField textPseudo;
 
+    @FXML
+    private VBox VboxMere;
+
     ServerInterface obj;
 
     @SuppressWarnings("unused")
@@ -37,6 +42,16 @@ public class IRCController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        (Main.getPrimaryStage()).widthProperty().addListener((obs, oldVal, newVal) -> {
+            if(Main.getPrimaryStage().isMaximized()){
+            VboxMere.setPrefSize(1600,725);
+            }else {
+                VboxMere.setPrefSize(1600, 500);
+            }
+        });
+
+
         sc = new Scanner(System.in);
         int port = 8000;
         try {
