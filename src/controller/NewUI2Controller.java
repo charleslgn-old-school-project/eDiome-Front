@@ -89,11 +89,12 @@ public class NewUI2Controller implements Initializable {
                 hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
                     burgertask.setRate(burgertask.getRate() * -1);
                     burgertask.play();
-
                     if (drawer.isOpened()) {
                         drawer.close();
+                        this.pnZoneTravail.setPadding(new Insets(0,0,0,0));
                     } else {
                         drawer.toggle();
+                        this.pnZoneTravail.setPadding(new Insets(0,0,0,260));
                     }
                 });
 
