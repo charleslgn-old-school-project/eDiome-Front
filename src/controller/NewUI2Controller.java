@@ -6,19 +6,13 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,39 +22,27 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import metier.Message;
 import resource.lang.Lang;
 import resource.lang.Translate;
 import resource.lang.langage.DE;
 import resource.lang.langage.EN;
 import resource.lang.langage.FR;
 import resource.lang.langage.RU;
-import resource.lang.typetrad.LabelName;
 import resource.lang.typetrad.MenuName;
-import resource.lang.typetrad.TitleName;
 import start.Main;
 
 import java.net.URL;
-import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NewUI2Controller implements Initializable {
     private static double xOffset = 0;
     private static double yOffset = 0;
-    private final String username = System.getProperty("user.name");
-    private int titre = -1;
 
-        @FXML
+    @FXML
         private VBox pnPrincipal;
 
         @FXML
         private Pane pnZoneTravail;
-
-    public Pane getPnZone(){
-            Pane pan = this.pnZoneTravail;
-            return pan;
-        }
 
         @FXML
         private MenuBar mnuBar;
@@ -70,18 +52,6 @@ public class NewUI2Controller implements Initializable {
 
         @FXML
         private Menu mnuLanguage;
-
-        @FXML
-        private MenuItem mnuFr;
-
-        @FXML
-        private MenuItem mnuEn;
-
-        @FXML
-        private MenuItem mnuDe;
-
-        @FXML
-        private MenuItem mnuRu;
 
         @FXML
         private Menu mnuHelp;
@@ -199,8 +169,15 @@ public class NewUI2Controller implements Initializable {
      * @param event le click de la souris
      */
     private void mouseDrag(MouseEvent event){
+
+        setOpacity(0.8);
+
         Main.getPrimaryStage().setX(event.getScreenX() - xOffset);
         Main.getPrimaryStage().setY(event.getScreenY() - yOffset);
+    }
+
+    private void setOpacity(double opacity){
+        pnPrincipal.getScene().getWindow().setOpacity(opacity);
     }
 
     /**
@@ -213,6 +190,7 @@ public class NewUI2Controller implements Initializable {
         }else if(Main.getPrimaryStage().getY() < 0){
             Main.getPrimaryStage().setY(0);
         }
+        setOpacity(1);
     }
 
     /**
@@ -248,6 +226,7 @@ public class NewUI2Controller implements Initializable {
     private void translate() {
         Lang lang = Main.getLangue();
 
+        int titre = -1;
         if (titre != -1) {
             lbTitre.setText(Translate.haveIt(titre, lang.titleName));
         }
@@ -336,10 +315,10 @@ public class NewUI2Controller implements Initializable {
             vBox.setSpacing(20);
             vBox.setPadding(new Insets(10, 10, 0, 10));
             ImageView iw = new ImageView();
-            Image logo = new Image("resource/Images/logov2.png");
+            Image logo = new Image("resource/Images/logov4.png");
             iw.setImage(logo);
-            iw.setFitHeight(100);
-            iw.setFitWidth(100);
+            iw.setFitHeight(34.5);
+            iw.setFitWidth(150);
             vBox.getChildren().add(iw);
 
             JFXButton jfxButton = new JFXButton("server1");

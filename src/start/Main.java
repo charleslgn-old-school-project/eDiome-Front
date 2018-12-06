@@ -36,7 +36,7 @@ public class Main extends Application {
         primaryStage.setTitle("IRC");
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        prStage.getIcons().add(new Image("/resource/Images/logov3.png"));
+        prStage.getIcons().add(new Image("/resource/Images/ediome2.png"));
 
         primaryStage.setScene(new Scene(root, 1280, 720));
         Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-black.css").toExternalForm());

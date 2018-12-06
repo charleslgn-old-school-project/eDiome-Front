@@ -23,7 +23,7 @@
          <children>
             <ImageView fitHeight="99.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
                <image>
-                  <Image url="@../resource/Images/logoV1.png" />
+                  <Image url="@../resource/Images/logoV4.png" />
                </image>
             </ImageView>
             <Label fx:id="lblTranslate" prefHeight="60.0" prefWidth="162.0" text="eDiome" GridPane.columnIndex="1">
