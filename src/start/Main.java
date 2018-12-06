@@ -30,7 +30,6 @@ public class Main extends Application {
 
         //com.sun.javafx.util.Logging.getJavaFXLogger().setLevel(sun.util.logging.PlatformLogger.Level.OFF);
 
-        setPrimaryStage(primaryStage);
         prStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("../gui/NewUI2.fxml"));
         primaryStage.setTitle("IRC");
@@ -61,10 +60,6 @@ public class Main extends Application {
 
     public static Stage getPrimaryStage() {
         return prStage;
-    }
-
-    public static void setPrimaryStage(Stage prStage) {
-        Main.prStage = prStage;
     }
 
     public static Lang getLangue() {
