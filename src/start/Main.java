@@ -1,5 +1,6 @@
 package start;
 
+import Utils.ResizeHelper;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
@@ -40,6 +41,10 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 1280, 720));
         Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-black.css").toExternalForm());
         primaryStage.setResizable(true);
+
+        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(600);
+
         primaryStage.show();
 
         String os = System.getProperty("os.name").toLowerCase();
@@ -56,6 +61,8 @@ public class Main extends Application {
             System.out.println(Integer.toBinaryString(newStyle));
             user32.SetWindowLong(hwnd, WinUser.GWL_STYLE, newStyle);
         }
+
+        ResizeHelper.addResizeListener(getPrimaryStage());
     }
 
     public static Stage getPrimaryStage() {

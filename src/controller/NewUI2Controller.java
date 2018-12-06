@@ -1,5 +1,6 @@
 package controller;
 
+import Utils.ResizeHelper;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -10,12 +11,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -42,7 +46,7 @@ public class NewUI2Controller implements Initializable {
         private VBox pnPrincipal;
 
         @FXML
-        private Pane pnZoneTravail;
+        private BorderPane pnZoneTravail;
 
         @FXML
         private MenuBar mnuBar;
@@ -113,9 +117,12 @@ public class NewUI2Controller implements Initializable {
 
                 addServ();
 
+                BorderPane.setAlignment(this.pnZoneTravail, Pos.CENTER);
                 mnuBar.setOnMousePressed(this::mousePressed);
                 mnuBar.setOnMouseDragged(this::mouseDrag);
                 mnuBar.setOnMouseReleased(this::mouseRealease);
+                mnuBar.setOnMouseClicked(this::mouseClicked);
+
             }catch (Exception ex){
                System.out.println(ex);
             }
@@ -140,11 +147,11 @@ public class NewUI2Controller implements Initializable {
 
             pan.getChildren().clear();
             Pane newLoadedPane = FXMLLoader.load(getClass().getResource(form));
-            newLoadedPane.setPrefWidth(pnZoneTravail.getPrefWidth());
-            newLoadedPane.setMinWidth(pnZoneTravail.getPrefWidth());
-            newLoadedPane.setMaxWidth(pnZoneTravail.getPrefHeight());
-            newLoadedPane.setPrefHeight(pnZoneTravail.getPrefHeight());
-            pnZoneTravail.getChildren().add(newLoadedPane);
+            //newLoadedPane.setPrefWidth(pnZoneTravail.getPrefWidth());
+            //newLoadedPane.setMinWidth(pnZoneTravail.getPrefWidth());
+            //newLoadedPane.setMaxWidth(pnZoneTravail.getPrefHeight());
+            //newLoadedPane.setPrefHeight(pnZoneTravail.getPrefHeight());
+            pnZoneTravail.setCenter(newLoadedPane);
         } catch (Exception ex) {
             System.err.println(ex);
         }
@@ -169,7 +176,7 @@ public class NewUI2Controller implements Initializable {
      * @param event le click de la souris
      */
     private void mouseDrag(MouseEvent event){
-
+        Main.getPrimaryStage().setMaximized(false);
         setOpacity(0.8);
 
         Main.getPrimaryStage().setX(event.getScreenX() - xOffset);
@@ -186,11 +193,14 @@ public class NewUI2Controller implements Initializable {
      */
     private void mouseRealease(MouseEvent event){
         if(event.getSceneY() == 0){
-            Main.getPrimaryStage().setY(0);
+            //Main.getPrimaryStage().setY(0);
+            Main.getPrimaryStage().setMaximized(true);
         }else if(Main.getPrimaryStage().getY() < 0){
             Main.getPrimaryStage().setY(0);
         }
         setOpacity(1);
+
+
     }
 
     /**
@@ -200,6 +210,18 @@ public class NewUI2Controller implements Initializable {
     private void mousePressed(MouseEvent event){
         xOffset = event.getSceneX();
         yOffset = event.getSceneY();
+    }
+
+    /**
+     * permet de déplacer le fenettre
+     * @param event le relachemleltn de la souris
+     */
+    private void mouseClicked(MouseEvent event){
+        if(event.getButton().equals(MouseButton.PRIMARY)) {
+            if (event.getClickCount() == 2) {
+                Main.getPrimaryStage().setMaximized(!Main.getPrimaryStage().isMaximized());
+            }
+        }
     }
 
     /**
