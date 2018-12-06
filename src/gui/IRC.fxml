@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox fx:id="VboxMere" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
+<VBox fx:id="VboxMere" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" style="-fx-background-color: lightgreen;" VBox.vgrow="ALWAYS">
          <bottom>
@@ -40,12 +40,12 @@
             </AnchorPane>
          </center>
          <top>
-            <AnchorPane BorderPane.alignment="CENTER">
+            <AnchorPane BorderPane.alignment="TOP_RIGHT">
                <children>
-                  <Pane prefHeight="45.0" prefWidth="600.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+                  <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="45.0" prefWidth="600.0">
                      <children>
-                        <TextField fx:id="textPseudo" layoutX="1044.0" layoutY="10.0" prefHeight="26.0" prefWidth="196.0" />
-                        <Label layoutX="982.0" layoutY="14.0" prefHeight="17.0" prefWidth="62.0" text="Pseudo :" />
+                        <TextField fx:id="textPseudo" layoutX="1017.0" layoutY="10.0" prefHeight="26.0" prefWidth="196.0" />
+                        <Label layoutX="955.0" layoutY="14.0" prefHeight="17.0" prefWidth="62.0" text="Pseudo :" />
                      </children>
                   </Pane>
                </children>
@@ -63,8 +63,14 @@
                <children>
                   <Pane prefHeight="200.0" prefWidth="10.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0" />
                </children>
+               <BorderPane.margin>
+                  <Insets right="30.0" />
+               </BorderPane.margin>
             </AnchorPane>
          </right>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
       </BorderPane>
    </children>
 </VBox>

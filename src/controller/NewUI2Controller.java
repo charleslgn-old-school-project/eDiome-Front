@@ -170,6 +170,10 @@ public class NewUI2Controller implements Initializable {
 
             pan.getChildren().clear();
             Pane newLoadedPane = FXMLLoader.load(getClass().getResource(form));
+            newLoadedPane.setPrefWidth(pnZoneTravail.getPrefWidth());
+            newLoadedPane.setMinWidth(pnZoneTravail.getPrefWidth());
+            newLoadedPane.setMaxWidth(pnZoneTravail.getPrefHeight());
+            newLoadedPane.setPrefHeight(pnZoneTravail.getPrefHeight());
             pnZoneTravail.getChildren().add(newLoadedPane);
         } catch (Exception ex) {
             System.err.println(ex);
