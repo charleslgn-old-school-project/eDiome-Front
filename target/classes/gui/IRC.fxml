@@ -47,61 +47,43 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 
 
-<VBox fx:id="VboxMere" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
-   <children>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" style="-fx-background-color: lightgreen;" VBox.vgrow="ALWAYS">
-         <bottom>
-            <AnchorPane BorderPane.alignment="CENTER">
+<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
+   <bottom>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="64.0" prefWidth="1250.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
                <children>
-                  <Pane prefHeight="64.0" prefWidth="1250.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
-                     <children>
-                        <TextField fx:id="textMessage" layoutX="39.0" layoutY="12.0" prefHeight="31.0" prefWidth="1072.0" />
-                        <JFXButton layoutX="1120.0" layoutY="12.0" onAction="#send" prefHeight="30.0" prefWidth="119.0" text="Envoyer" />
-                     </children>
-                  </Pane>
+                  <TextField fx:id="textMessage" layoutX="39.0" layoutY="12.0" prefHeight="31.0" prefWidth="1072.0" />
+                  <JFXButton layoutX="1120.0" layoutY="12.0" onAction="#send" prefHeight="30.0" prefWidth="119.0" text="Envoyer" />
                </children>
-            </AnchorPane>
-         </bottom>
-         <center>
-            <AnchorPane BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets left="30.0" />
-               </BorderPane.margin>
-               <children>
-                  <ScrollPane fx:id="paneChat" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
-                     <content>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="30.0" />
+         </BorderPane.margin>
+         <children>
+            <ScrollPane fx:id="paneChat" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+               <content>
          </content>
-                  </ScrollPane>
-               </children>
-            </AnchorPane>
-         </center>
-         <top>
-            <AnchorPane BorderPane.alignment="TOP_RIGHT">
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </center>
+   <top>
+      <AnchorPane BorderPane.alignment="TOP_RIGHT">
+         <children>
+            <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="45.0" prefWidth="600.0">
                <children>
-                  <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="45.0" prefWidth="600.0">
-                     <children>
-                        <TextField fx:id="textPseudo" layoutX="1017.0" layoutY="10.0" prefHeight="26.0" prefWidth="196.0" />
-                        <Label layoutX="955.0" layoutY="14.0" prefHeight="17.0" prefWidth="62.0" text="Pseudo :" />
-                     </children>
-                  </Pane>
+                  <TextField fx:id="textPseudo" layoutX="1017.0" layoutY="10.0" prefHeight="26.0" prefWidth="196.0" />
+                  <Label layoutX="955.0" layoutY="14.0" prefHeight="17.0" prefWidth="62.0" text="Pseudo :" />
                </children>
-            </AnchorPane>
-         </top>
-         <left>
-            <AnchorPane BorderPane.alignment="CENTER">
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="10.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0" />
-               </children>
-            </AnchorPane>
-         </left>
-         <right>
-            <AnchorPane BorderPane.alignment="CENTER">
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="10.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0" />
-               </children>
+<<<<<<< HEAD
                <BorderPane.margin>
                   <Insets right="30.0" />
                </BorderPane.margin>
@@ -114,3 +96,27 @@
    </children>
 </VBox>
 >>>>>>> [fix] Parent fit
+=======
+            </Pane>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="10.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0" />
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="10.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0" />
+         </children>
+         <BorderPane.margin>
+            <Insets right="30.0" />
+         </BorderPane.margin>
+      </AnchorPane>
+   </right>
+</BorderPane>
+>>>>>>> [feat] Resizeable canvas
