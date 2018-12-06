@@ -15,6 +15,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -35,6 +40,7 @@ import resource.lang.langage.RU;
 import resource.lang.typetrad.MenuName;
 import start.Main;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -86,15 +92,22 @@ public class NewUI2Controller implements Initializable {
                 drawer.setSidePane(box);
                 HamburgerBackArrowBasicTransition burgertask = new HamburgerBackArrowBasicTransition(hamburger);
                 burgertask.setRate(-1);
-                hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
-                    burgertask.setRate(burgertask.getRate() * -1);
-                    burgertask.play();
+
+                drawer.setOnDrawerClosing(e -> {
+                    this.pnZoneTravail.setPadding(new Insets(0,0,0,0));
+                    changeBurger(burgertask);
+                });
+
+                drawer.setOnDrawerOpening(e -> {
+                    this.pnZoneTravail.setPadding(new Insets(0,0,0,260));
+                    changeBurger(burgertask);
+                });
+
+                hamburger.setOnMousePressed( e -> {
                     if (drawer.isOpened()) {
                         drawer.close();
-                        this.pnZoneTravail.setPadding(new Insets(0,0,0,0));
                     } else {
                         drawer.toggle();
-                        this.pnZoneTravail.setPadding(new Insets(0,0,0,260));
                     }
                 });
 
@@ -136,6 +149,11 @@ public class NewUI2Controller implements Initializable {
         //titre = TitleName.LANGUAGE_TO_MORSE;
         loadFxml("..//gui/IRC.fxml");
 
+    }
+
+    private void changeBurger(HamburgerBackArrowBasicTransition burgertask){
+        burgertask.setRate(burgertask.getRate() * -1);
+        burgertask.play();
     }
 
     /**
@@ -180,8 +198,10 @@ public class NewUI2Controller implements Initializable {
         Main.getPrimaryStage().setMaximized(false);
         setOpacity(0.8);
 
-        Main.getPrimaryStage().setX(event.getScreenX() - xOffset);
-        Main.getPrimaryStage().setY(event.getScreenY() - yOffset);
+        if(Main.getPrimaryStage().getY() != event.getScreenY()){
+            Main.getPrimaryStage().setX(event.getScreenX() - xOffset);
+            Main.getPrimaryStage().setY(event.getScreenY() - yOffset);
+        }
     }
 
     private void setOpacity(double opacity){
