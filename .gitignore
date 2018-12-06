@@ -152,3 +152,5 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+IRCFront.iml
