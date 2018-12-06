@@ -9,6 +9,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
+<<<<<<< HEAD
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -77,10 +78,90 @@
                      </font>
                   </Button>
                   <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Maximize" prefHeight="40.0" prefWidth="61.0" styleClass="btn-close" text="□" textFill="WHITE">
+=======
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="pnPrincipal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewUI2Controller">
+   <children>
+      <GridPane prefHeight="756.0" prefWidth="1280.0" VBox.vgrow="ALWAYS">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane fx:id="fullmenubar" prefHeight="38.0" prefWidth="1240.0" styleClass="menu-bar-1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" percentWidth="90.0" prefWidth="1224.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" percentWidth="14.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" percentWidth="5.6" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="0.0" percentWidth="5.6" prefWidth="56.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <MenuBar fx:id="mnuBar" prefHeight="46.0" prefWidth="266.0" styleClass="menu-bar-1">
+                     <menus>
+                        <Menu fx:id="mnuMenu" mnemonicParsing="false" text="Menu">
+                           <items>
+                              <Menu mnemonicParsing="false" text="style">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" onAction="#toWhite" text="Blanc" />
+                                    <MenuItem mnemonicParsing="false" onAction="#toBlack" text="Noir" />
+                                 </items>
+                              </Menu>
+                              <Menu fx:id="mnuLanguage" mnemonicParsing="false" text="Langue">
+                                 <items>
+                                    <MenuItem fx:id="mnuFr" mnemonicParsing="false" onAction="#toFr" text="Français" />
+                                    <MenuItem fx:id="mnuEn" mnemonicParsing="false" onAction="#toEn" text="English" />
+                                    <MenuItem fx:id="mnuDe" mnemonicParsing="false" onAction="#toDe" text="Deutsch" />
+                                    <MenuItem fx:id="mnuRu" mnemonicParsing="false" onAction="#toRu" text="Русский" />
+                                 </items>
+                              </Menu>
+                           </items>
+                        </Menu>
+                        <Menu fx:id="mnuHelp" mnemonicParsing="false" text="Help">
+                           <items>
+                              <MenuItem fx:id="mnuAbout" mnemonicParsing="false" onAction="#about" text="About" />
+                           </items>
+                        </Menu>
+                     </menus>
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="4.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </MenuBar>
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefHeight="34.0" prefWidth="61.0" styleClass="btn-close" text="X" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Maximize" prefHeight="34.0" prefWidth="61.0" styleClass="btn-close" text="□" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Shrink" prefHeight="34.0" prefWidth="61.0" styleClass="btn-close" text="--" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+>>>>>>> [fix] Parent fit
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
+<<<<<<< HEAD
                   <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefHeight="40.0" prefWidth="61.0" styleClass="btn-close" text="X" textFill="WHITE" />
                </children>
             </HBox>
@@ -140,11 +221,24 @@
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="6.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+=======
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </GridPane>
+            <GridPane styleClass="menu-bar-2" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="541.0" minWidth="10.0" percentWidth="6.0" prefWidth="433.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="572.0" minWidth="10.0" percentWidth="89.0" prefWidth="421.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="572.0" minWidth="10.0" percentWidth="5.0" prefWidth="421.0" />
+>>>>>>> [fix] Parent fit
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
+<<<<<<< HEAD
                   <BorderPane fx:id="pnZoneTravail" prefHeight="200.0" prefWidth="200.0" styleClass="pn-zone-travail" GridPane.columnIndex="1" />
                   <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="260.0" />
                </children>
@@ -153,3 +247,38 @@
       </AnchorPane>
    </children>
 </GridPane>
+=======
+                  <JFXHamburger fx:id="hamburger" styleClass="jfx-hamburger" />
+                  <Label fx:id="lbTitre" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <AnchorPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+               <children>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+                      <children>
+                        <Pane fx:id="pnZoneTravail" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: blue;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0" />
+                     </children>
+                  </AnchorPane>
+                  <GridPane layoutX="330.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="6.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="260.0" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+   </children>
+</VBox>
+>>>>>>> [fix] Parent fit
