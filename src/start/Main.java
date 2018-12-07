@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import resource.lang.Lang;
@@ -45,6 +44,17 @@ public class Main extends Application {
 
         primaryStage.setScene(new Scene(root, 1280, 720));
         Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-white.css").toExternalForm());
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("./src/resource/css.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-"+line.trim().toLowerCase()+".css").toExternalForm());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Font.loadFont("..//resource/emojione.ttf", 10);
 
         primaryStage.setResizable(true);
