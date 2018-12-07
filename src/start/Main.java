@@ -1,6 +1,7 @@
 package start;
 
 import Utils.ResizeHelper;
+import Utils.ThemeSaver;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
@@ -43,8 +44,6 @@ public class Main extends Application {
         prStage.getIcons().add(new Image(".//resource/Images/ediome2.png"));
 
         primaryStage.setScene(new Scene(root, 1280, 720));
-        Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-white.css").toExternalForm());
-
         try {
             BufferedReader br = new BufferedReader(new FileReader(".//src/resource/css.txt"));
             String line;
@@ -52,7 +51,8 @@ public class Main extends Application {
                 Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-"+line.trim().toLowerCase()+".css").toExternalForm());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-white.css").toExternalForm());
+            ThemeSaver.saveTheme("white");
         }
 
         primaryStage.setResizable(true);

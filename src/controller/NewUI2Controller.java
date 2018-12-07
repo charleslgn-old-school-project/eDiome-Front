@@ -1,6 +1,5 @@
 package controller;
 
-import Utils.ResizeHelper;
 import Utils.ThemeSaver;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -8,28 +7,18 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -55,6 +44,10 @@ import java.util.ResourceBundle;
 public class NewUI2Controller implements Initializable {
   private static double xOffset = 0;
   private static double yOffset = 0;
+
+  private boolean canBeResizeN;
+  private boolean canBeResizeNW;
+  private boolean canBeResizeNE;
 
   @FXML
   private GridPane pnPrincipal;
@@ -95,6 +88,7 @@ public class NewUI2Controller implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle rb){
+    //isDrag = false;
     try {
       HamburgerBackArrowBasicTransition burgertask = new HamburgerBackArrowBasicTransition(hamburger);
       burgertask.setRate(-1);
@@ -155,17 +149,30 @@ public class NewUI2Controller implements Initializable {
       mnuBar.setOnMousePressed(this::mousePressed);
       mnuBar.setOnMouseDragged(this::mouseDrag);
       mnuBar.setOnMouseReleased(this::mouseRealease);
-      mnuBar.setOnMouseClicked(this::mouseClicked);
+      //mnuBar.setOnMouseClicked(this::mouseClicked);
 
-      mnuBar.setOnMouseMoved(e -> Main.getPrimaryStage().getScene().setCursor(Cursor.OPEN_HAND));
+      mnuBar.setOnMouseMoved(e -> {
+        canBeResizeN  = false;
+        canBeResizeNE = false;
+        canBeResizeNW = false;
+
+        if(e.getSceneX() < 4){
+          canBeResizeNW = true;
+          Main.getPrimaryStage().getScene().setCursor(Cursor.NW_RESIZE);
+        }else if(e.getSceneX() > Main.getPrimaryStage().getScene().getWidth() -4){
+          canBeResizeNE = true;
+          Main.getPrimaryStage().getScene().setCursor(Cursor.NE_RESIZE);
+        } else if (e.getSceneY() < 4){
+          canBeResizeN = true;
+          Main.getPrimaryStage().getScene().setCursor(Cursor.N_RESIZE);
+        } else {
+          Main.getPrimaryStage().getScene().setCursor(Cursor.OPEN_HAND);
+        }
+      });
 
     }catch (Exception ex){
       System.out.println(ex);
     }
-  }
-
-  private void getElementID(MouseEvent event){
-    System.out.println("mouse click detected! " + event.getSource());
   }
 
   public void AffichageIRCClick() {
@@ -221,7 +228,10 @@ public class NewUI2Controller implements Initializable {
    * @param event le click de la souris
    */
   private void mouseDrag(MouseEvent event){
-    Main.getPrimaryStage().getScene().setCursor(Cursor.CLOSED_HAND);
+    Main.getPrimaryStage().getScene().setCursor(canBeResizeN  ? Cursor.N_RESIZE :
+                                                canBeResizeNE ? Cursor.NE_RESIZE:
+                                                canBeResizeNW ? Cursor.NW_RESIZE:Cursor.CLOSED_HAND);
+
     Main.getPrimaryStage().setMaximized(false);
     setOpacity(0.8);
 
@@ -240,11 +250,11 @@ public class NewUI2Controller implements Initializable {
    * @param event le click de la souris
    */
   private void mouseRealease(MouseEvent event){
-    Main.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT);
-    if(event.getSceneY() == 0){
-      //Main.getPrimaryStage().setY(0);
-      Main.getPrimaryStage().setMaximized(true);
-    }else if(Main.getPrimaryStage().getY() < 0){
+    mouseClicked(event);
+    Main.getPrimaryStage().getScene().setCursor(canBeResizeN  ? Cursor.N_RESIZE :
+                                                canBeResizeNE ? Cursor.NE_RESIZE:
+                                                canBeResizeNW ? Cursor.NW_RESIZE:Cursor.OPEN_HAND);
+    if(Main.getPrimaryStage().getY() < 0){
       Main.getPrimaryStage().setY(0);
     }
     setOpacity(1);
@@ -257,7 +267,10 @@ public class NewUI2Controller implements Initializable {
    * @param event le relachemleltn de la souris
    */
   private void mousePressed(MouseEvent event){
-    Main.getPrimaryStage().getScene().setCursor(Cursor.CLOSED_HAND);
+    Main.getPrimaryStage().getScene().setCursor(canBeResizeN  ? Cursor.N_RESIZE :
+                                                canBeResizeNE ? Cursor.NE_RESIZE:
+                                                canBeResizeNW ? Cursor.NW_RESIZE:Cursor.CLOSED_HAND);
+
     xOffset = event.getSceneX();
     yOffset = event.getSceneY();
   }
