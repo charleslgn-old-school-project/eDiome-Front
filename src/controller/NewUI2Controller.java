@@ -1,6 +1,7 @@
 package controller;
 
 import Utils.ResizeHelper;
+import Utils.ThemeSaver;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -9,12 +10,15 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -92,11 +96,8 @@ public class NewUI2Controller implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle rb){
     try {
-      VBox box = FXMLLoader.load(getClass().getResource("../gui/Sandwitch.fxml"));
-      drawer.setSidePane(box);
       HamburgerBackArrowBasicTransition burgertask = new HamburgerBackArrowBasicTransition(hamburger);
       burgertask.setRate(-1);
-
       drawer.setOnDrawerClosing(e -> {
         drawer.setOnDrawerClosed(e2 -> {
           drawer.setPrefWidth(0);
@@ -108,11 +109,9 @@ public class NewUI2Controller implements Initializable {
       });
 
       drawer.setOnDrawerOpening(e -> {
-        drawer.setOnDrawerOpened(e2 -> {
-          drawer.setPrefWidth(260);
-          drawer.setMinWidth(260);
-          drawer.setMaxWidth(260);
-        });
+        drawer.setPrefWidth(260);
+        drawer.setMinWidth(260);
+        drawer.setMaxWidth(260);
         this.pnZoneTravail.setPadding(new Insets(0,0,0,260));
         changeBurger(burgertask);
       });
@@ -157,13 +156,8 @@ public class NewUI2Controller implements Initializable {
       mnuBar.setOnMouseDragged(this::mouseDrag);
       mnuBar.setOnMouseReleased(this::mouseRealease);
       mnuBar.setOnMouseClicked(this::mouseClicked);
-                /*System.out.println(mnuBar.getScene());
-                mnuBar.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        System.out.println("mouse click detected! " + event.getSource());
-                    }
-                });*/
+
+      mnuBar.setOnMouseMoved(e -> Main.getPrimaryStage().getScene().setCursor(Cursor.OPEN_HAND));
 
     }catch (Exception ex){
       System.out.println(ex);
@@ -227,6 +221,7 @@ public class NewUI2Controller implements Initializable {
    * @param event le click de la souris
    */
   private void mouseDrag(MouseEvent event){
+    Main.getPrimaryStage().getScene().setCursor(Cursor.CLOSED_HAND);
     Main.getPrimaryStage().setMaximized(false);
     setOpacity(0.8);
 
@@ -245,6 +240,7 @@ public class NewUI2Controller implements Initializable {
    * @param event le click de la souris
    */
   private void mouseRealease(MouseEvent event){
+    Main.getPrimaryStage().getScene().setCursor(Cursor.DEFAULT);
     if(event.getSceneY() == 0){
       //Main.getPrimaryStage().setY(0);
       Main.getPrimaryStage().setMaximized(true);
@@ -261,6 +257,7 @@ public class NewUI2Controller implements Initializable {
    * @param event le relachemleltn de la souris
    */
   private void mousePressed(MouseEvent event){
+    Main.getPrimaryStage().getScene().setCursor(Cursor.CLOSED_HAND);
     xOffset = event.getSceneX();
     yOffset = event.getSceneY();
   }
@@ -295,24 +292,13 @@ public class NewUI2Controller implements Initializable {
   public void Shrink() {
     ((Stage) pnPrincipal.getScene().getWindow()).setIconified(true);
   }
+
   /**
    * Traduction des composants
    */
   private void translate() {
     Lang lang = Main.getLangue();
 
-    int titre = -1;
-    if (titre != -1) {
-      lbTitre.setText(Translate.haveIt(titre, lang.titleName));
-    }
-
-    //Main.getPrimaryStage().setTitle(Translate.haveIt(LabelName.TITLE, lang.label));
-    //AffichageIRC.setText(Translate.haveIt(TitleName.LANGUAGE_TO_MORSE, lang.titleName));
-    //btFrToLeet.setText(Translate.haveIt(TitleName.LANGUAGE_TO_L33T, lang.titleName));
-    //btMorseToFr.setText(Translate.haveIt(TitleName.MORSE_TO_LANGUAGE, lang.titleName));
-    //btTradDirecte.setText(Translate.haveIt(TitleName.DIRECT_TRANSLATE, lang.titleName));
-    //lbBienvenu.setText(Translate.haveIt(LabelName.WELCOME, lang.label) + " " + username);
-    //lblTranslate.setText(Translate.haveIt(LabelName.TITLE, lang.label));
     mnuMenu.setText(Translate.haveIt(MenuName.MENU_MENU, lang.menu));
     mnuAbout.setText(Translate.haveIt(MenuName.MENU_ABOUT, lang.menu));
     mnuHelp.setText(Translate.haveIt(MenuName.MENU_HELP, lang.menu));
@@ -373,18 +359,15 @@ public class NewUI2Controller implements Initializable {
     }
   }
 
-  public void toBlack(){
-    System.out.println("hcjdhdj");
-    Main.getPrimaryStage().getScene().getStylesheets().clear();
-    Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-black.css").toExternalForm());
-  }
-  public void toWhite(){
-    Main.getPrimaryStage().getScene().getStylesheets().clear();
-    Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-white.css").toExternalForm());
-  }
-  public void toPink(){
-    Main.getPrimaryStage().getScene().getStylesheets().clear();
-    Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-pink.css").toExternalForm());
+  public void changeTheme(ActionEvent event){
+    Object node = event.getSource();
+    if (node instanceof MenuItem) {
+      MenuItem mnu = (MenuItem) node;
+      String color = (String) mnu.getUserData();
+      Main.getPrimaryStage().getScene().getStylesheets().clear();
+      Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-" + color + ".css").toExternalForm());
+      ThemeSaver.saveTheme(color);
+    }
   }
 
   private void addServ(){

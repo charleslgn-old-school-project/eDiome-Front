@@ -24,7 +24,7 @@ public class ResizeHelper {
         }
     }
 
-    public static void addListenerDeeply(Node node, EventHandler<MouseEvent> listener) {
+    private static void addListenerDeeply(Node node, EventHandler<MouseEvent> listener) {
         node.addEventHandler(MouseEvent.MOUSE_MOVED, listener);
         node.addEventHandler(MouseEvent.MOUSE_PRESSED, listener);
         node.addEventHandler(MouseEvent.MOUSE_DRAGGED, listener);

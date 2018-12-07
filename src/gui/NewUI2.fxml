@@ -41,9 +41,10 @@
                      <items>
                         <Menu mnemonicParsing="false" text="style">
                            <items>
-                              <MenuItem mnemonicParsing="false" onAction="#toWhite" text="Blanc" />
-                              <MenuItem mnemonicParsing="false" onAction="#toBlack" text="Noir" />
-                              <MenuItem mnemonicParsing="false" onAction="#toPink" text="Rose" />
+                              <MenuItem mnemonicParsing="false" onAction="#changeTheme" userData="white" text="Blanc" />
+                              <MenuItem mnemonicParsing="false" onAction="#changeTheme" userData="black" text="Noir" />
+                              <MenuItem mnemonicParsing="false" onAction="#changeTheme"  userData="pink" text="Rose" />
+                              <MenuItem mnemonicParsing="false" onAction="#changeTheme" userData="green" text="Vert" />
                            </items>
                         </Menu>
                         <Menu fx:id="mnuLanguage" mnemonicParsing="false" text="Langue">

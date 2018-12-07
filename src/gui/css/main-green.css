@@ -1,0 +1,47 @@
+@import url("main.css");
+
+* {
+    -pn-zone-principale-color : rgb(209,237,231);
+
+    -ecriture-clor            : black;
+/*___ chat CSS ___*/
+    -text-field-color         : white;
+    -scroll-bar-color         : rgb(39,105,85);
+
+/*___ Menu Bar CSS ___*/
+    -menu-item-color          : rgb(39,105,85);
+    -menu-item-color-OVER     : rgb(65,165,141);;
+
+    -menu-bar-color           : rgb(39,105,85);
+
+    -menu-bar-2-color :  rgb(65,165,141);
+
+/*___ Buton CSS ___*/
+    -button-color :     rgb(39,105,85);;
+    -button-text-color: black;
+
+    -button-color-OVER : rgb(65,165,141);;
+    -button-text-color-OVER: black;
+
+ /*___ Button Dashboard CSS ___*/
+    -button-dashboard-color :     rgb(39,105,85);;
+    -button-dashboard-text-color: black;
+
+    -button-dashboard-color-OVER : rgb(65,165,141);;
+
+    -separator-color : rgb(17,17,17);
+
+/*___ Button Close CSS ___*/
+    -button-close-color :     rgb(39,105,85);;
+    -button-close-text-color: black;
+
+    -button-close-color-OVER : rgb(65,165,141);;
+    -button-close-text-color-OVER : red;
+
+/*___ Sandwitch Menu ___*/
+
+    -jfx-hamburger-button-color : black;
+}
+
+
+
