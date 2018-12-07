@@ -7,6 +7,9 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -94,17 +97,21 @@ public class NewUI2Controller implements Initializable {
                 burgertask.setRate(-1);
 
                 drawer.setOnDrawerClosing(e -> {
-                    drawer.setPrefWidth(0);
-                    drawer.setMinWidth (0);
-                    drawer.setMaxWidth (0);
+                    drawer.setOnDrawerClosed(e2 -> {
+                        drawer.setPrefWidth(0);
+                        drawer.setMinWidth (0);
+                        drawer.setMaxWidth (0);
+                    });
                     this.pnZoneTravail.setPadding(new Insets(0,0,0,0));
                     changeBurger(burgertask);
                 });
 
                 drawer.setOnDrawerOpening(e -> {
-                    drawer.setPrefWidth(260);
-                    drawer.setMinWidth(260);
-                    drawer.setMaxWidth(260);
+                    drawer.setOnDrawerOpened(e2 -> {
+                        drawer.setPrefWidth(260);
+                        drawer.setMinWidth(260);
+                        drawer.setMaxWidth(260);
+                    });
                     this.pnZoneTravail.setPadding(new Insets(0,0,0,260));
                     changeBurger(burgertask);
                 });
@@ -142,6 +149,13 @@ public class NewUI2Controller implements Initializable {
                 mnuBar.setOnMouseDragged(this::mouseDrag);
                 mnuBar.setOnMouseReleased(this::mouseRealease);
                 mnuBar.setOnMouseClicked(this::mouseClicked);
+                mnuBar.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        System.out.println("mouse click detected! " + event.getSource());
+                    }
+                });
+
 
             }catch (Exception ex){
                System.out.println(ex);
@@ -355,6 +369,10 @@ public class NewUI2Controller implements Initializable {
     public void toWhite(){
         Main.getPrimaryStage().getScene().getStylesheets().clear();
         Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-white.css").toExternalForm());
+    }
+    public void toPink(){
+        Main.getPrimaryStage().getScene().getStylesheets().clear();
+        Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-pink.css").toExternalForm());
     }
 
     private void addServ(){
