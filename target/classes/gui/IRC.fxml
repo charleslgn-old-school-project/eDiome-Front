@@ -10,7 +10,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<<<<<<< HEAD
 <BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" styleClass="pn-zone-travail" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
+=======
+<<<<<<< HEAD
+<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" styleClass="pn-zone-travail" stylesheets="@css/main-pink.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
+=======
+<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" styleClass="pn-zone-travail" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
+>>>>>>> [feat] new blue font
+>>>>>>> [feat] new blue font
    <bottom>
       <HBox alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0">
          <children>
