@@ -154,3 +154,6 @@ nbdist/
 .nb-gradle/
 
 IRCFront.iml
+
+src/resource/css.txt
+target/classes/resource/css.txt
