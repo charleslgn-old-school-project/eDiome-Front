@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import resource.lang.Lang;
@@ -37,12 +39,14 @@ public class Main extends Application {
         prStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("../gui/NewUI2.fxml"));
         primaryStage.setTitle("IRC");
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
 
         prStage.getIcons().add(new Image("/resource/Images/ediome2.png"));
 
         primaryStage.setScene(new Scene(root, 1280, 720));
-        Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-black.css").toExternalForm());
+        Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-white.css").toExternalForm());
+        Font.loadFont("..//resource/emojione.ttf", 10);
+
         primaryStage.setResizable(true);
 
         primaryStage.setMinWidth(800);
