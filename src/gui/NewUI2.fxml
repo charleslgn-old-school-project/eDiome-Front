@@ -16,7 +16,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <GridPane fx:id="pnPrincipal" prefHeight="756.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewUI2Controller">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,7 +35,7 @@
           <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" percentHeight="100.0" prefHeight="40.0" valignment="TOP" />
         </rowConstraints>
          <children>
-            <MenuBar fx:id="mnuBar" maxHeight="-Infinity" prefHeight="40.0" prefWidth="1083.0" styleClass="menu-bar-1">
+            <MenuBar fx:id="mnuBar" maxHeight="-Infinity" prefHeight="42.0" prefWidth="1037.0" styleClass="menu-bar-1">
                <menus>
                   <Menu fx:id="mnuMenu" mnemonicParsing="false" text="Menu">
                      <items>
@@ -44,6 +43,7 @@
                            <items>
                               <MenuItem mnemonicParsing="false" onAction="#toWhite" text="Blanc" />
                               <MenuItem mnemonicParsing="false" onAction="#toBlack" text="Noir" />
+                              <MenuItem mnemonicParsing="false" onAction="#toPink" text="Rose" />
                            </items>
                         </Menu>
                         <Menu fx:id="mnuLanguage" mnemonicParsing="false" text="Langue">
@@ -71,12 +71,12 @@
             </MenuBar>
             <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="183.0" styleClass="menu-bar-1" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Shrink" prefHeight="40.0" prefWidth="61.0" styleClass="btn-close" text="--" textFill="WHITE">
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Shrink" prefHeight="40.0" prefWidth="61.0" styleClass="btn-close" text="--" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Maximize" prefHeight="40.0" prefWidth="61.0" styleClass="btn-close" text="□" textFill="WHITE">
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Maximize" prefHeight="40.0" prefWidth="61.0" styleClass="btn-close" text="☐" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>

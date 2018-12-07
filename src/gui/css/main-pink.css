@@ -1,46 +1,46 @@
 @import url("main.css");
 
 * {
-    -pn-zone-principale-color : rgb(54, 57, 63) ;
+    -pn-zone-principale-color : LavenderBlush;
 
-    -ecriture-clor            : white;
+    -ecriture-clor            : black;
 /*___ chat CSS ___*/
-    -text-field-color         : rgb(72, 75, 81);
-    -scroll-bar-color         : white;
+    -text-field-color         : white;
+    -scroll-bar-color         : Lavender;
 
 /*___ Menu Bar CSS ___*/
-    -menu-item-color          : rgb(13, 17, 20);
-    -menu-item-color-OVER     : rgb(47, 49, 54);
+    -menu-item-color          : rgb(255,158,206);
+    -menu-item-color-OVER     : LavenderBlush;
 
-    -menu-bar-color           : rgb(12, 12, 13);
+    -menu-bar-color           : rgb(255,158,206);
 
-    -menu-bar-2-color :  rgb(32,34,37);
+    -menu-bar-2-color :  rgb(255,208,216);
 
 /*___ Buton CSS ___*/
-    -button-color :      rgb(72,75,81);
-    -button-text-color: white;
+    -button-color :     rgb(255,158,206);
+    -button-text-color: black;
 
-    -button-color-OVER : rgb(72,75,81);
-    -button-text-color-OVER: white;
+    -button-color-OVER : LavenderBlush;
+    -button-text-color-OVER: black;
 
  /*___ Button Dashboard CSS ___*/
-    -button-dashboard-color :      rgb(47,49,54);
-    -button-dashboard-text-color: white;
+    -button-dashboard-color :     rgb(255,158,206);
+    -button-dashboard-text-color: black;
 
-    -button-dashboard-color-OVER : rgb(36,41,44);
+    -button-dashboard-color-OVER : LavenderBlush;
 
     -separator-color : rgb(17,17,17);
 
 /*___ Button Close CSS ___*/
-    -button-close-color :      rgb( 12, 12, 13);
-    -button-close-text-color: white;
+    -button-close-color :     rgb(255,158,206);
+    -button-close-text-color: black;
 
-    -button-close-color-OVER : rgb(54,57,63);
+    -button-close-color-OVER : LavenderBlush;
     -button-close-text-color-OVER : red;
 
 /*___ Sandwitch Menu ___*/
 
-    -jfx-hamburger-button-color : white;
+    -jfx-hamburger-button-color : black;
 }
 
 

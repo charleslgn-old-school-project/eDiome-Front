@@ -40,7 +40,7 @@ public class Main extends Application {
         prStage.getIcons().add(new Image("/resource/Images/ediome2.png"));
 
         primaryStage.setScene(new Scene(root, 1280, 720));
-        Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-white.css").toExternalForm());
+        Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-pink.css").toExternalForm());
         Font.loadFont("..//resource/emojione.ttf", 10);
 
         primaryStage.setResizable(true);

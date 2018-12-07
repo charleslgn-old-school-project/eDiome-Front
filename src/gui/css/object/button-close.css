@@ -1,4 +1,6 @@
-    .btn-close{
+.btn-close{
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
     -fx-padding: 0 0 0 0;
     -fx-background-radius: 0;
     -fx-background-color: -button-close-color;
