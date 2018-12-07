@@ -1,40 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-
-<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
+<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" styleClass="pn-zone-travail" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.IRCController">
    <bottom>
-      <Pane prefHeight="64.0" prefWidth="1250.0">
+      <HBox alignment="CENTER" maxHeight="40.0" minHeight="40.0" prefHeight="40.0">
          <children>
-            <TextField fx:id="textMessage" layoutX="39.0" layoutY="12.0" prefHeight="31.0" prefWidth="1072.0" />
-            <JFXButton layoutX="1120.0" layoutY="12.0" onAction="#send" prefHeight="30.0" prefWidth="119.0" text="Envoyer" />
+            <TextField fx:id="textMessage" maxWidth="1.7976931348623157E308" minWidth="0.0" prefHeight="31.0" prefWidth="500000.0">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </TextField>
+            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#send" prefHeight="31.0" prefWidth="109.0" text="Envoyer">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </JFXButton>
          </children>
-      </Pane>
+         <BorderPane.margin>
+            <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+         </BorderPane.margin>
+      </HBox>
    </bottom>
    <center>
       <ScrollPane fx:id="paneChat">
          <content>
          </content>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
       </ScrollPane>
    </center>
    <top>
-      <Pane prefHeight="45.0" prefWidth="600.0">
+      <HBox alignment="CENTER_RIGHT" maxHeight="40.0" minHeight="40.0" prefHeight="40.0">
          <children>
-            <TextField fx:id="textPseudo" layoutX="1017.0" layoutY="10.0" prefHeight="26.0" prefWidth="196.0" />
-            <Label layoutX="955.0" layoutY="14.0" prefHeight="17.0" prefWidth="62.0" text="Pseudo :" />
+            <Label prefHeight="17.0" prefWidth="62.0" text="Pseudo :" />
+            <TextField fx:id="textPseudo" prefHeight="26.0" prefWidth="196.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TextField>
          </children>
-      </Pane>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets right="20.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="15.0" top="10.0" />
+         </BorderPane.margin>
+      </HBox>
    </top>
    <left>
-      <Pane prefHeight="200.0" prefWidth="10.0" />
+      <Pane prefHeight="200.0" prefWidth="20.0" />
    </left>
    <right>
-      <Pane prefHeight="200.0" prefWidth="10.0" />
+      <Pane prefHeight="200.0" prefWidth="20.0" />
    </right>
 </BorderPane>

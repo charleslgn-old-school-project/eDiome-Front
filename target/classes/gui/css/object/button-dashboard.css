@@ -7,12 +7,12 @@
     -fx-text-fill: -button-dashboard-text-color;
 }
 
-.button-dashboard:hover {
-    -fx-background-color: -button-dashboard-color-OVER;
-}
-
 .separator *.line {
     -fx-border-style: solid;
     -fx-border-width: 0 0 1 0; /* its make really one-pixel-border */
     -fx-border-color: -separator-color;
+}
+
+.jfx-button .jfx-rippler {
+    -jfx-rippler-fill: -button-dashboard-color-OVER;
 }
