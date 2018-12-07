@@ -1,3 +1,6 @@
+
+css.txt
+
 # Compiled class file
 *.class
 
@@ -154,5 +157,3 @@ nbdist/
 .nb-gradle/
 
 IRCFront.iml
-
-*.txt
