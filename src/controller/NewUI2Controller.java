@@ -25,6 +25,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -51,7 +52,7 @@ public class NewUI2Controller implements Initializable {
     private static double xOffset = 0;
     private static double yOffset = 0;
 
-    @FXML
+        @FXML
         private GridPane pnPrincipal;
 
         @FXML
@@ -124,6 +125,13 @@ public class NewUI2Controller implements Initializable {
                     }
                 });
 
+                // Si l'utilisateur clique sur la zone d'irc, le drawer se fermera
+                pnZoneTravail.setOnMouseClicked(e ->{
+                    if(drawer.isOpened()){
+                        drawer.close();
+                    }
+                });
+
                 String lan = System.getProperty("user.language");
                 if(lan.equalsIgnoreCase("fr")){
                     Main.setLangue(new FR());
@@ -149,18 +157,22 @@ public class NewUI2Controller implements Initializable {
                 mnuBar.setOnMouseDragged(this::mouseDrag);
                 mnuBar.setOnMouseReleased(this::mouseRealease);
                 mnuBar.setOnMouseClicked(this::mouseClicked);
+                /*System.out.println(mnuBar.getScene());
                 mnuBar.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
                         System.out.println("mouse click detected! " + event.getSource());
                     }
-                });
-
+                });*/
 
             }catch (Exception ex){
                System.out.println(ex);
             }
         }
+
+    private void getElementID(MouseEvent event){
+        System.out.println("mouse click detected! " + event.getSource());
+    }
 
     public void AffichageIRCClick() {
         //this.lbTitre.setText("Français vers Morse");
