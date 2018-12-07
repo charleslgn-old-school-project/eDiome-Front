@@ -48,22 +48,6 @@ public class IRCController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        /*(Main.getPrimaryStage()).widthProperty().addListener((obs, oldVal, newVal) -> {
-            if(Main.getPrimaryStage().isMaximized()){
-            VboxMere.setPrefSize(Main.getPrimaryStage().getWidth(),Main.getPrimaryStage().getHeight());
-            }else {
-                VboxMere.setPrefSize(Main.getPrimaryStage().getWidth(),Main.getPrimaryStage().getHeight());
-            }
-        });*/
-
-        /*(Main.getPrimaryStage()).widthProperty().addListener((obs, oldVal, newVal) -> {
-            if(Main.getPrimaryStage().isMaximized()){
-                VboxMere.setPrefSize(,Main.getPrimaryStage().getHeight());
-            }else {
-                VboxMere.setPrefSize(Main.getPrimaryStage().getWidth(),Main.getPrimaryStage().getHeight() * 0.7);
-            }
-        });*/
-
         sc = new Scanner(System.in);
         int port = 8000;
         try {

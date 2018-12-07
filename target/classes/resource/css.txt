@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-black
-=======
 white
->>>>>>> [feat] css history
