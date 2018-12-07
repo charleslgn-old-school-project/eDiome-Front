@@ -28,10 +28,6 @@
     -fx-border-color: -menu-bar-2-color;
 }
 
-.lateral-bar{
-    -fx-background-color: -lateral-bar-color;
-}
-
 .jfx-hamburger StackPane{
     -fx-background-color: -jfx-hamburger-button-color;
 }

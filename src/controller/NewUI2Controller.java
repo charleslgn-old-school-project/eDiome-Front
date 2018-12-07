@@ -25,6 +25,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -40,7 +41,6 @@ import resource.lang.langage.RU;
 import resource.lang.typetrad.MenuName;
 import start.Main;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -49,7 +49,7 @@ public class NewUI2Controller implements Initializable {
     private static double yOffset = 0;
 
     @FXML
-        private VBox pnPrincipal;
+        private GridPane pnPrincipal;
 
         @FXML
         private BorderPane pnZoneTravail;
@@ -94,11 +94,17 @@ public class NewUI2Controller implements Initializable {
                 burgertask.setRate(-1);
 
                 drawer.setOnDrawerClosing(e -> {
+                    drawer.setPrefWidth(0);
+                    drawer.setMinWidth (0);
+                    drawer.setMaxWidth (0);
                     this.pnZoneTravail.setPadding(new Insets(0,0,0,0));
                     changeBurger(burgertask);
                 });
 
                 drawer.setOnDrawerOpening(e -> {
+                    drawer.setPrefWidth(260);
+                    drawer.setMinWidth(260);
+                    drawer.setMaxWidth(260);
                     this.pnZoneTravail.setPadding(new Insets(0,0,0,260));
                     changeBurger(burgertask);
                 });
