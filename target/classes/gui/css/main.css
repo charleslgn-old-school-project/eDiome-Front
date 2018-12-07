@@ -7,7 +7,3 @@
 .pn-zone-travail {
     -fx-background-color:  -pn-zone-principale-color;
 }
-
-.VBox{
-    -fx-background-color: -v-box-color;
-}

@@ -3,8 +3,6 @@
 * {
     -pn-zone-principale-color : rgb(54, 57, 63) ;
 
-    -v-box-color              : rgb(32,34,37);
-
     -ecriture-clor            : white;
 /*___ chat CSS ___*/
     -text-field-color         : rgb(72, 75, 81);
@@ -17,14 +15,13 @@
     -menu-bar-color           : rgb(12, 12, 13);
 
     -menu-bar-2-color :  rgb(32,34,37);
-    -lateral-bar-color : rgb(47,49,54);
 
 /*___ Buton CSS ___*/
     -button-color :      rgb(72,75,81);
     -button-text-color: white;
 
-    -button-color-OVER : white;
-    -button-text-color-OVER:rgb(83,85,89);
+    -button-color-OVER : rgb(72,75,81);
+    -button-text-color-OVER: white;
 
  /*___ Button Dashboard CSS ___*/
     -button-dashboard-color :      rgb(47,49,54);
@@ -40,5 +37,11 @@
 
     -button-close-color-OVER : rgb(54,57,63);
     -button-close-text-color-OVER : red;
+
+/*___ Sandwitch Menu ___*/
+
+    -jfx-hamburger-button-color : white;
 }
+
+
 

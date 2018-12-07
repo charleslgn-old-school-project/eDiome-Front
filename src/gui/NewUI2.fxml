@@ -8,117 +8,127 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewUI2Controller">
+<GridPane fx:id="pnPrincipal" prefHeight="756.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewUI2Controller">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
    <children>
-      <GridPane prefHeight="756.0" prefWidth="1280.0">
+      <GridPane fx:id="fullmenubar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="38.0" prefWidth="1240.0" GridPane.hgrow="SOMETIMES" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" percentWidth="90.0" prefWidth="1224.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" percentWidth="14.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" percentHeight="100.0" prefHeight="40.0" valignment="TOP" />
+        </rowConstraints>
+         <children>
+            <MenuBar fx:id="mnuBar" maxHeight="-Infinity" prefHeight="40.0" prefWidth="1083.0" styleClass="menu-bar-1">
+               <menus>
+                  <Menu fx:id="mnuMenu" mnemonicParsing="false" text="Menu">
+                     <items>
+                        <Menu mnemonicParsing="false" text="style">
+                           <items>
+                              <MenuItem mnemonicParsing="false" onAction="#toWhite" text="Blanc" />
+                              <MenuItem mnemonicParsing="false" onAction="#toBlack" text="Noir" />
+                           </items>
+                        </Menu>
+                        <Menu fx:id="mnuLanguage" mnemonicParsing="false" text="Langue">
+                           <items>
+                              <MenuItem fx:id="mnuFr" mnemonicParsing="false" onAction="#toFr" text="Français" />
+                              <MenuItem fx:id="mnuEn" mnemonicParsing="false" onAction="#toEn" text="English" />
+                              <MenuItem fx:id="mnuDe" mnemonicParsing="false" onAction="#toDe" text="Deutsch" />
+                              <MenuItem fx:id="mnuRu" mnemonicParsing="false" onAction="#toRu" text="Русский" />
+                           </items>
+                        </Menu>
+                     </items>
+                  </Menu>
+                  <Menu fx:id="mnuHelp" mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem fx:id="mnuAbout" mnemonicParsing="false" onAction="#about" text="About" />
+                     </items>
+                  </Menu>
+               </menus>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="4.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </MenuBar>
+            <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="183.0" styleClass="menu-bar-1" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Shrink" prefHeight="40.0" prefWidth="61.0" styleClass="btn-close" text="--" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#Maximize" prefHeight="40.0" prefWidth="61.0" styleClass="btn-close" text="□" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefHeight="40.0" prefWidth="61.0" styleClass="btn-close" text="X" textFill="WHITE" />
+               </children>
+            </HBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </GridPane>
+      <GridPane styleClass="menu-bar-2" GridPane.rowIndex="1">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="541.0" minWidth="10.0" percentWidth="6.0" prefWidth="433.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="572.0" minWidth="10.0" percentWidth="89.0" prefWidth="421.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="572.0" minWidth="10.0" percentWidth="5.0" prefWidth="421.0" />
+        </columnConstraints>
+        <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <GridPane>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1280.0" minWidth="10.0" prefWidth="1224.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="628.0" minWidth="0.0" prefWidth="56.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <HBox>
                <children>
-                  <MenuBar fx:id="mnuBar" prefHeight="46.0" prefWidth="266.0" stylesheets="@css/object/menu-bar.css">
-                     <menus>
-                        <Menu fx:id="mnuMenu" mnemonicParsing="false" text="Menu">
-                           <items>
-                              <Menu mnemonicParsing="false" text="style">
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" onAction="#toWhite" text="Blanc" />
-                                    <MenuItem mnemonicParsing="false" onAction="#toBlack" text="Noir" />
-                                 </items>
-                              </Menu>
-                              <Menu fx:id="mnuLanguage" mnemonicParsing="false" text="Langue">
-                                 <items>
-                                    <MenuItem fx:id="mnuFr" mnemonicParsing="false" onAction="#toFr" text="Français" />
-                                    <MenuItem fx:id="mnuEn" mnemonicParsing="false" onAction="#toEn" text="English" />
-                                    <MenuItem fx:id="mnuDe" mnemonicParsing="false" onAction="#toDe" text="Deutsch" />
-                                    <MenuItem fx:id="mnuRu" mnemonicParsing="false" onAction="#toRu" text="Русский" />
-                                 </items>
-                              </Menu>
-                           </items>
-                        </Menu>
-                        <Menu fx:id="mnuHelp" mnemonicParsing="false" text="Help">
-                           <items>
-                              <MenuItem fx:id="mnuAbout" mnemonicParsing="false" onAction="#about" text="About" />
-                           </items>
-                        </Menu>
-                     </menus>
-                     <padding>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="4.0" />
-                     </padding>
-                  </MenuBar>
-                  <Button fx:id="btnClose" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="56.0" styleClass="btn-close" text="X" textFill="WHITE" GridPane.columnIndex="1">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets bottom="10.0" />
-                     </GridPane.margin>
-                  </Button>
+                  <JFXHamburger fx:id="hamburger" prefHeight="50.0" prefWidth="50.0" styleClass="jfx-hamburger" />
                </children>
-            </GridPane>
-            <GridPane GridPane.rowIndex="1">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="541.0" minWidth="10.0" percentWidth="20.0" prefWidth="433.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="572.0" minWidth="10.0" percentWidth="75.0" prefWidth="421.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="572.0" minWidth="10.0" percentWidth="5.0" prefWidth="421.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="102.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="154.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label fx:id="lblTranslate" prefHeight="28.0" prefWidth="259.0" text="eDiome" GridPane.columnIndex="1">
-                           <font>
-                              <Font name="Calibri" size="24.0" />
-                           </font>
-                        </Label>
-                        <ImageView fitHeight="75.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                           <image>
-                              <Image url="@../resource/Images/icon3.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </GridPane>
-                  <JFXHamburger fx:id="hamburger" GridPane.columnIndex="2" />
-               </children>
-            </GridPane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-               <children>
-                  <JFXDrawer fx:id="drawer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="637.0" prefWidth="260.0" />
-               </children>
-            </Pane>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </HBox>
+            <Label fx:id="lbTitre" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
+      <AnchorPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+         <children>
+            <GridPane layoutX="330.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="6.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <BorderPane fx:id="pnZoneTravail" prefHeight="200.0" prefWidth="200.0" styleClass="pn-zone-travail" GridPane.columnIndex="1" />
+                  <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="260.0" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
    </children>
-</VBox>
+</GridPane>

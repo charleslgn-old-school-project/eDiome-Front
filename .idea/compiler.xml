@@ -17,11 +17,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="IRCFront" />
+        <module name="artifactid" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="IRCFront" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

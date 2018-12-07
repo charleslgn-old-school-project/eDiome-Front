@@ -4,13 +4,17 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import inter.ServerInterface;
+import javafx.stage.Stage;
 import metier.Message;
+import start.Main;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,6 +34,12 @@ public class IRCController implements Initializable {
     @FXML
     private TextField textPseudo;
 
+    @FXML
+    private BorderPane borderPane;
+
+    @FXML
+    private VBox VboxMere;
+
     ServerInterface obj;
 
     @SuppressWarnings("unused")
@@ -37,6 +47,7 @@ public class IRCController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         sc = new Scanner(System.in);
         int port = 8000;
         try {
@@ -90,4 +101,25 @@ public class IRCController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void attachments(){
+        try {
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    public void displayEmoji(){
+        try {
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+
 }

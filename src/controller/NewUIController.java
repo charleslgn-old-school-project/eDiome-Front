@@ -51,6 +51,10 @@ public class NewUIController {
     @FXML
     private Button btTradDirecte;
 
+
+    @FXML
+    private Button btnClose;
+
     @FXML
     private Pane pnZoneTravail;
 

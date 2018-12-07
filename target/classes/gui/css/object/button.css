@@ -5,8 +5,6 @@
     -fx-text-fill: -button-text-color;
 }
 
-.button:hover {
-    -fx-background-color: -button-color-OVER;
-    -fx-text-fill: -button-text-color-OVER;
+.jfx-button {
+    -jfx-disable-visual-focus: true;
 }
-
