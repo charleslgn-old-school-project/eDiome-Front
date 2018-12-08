@@ -1,5 +1,6 @@
 # ignore file css.txt
 **css.txt
+**data.xml
 
 # Compiled class file
 *.class

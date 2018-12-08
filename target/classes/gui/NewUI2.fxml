@@ -39,20 +39,20 @@
                <menus>
                   <Menu fx:id="mnuMenu" mnemonicParsing="false" text="Menu">
                      <items>
-                        <Menu mnemonicParsing="false" text="style">
+                        <Menu fx:id="mnuStyle" mnemonicParsing="false" text="style">
                            <items>
-                              <MenuItem mnemonicParsing="false" onAction="#changeTheme" userData="white" text="Blanc" />
-                              <MenuItem mnemonicParsing="false" onAction="#changeTheme" userData="black" text="Noir" />
-                              <MenuItem mnemonicParsing="false" onAction="#changeTheme"  userData="pink" text="Rose" />
-                              <MenuItem mnemonicParsing="false" onAction="#changeTheme" userData="green" text="Vert" />
+                              <MenuItem fx:id="whiteTheme" mnemonicParsing="false" onAction="#changeTheme" text="Blanc" userData="white" />
+                              <MenuItem fx:id="blackTheme" mnemonicParsing="false" onAction="#changeTheme" text="Noir" userData="black" />
+                              <MenuItem fx:id="pinkTheme" mnemonicParsing="false" onAction="#changeTheme" text="Rose" userData="pink" />
+                              <MenuItem fx:id="greenTheme" mnemonicParsing="false" onAction="#changeTheme" text="Vert" userData="green" />
                            </items>
                         </Menu>
                         <Menu fx:id="mnuLanguage" mnemonicParsing="false" text="Langue">
                            <items>
-                              <MenuItem fx:id="mnuFr" mnemonicParsing="false" onAction="#toFr" text="Français" />
-                              <MenuItem fx:id="mnuEn" mnemonicParsing="false" onAction="#toEn" text="English" />
-                              <MenuItem fx:id="mnuDe" mnemonicParsing="false" onAction="#toDe" text="Deutsch" />
-                              <MenuItem fx:id="mnuRu" mnemonicParsing="false" onAction="#toRu" text="Русский" />
+                              <MenuItem fx:id="mnuFr" mnemonicParsing="false" onAction="#changeLanguage" userData="FR" text="Français" />
+                              <MenuItem fx:id="mnuEn" mnemonicParsing="false" onAction="#changeLanguage" userData="EN" text="English" />
+                              <MenuItem fx:id="mnuDe" mnemonicParsing="false" onAction="#changeLanguage" userData="DE" text="Deutsch" />
+                              <MenuItem fx:id="mnuRu" mnemonicParsing="false" onAction="#changeLanguage" userData="RU" text="Русский" />
                            </items>
                         </Menu>
                      </items>

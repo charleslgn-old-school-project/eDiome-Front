@@ -6,58 +6,27 @@ public class EN extends Lang {
 
     @Override
     protected String[] getBoutonName() {
-        String chooseFile       = "Choose a file";
-        String translate        = "Translate";
-        String playTranslate    = "Play translation";
-        String export           = "Export";
-        String newTranslate     = "New translation";
-        String restart          = "Restart";
+        String send       = "Send";
 
-        return new String[] {chooseFile, translate, playTranslate,
-                export, newTranslate, restart};
+        return new String[] {send};
     }
 
     @Override
-    protected String[] getTitleName() {
-        String languageToMorse  = "English to Morse";
-        String languageToL33t   = "English to L33t";
-        String morseToLanguage  = "Morse to English";
-        String directTranslate  = "Live Translation";
+    protected String[] getThemeName() {
+        String black = "Black";
+        String white = "White";
+        String pink  = "Pink";
+        String green = "Green";
 
-        return new String[] {languageToMorse, languageToL33t,
-                morseToLanguage, directTranslate};
+        return new String[] {black, white,
+                pink, green};
     }
 
     @Override
     protected String[] getLabel() {
-        String writeRoman  = "Write in English";
-        String writeMorse  = "Write in Morse";
-        String welcome     = "Welcome";
-        String title       = "Translator";
+        String pseudo  = "pseudo";
 
-        return new String[] {writeRoman, writeMorse, welcome, title};
-    }
-
-    @Override
-    protected String[] getPopUp() {
-        String chooseFileTrad       = "Choose a text file";
-        String chooseFileExport     = "Choose a directory where export your translation";
-
-        String popUpSuccesTittle    = "Success";
-        String popUpSuccesName      = "Export";
-        String popUpSuccesDesc      = "Translation has been exported";
-
-        String popUpErrorTittle     = "Error";
-        String popUpErrorName       = "File path";
-        String popUpErrorDescTrad   = "Select a file to translate first";
-        String popUpErrorDescExport = "Verify that a translation has been done";
-
-        String popUpErrorNoFileSelected = "Verify that a file is selected";
-        String popUpErrorPlayTrad = "Verify that a translation has a result";
-
-        return new String[] {chooseFileTrad, chooseFileExport, popUpSuccesTittle, popUpSuccesName,
-                popUpSuccesDesc, popUpErrorTittle, popUpErrorName, popUpErrorDescTrad, popUpErrorDescExport,
-                popUpErrorNoFileSelected, popUpErrorPlayTrad};
+        return new String[] {pseudo};
     }
 
     @Override
@@ -66,7 +35,8 @@ public class EN extends Lang {
         String menuHelp     = "Help";
         String menuLangage  = "Languages";
         String menuAbout    = "About";
-        return new String[] {menuMenu, menuHelp, menuLangage, menuAbout};
+        String menuStyle    = "Style";
+        return new String[] {menuMenu, menuHelp, menuLangage, menuAbout, menuStyle};
     }
 
     @Override

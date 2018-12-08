@@ -62,6 +62,5 @@ public class ProposController implements Initializable{
         lblBuild.setText(Translate.haveIt(DisclimerName.LBL_BUILD, lang.disclimer));
         lblCadre.setText(Translate.haveIt(DisclimerName.LBL_CADRE, lang.disclimer));
         lblRealise.setText(Translate.haveIt(DisclimerName.LBL_REALISE, lang.disclimer));
-        lblTitle.setText(Translate.haveIt(LabelName.TITLE, lang.label));
     }
 }

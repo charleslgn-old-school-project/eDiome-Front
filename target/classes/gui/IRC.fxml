@@ -44,7 +44,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#send" prefHeight="31.0" prefWidth="109.0" text="Envoyer">
+                  <JFXButton fx:id="btnSend" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#send" prefHeight="31.0" prefWidth="109.0" text="Envoyer">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -67,7 +67,7 @@
    <top>
       <HBox alignment="CENTER_RIGHT" maxHeight="40.0" minHeight="40.0" prefHeight="40.0">
          <children>
-            <Label prefHeight="17.0" prefWidth="62.0" text="Pseudo :" />
+            <Label fx:id="lblPseudo" prefHeight="17.0" prefWidth="62.0" text="Pseudo :" />
             <TextField fx:id="textPseudo" prefHeight="26.0" prefWidth="196.0">
                <HBox.margin>
                   <Insets />

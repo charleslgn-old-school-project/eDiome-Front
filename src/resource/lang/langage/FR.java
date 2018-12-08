@@ -3,60 +3,30 @@ package resource.lang.langage;
 import resource.lang.Lang;
 
 public class FR extends Lang {
+
     @Override
     protected String[] getBoutonName() {
-        String chooseFile       = "Choisir un fichier";
-        String translate        = "Traduire";
-        String playTranslate    = "Jouer la traduction";
-        String export           = "Exporter";
-        String newTranslate     = "Nouvelle traduction";
-        String restart          = "Recommencer";
+        String send       = "Envoyer";
 
-        return new String[] {chooseFile, translate, playTranslate,
-                export, newTranslate, restart};
+        return new String[] {send};
     }
 
     @Override
-    protected String[] getTitleName() {
-        String languageToMorse  = "Serveur 1";
-        String languageToL33t   = "Serveur 2";
-        String morseToLanguage  = "etc";
-        String directTranslate  = "...";
+    protected String[] getThemeName() {
+        String black = "Noir";
+        String white = "Blanc";
+        String pink  = "Rose";
+        String green = "Vert";
 
-        return new String[] {languageToMorse, languageToL33t,
-                morseToLanguage, directTranslate};
+        return new String[] {black, white,
+                pink, green};
     }
 
     @Override
     protected String[] getLabel() {
-        String writeRoman  = "";
-        String writeMorse  = "";
-        String welcome     = "Bienvenue";
-        String title       = "eDiome";
+        String pseudo  = "pseudo";
 
-        return new String[] {writeRoman, writeMorse, welcome, title};
-    }
-
-    @Override
-    protected String[] getPopUp() {
-        String chooseFileTrad  = "Choisissez un fichier texte";
-        String chooseFileExport= "Choisissez un répertoire ou exporter votre traduction";
-
-        String popUpSuccesTittle    = "Succès";
-        String popUpSuccesName      = "Export";
-        String popUpSuccesDesc      = "La traduction a été exportée";
-
-        String popUpErrorTittle     = "Erreur";
-        String popUpErrorName       = "Chemin du fichier";
-        String popUpErrorDescTrad   = "Sélectionnez dans un premier temps un fichier texte à traduire";
-        String popUpErrorDescExport = "Vérifiez qu'une traduction a été effectuée";
-
-        String popUpErrorNoFileSelected = "Vérifiez qu'un fichier a été sélectionné";
-        String popUpErrorPlayTrad       = "Vérifiez que la traduction a un résultat";
-
-        return new String[] {chooseFileTrad, chooseFileExport, popUpSuccesTittle, popUpSuccesName,
-                             popUpSuccesDesc, popUpErrorTittle, popUpErrorName, popUpErrorDescTrad, popUpErrorDescExport,
-                            popUpErrorNoFileSelected, popUpErrorPlayTrad};
+        return new String[] {pseudo};
     }
 
     @Override
@@ -65,7 +35,8 @@ public class FR extends Lang {
         String menuHelp     = "Aide";
         String menuLangage  = "Langue";
         String menuAbout    = "A propos";
-        return new String[] {menuMenu, menuHelp, menuLangage, menuAbout};
+        String menuStyle    = "Theme";
+        return new String[] {menuMenu, menuHelp, menuLangage, menuAbout, menuStyle};
     }
 
     @Override

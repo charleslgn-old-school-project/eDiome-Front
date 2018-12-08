@@ -1,6 +1,6 @@
 package controller;
 
-import Utils.ThemeSaver;
+import Utils.XMLDataFinder;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -31,13 +31,12 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import resource.lang.Lang;
 import resource.lang.Translate;
-import resource.lang.langage.DE;
 import resource.lang.langage.EN;
-import resource.lang.langage.FR;
-import resource.lang.langage.RU;
+import resource.lang.typetrad.ColorName;
 import resource.lang.typetrad.MenuName;
 import start.Main;
 
+import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -48,6 +47,16 @@ public class NewUI2Controller implements Initializable {
   private boolean canBeResizeN;
   private boolean canBeResizeNW;
   private boolean canBeResizeNE;
+
+  @FXML
+  private MenuItem whiteTheme;
+  @FXML
+  private MenuItem blackTheme;
+  @FXML
+  private MenuItem greenTheme;
+  @FXML
+  private MenuItem pinkTheme;
+
 
   @FXML
   private GridPane pnPrincipal;
@@ -63,18 +72,14 @@ public class NewUI2Controller implements Initializable {
 
   @FXML
   private Menu mnuLanguage;
+  @FXML
+  private Menu mnuStyle;
 
   @FXML
   private Menu mnuHelp;
 
   @FXML
   private MenuItem mnuAbout;
-
-  @FXML
-  private Button btnClose;
-
-  @FXML
-  private Label lblTranslate;
 
   @FXML
   private Label lbTitre;
@@ -87,95 +92,65 @@ public class NewUI2Controller implements Initializable {
   private JFXDrawer drawer;
 
   @Override
-  public void initialize(URL url, ResourceBundle rb){
-    //isDrag = false;
-    try {
-      HamburgerBackArrowBasicTransition burgertask = new HamburgerBackArrowBasicTransition(hamburger);
-      burgertask.setRate(-1);
-      drawer.setOnDrawerClosing(e -> {
-        drawer.setOnDrawerClosed(e2 -> {
-          drawer.setPrefWidth(0);
-          drawer.setMinWidth (0);
-          drawer.setMaxWidth (0);
-        });
-        this.pnZoneTravail.setPadding(new Insets(0,0,0,0));
-        changeBurger(burgertask);
-      });
+  public void initialize(URL url, ResourceBundle rb) {
+    createDrawer();
+    addServ();
+    BorderPane.setAlignment(this.pnZoneTravail, Pos.CENTER);
 
-      drawer.setOnDrawerOpening(e -> {
-        drawer.setPrefWidth(260);
-        drawer.setMinWidth(260);
-        drawer.setMaxWidth(260);
-        this.pnZoneTravail.setPadding(new Insets(0,0,0,260));
-        changeBurger(burgertask);
-      });
+    //Si l'utilisateur clique sur la zone d'irc, le drawer se fermera
+    pnZoneTravail.setOnMouseClicked(e -> drawer.close());
+    mnuBar.setOnMousePressed(this::mousePressed);
+    mnuBar.setOnMouseDragged(this::mouseDrag);
+    mnuBar.setOnMouseReleased(this::mouseRelease);
+    mnuBar.setOnMouseMoved(this::mouseMove);
 
-      hamburger.setOnMousePressed( e -> {
-        if (drawer.isOpened()) {
-          drawer.close();
-        } else {
-          drawer.toggle();
-        }
-      });
-
-      // Si l'utilisateur clique sur la zone d'irc, le drawer se fermera
-      pnZoneTravail.setOnMouseClicked(e ->{
-        if(drawer.isOpened()){
-          drawer.close();
-        }
-      });
-
-      String lan = System.getProperty("user.language");
-      if(lan.equalsIgnoreCase("fr")){
-        Main.setLangue(new FR());
-      } else if (lan.equalsIgnoreCase("de")){
-        Main.setLangue(new DE());
-      } else if (lan.equalsIgnoreCase("ru")) {
-        Main.setLangue(new RU());
-      } else {
-        Main.setLangue(new EN());
+    //language Management
+    Main.setLangue(getLang(XMLDataFinder.getLangage()));
+    new AnimationTimer() {
+      @Override
+      public void handle(long now) {
+        translate();
       }
-
-      new AnimationTimer() {
-        @Override
-        public void handle(long now) {
-          translate();
-        }
-      }.start();
-
-      addServ();
-
-      BorderPane.setAlignment(this.pnZoneTravail, Pos.CENTER);
-      mnuBar.setOnMousePressed(this::mousePressed);
-      mnuBar.setOnMouseDragged(this::mouseDrag);
-      mnuBar.setOnMouseReleased(this::mouseRealease);
-      //mnuBar.setOnMouseClicked(this::mouseClicked);
-
-      mnuBar.setOnMouseMoved(e -> {
-        canBeResizeN  = false;
-        canBeResizeNE = false;
-        canBeResizeNW = false;
-
-        if(e.getSceneX() < 4){
-          canBeResizeNW = true;
-          Main.getPrimaryStage().getScene().setCursor(Cursor.NW_RESIZE);
-        }else if(e.getSceneX() > Main.getPrimaryStage().getScene().getWidth() -4){
-          canBeResizeNE = true;
-          Main.getPrimaryStage().getScene().setCursor(Cursor.NE_RESIZE);
-        } else if (e.getSceneY() < 4){
-          canBeResizeN = true;
-          Main.getPrimaryStage().getScene().setCursor(Cursor.N_RESIZE);
-        } else {
-          Main.getPrimaryStage().getScene().setCursor(Cursor.OPEN_HAND);
-        }
-      });
-
-    }catch (Exception ex){
-      System.out.println(ex);
-    }
+    }.start();
   }
 
-  public void AffichageIRCClick() {
+  /**
+   * Create a drawer with all these event
+   */
+  private void createDrawer() {
+    HamburgerBackArrowBasicTransition burgertask = new HamburgerBackArrowBasicTransition(hamburger);
+    burgertask.setRate(-1);
+    drawer.setOnDrawerClosing(e -> {
+      drawer.setOnDrawerClosed(e2 -> {
+        drawer.setPrefWidth(0);
+        drawer.setMinWidth(0);
+        drawer.setMaxWidth(0);
+      });
+      this.pnZoneTravail.setPadding(new Insets(0, 0, 0, 0));
+      changeBurger(burgertask);
+    });
+
+    drawer.setOnDrawerOpening(e -> {
+      drawer.setPrefWidth(260);
+      drawer.setMinWidth(260);
+      drawer.setMaxWidth(260);
+      this.pnZoneTravail.setPadding(new Insets(0, 0, 0, 260));
+      changeBurger(burgertask);
+    });
+
+    hamburger.setOnMousePressed(e -> {
+      if (drawer.isOpened()) {
+        drawer.close();
+      } else {
+        drawer.toggle();
+      }
+    });
+  }
+
+  /**
+   * call when we need to show an IRC
+   */
+  private void AffichageIRCClick() {
     //this.lbTitre.setText("Français vers Morse");
     fadeout(pnZoneTravail);
     fadeout(pnZoneTravail);
@@ -184,14 +159,17 @@ public class NewUI2Controller implements Initializable {
 
   }
 
-  private void changeBurger(HamburgerBackArrowBasicTransition burgertask){
+  /**
+   * change the menu icon to a row when it is open
+   * change the row to a menu icon when it is close
+   */
+  private void changeBurger(HamburgerBackArrowBasicTransition burgertask) {
     burgertask.setRate(burgertask.getRate() * -1);
     burgertask.play();
   }
 
   /**
-   * Lance la fenêtre correspondante dans la pane prévue à cet effet
-   * @param form : fxml à charger
+   * load the new stage in the work zone pane
    */
   private void loadFxml(String form) {
     try {
@@ -210,8 +188,9 @@ public class NewUI2Controller implements Initializable {
   }
 
   /**
-   * Effet de transition
-   * @param pane : Pane (zone de travail) où s'affichent les différentes fonctionnalités
+   * transition effect
+   *
+   * @param pane : Pane (Work Zone) where it will display the content
    */
   private void fadeout(Pane pane) {
     FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), pane);
@@ -224,63 +203,82 @@ public class NewUI2Controller implements Initializable {
   }
 
   /**
-   * permet de déplacer le fenettre
-   * @param event le click de la souris
+   * call to move the window
    */
-  private void mouseDrag(MouseEvent event){
-    Main.getPrimaryStage().getScene().setCursor(canBeResizeN  ? Cursor.N_RESIZE :
-                                                canBeResizeNE ? Cursor.NE_RESIZE:
-                                                canBeResizeNW ? Cursor.NW_RESIZE:Cursor.CLOSED_HAND);
+  private void mouseDrag(MouseEvent event) {
+    Main.getPrimaryStage().getScene().setCursor(canBeResizeN ? Cursor.N_RESIZE :
+            canBeResizeNE ? Cursor.NE_RESIZE :
+                    canBeResizeNW ? Cursor.NW_RESIZE : Cursor.CLOSED_HAND);
 
     Main.getPrimaryStage().setMaximized(false);
     setOpacity(0.8);
 
-    if(Main.getPrimaryStage().getY() != event.getScreenY()){
+    if (Main.getPrimaryStage().getY() != event.getScreenY()) {
       Main.getPrimaryStage().setX(event.getScreenX() - xOffset);
       Main.getPrimaryStage().setY(event.getScreenY() - yOffset);
     }
   }
 
-  private void setOpacity(double opacity){
+  /**
+   * change opacity
+   */
+  private void setOpacity(double opacity) {
     pnPrincipal.getScene().getWindow().setOpacity(opacity);
   }
 
   /**
-   * permet de replacer la fenettre si elle est mise en haut
-   * @param event le click de la souris
+   * replace the window if it is out of the screen
    */
-  private void mouseRealease(MouseEvent event){
+  private void mouseRelease(MouseEvent event) {
     mouseClicked(event);
-    Main.getPrimaryStage().getScene().setCursor(canBeResizeN  ? Cursor.N_RESIZE :
-                                                canBeResizeNE ? Cursor.NE_RESIZE:
-                                                canBeResizeNW ? Cursor.NW_RESIZE:Cursor.OPEN_HAND);
-    if(Main.getPrimaryStage().getY() < 0){
+    Main.getPrimaryStage().getScene().setCursor(canBeResizeN ? Cursor.N_RESIZE :
+            canBeResizeNE ? Cursor.NE_RESIZE :
+                    canBeResizeNW ? Cursor.NW_RESIZE : Cursor.OPEN_HAND);
+    if (Main.getPrimaryStage().getY() < 0) {
       Main.getPrimaryStage().setY(0);
     }
     setOpacity(1);
-
-
   }
 
   /**
-   * permet de déplacer le fenettre
-   * @param event le relachemleltn de la souris
+   * set the cursor on the tittle bar
    */
-  private void mousePressed(MouseEvent event){
-    Main.getPrimaryStage().getScene().setCursor(canBeResizeN  ? Cursor.N_RESIZE :
-                                                canBeResizeNE ? Cursor.NE_RESIZE:
-                                                canBeResizeNW ? Cursor.NW_RESIZE:Cursor.CLOSED_HAND);
+  private void mouseMove(MouseEvent event) {
+    canBeResizeN = false;
+    canBeResizeNE = false;
+    canBeResizeNW = false;
+
+    if (event.getSceneX() < 4) {
+      canBeResizeNW = true;
+      Main.getPrimaryStage().getScene().setCursor(Cursor.NW_RESIZE);
+    } else if (event.getSceneX() > Main.getPrimaryStage().getScene().getWidth() - 4) {
+      canBeResizeNE = true;
+      Main.getPrimaryStage().getScene().setCursor(Cursor.NE_RESIZE);
+    } else if (event.getSceneY() < 4) {
+      canBeResizeN = true;
+      Main.getPrimaryStage().getScene().setCursor(Cursor.N_RESIZE);
+    } else {
+      Main.getPrimaryStage().getScene().setCursor(Cursor.OPEN_HAND);
+    }
+  }
+
+  /**
+   * move the window
+   */
+  private void mousePressed(MouseEvent event) {
+    Main.getPrimaryStage().getScene().setCursor(canBeResizeN ? Cursor.N_RESIZE :
+            canBeResizeNE ? Cursor.NE_RESIZE :
+                    canBeResizeNW ? Cursor.NW_RESIZE : Cursor.CLOSED_HAND);
 
     xOffset = event.getSceneX();
     yOffset = event.getSceneY();
   }
 
   /**
-   * permet de déplacer le fenettre
-   * @param event le relachemleltn de la souris
+   * maximized the window
    */
-  private void mouseClicked(MouseEvent event){
-    if(event.getButton().equals(MouseButton.PRIMARY)) {
+  private void mouseClicked(MouseEvent event) {
+    if (event.getButton().equals(MouseButton.PRIMARY)) {
       if (event.getClickCount() == 2) {
         Main.getPrimaryStage().setMaximized(!Main.getPrimaryStage().isMaximized());
       }
@@ -288,30 +286,40 @@ public class NewUI2Controller implements Initializable {
   }
 
   /**
-   * ferme l'application
+   * close application
    */
-  public void close(){
-    ((Stage)pnPrincipal.getScene().getWindow()).close();
+  public void close() {
+    ((Stage) pnPrincipal.getScene().getWindow()).close();
   }
 
-  public void Maximize(){
-    if(((Stage)pnPrincipal.getScene().getWindow()).isMaximized()) {
+  public void Maximize() {
+    if (((Stage) pnPrincipal.getScene().getWindow()).isMaximized()) {
       ((Stage) pnPrincipal.getScene().getWindow()).setMaximized(false);
-    }else{
+    } else {
       ((Stage) pnPrincipal.getScene().getWindow()).setMaximized(true);
     }
   }
 
+
+  /**
+   * shrink application
+   */
   public void Shrink() {
     ((Stage) pnPrincipal.getScene().getWindow()).setIconified(true);
   }
 
   /**
-   * Traduction des composants
+   * translate component
    */
   private void translate() {
     Lang lang = Main.getLangue();
 
+    whiteTheme.setText(Translate.haveIt(ColorName.WHITE, lang.themeName));
+    blackTheme.setText(Translate.haveIt(ColorName.BLACK, lang.themeName));
+    pinkTheme.setText(Translate.haveIt(ColorName.PINK, lang.themeName));
+    greenTheme.setText(Translate.haveIt(ColorName.GREEN, lang.themeName));
+
+    mnuStyle.setText(Translate.haveIt(MenuName.MENU_STYLE, lang.menu));
     mnuMenu.setText(Translate.haveIt(MenuName.MENU_MENU, lang.menu));
     mnuAbout.setText(Translate.haveIt(MenuName.MENU_ABOUT, lang.menu));
     mnuHelp.setText(Translate.haveIt(MenuName.MENU_HELP, lang.menu));
@@ -319,35 +327,37 @@ public class NewUI2Controller implements Initializable {
   }
 
   /**
-   * Affecte la langue Française
+   * change language
    */
-  public void toFr() {
-    Main.setLangue(new FR());
+  public void changeLanguage(ActionEvent event) {
+    Object node = event.getSource();
+    if (node instanceof MenuItem) {
+      MenuItem mnu = (MenuItem) node;
+      String language = (String) mnu.getUserData();
+      Lang lang = getLang(language);
+      Main.setLangue(lang);
+      XMLDataFinder.setLangage(language);
+
+    }
   }
 
   /**
-   * Affecte la langue Allemande
+   * get the language
    */
-  public void toDe() {
-    Main.setLangue(new DE());
+  private Lang getLang(String language) {
+    try {
+      Class<?> clazz = Class.forName("resource.lang.langage." + language.toUpperCase());
+      Constructor<?> ctor = clazz.getConstructor();
+      Object object = ctor.newInstance();
+      return  (Lang) object;
+    } catch (Exception e) {
+      System.err.println(e);
+    }
+    return new EN();
   }
 
   /**
-   * Affecte la langue Russe
-   */
-  public void toRu() {
-    Main.setLangue(new RU());
-  }
-
-  /**
-   * Affecte la langue Englaise
-   */
-  public void toEn() {
-    Main.setLangue(new EN());
-  }
-
-  /**
-   * Lance la fenêtre à propos de l'application
+   * generate the about window
    */
   public void about() {
     try {
@@ -362,28 +372,31 @@ public class NewUI2Controller implements Initializable {
       st.setResizable(false);
       st.show();
       st.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
-        if (!newPropertyValue){
+        if (!newPropertyValue) {
           st.close();
         }
       });
 
-    }catch(Exception ex){
+    } catch (Exception ex) {
       System.out.println(ex);
     }
   }
 
-  public void changeTheme(ActionEvent event){
+  /**
+   * change color of the application
+   */
+  public void changeTheme(ActionEvent event) {
     Object node = event.getSource();
     if (node instanceof MenuItem) {
       MenuItem mnu = (MenuItem) node;
       String color = (String) mnu.getUserData();
       Main.getPrimaryStage().getScene().getStylesheets().clear();
       Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-" + color + ".css").toExternalForm());
-      ThemeSaver.saveTheme(color);
+      XMLDataFinder.setTheme(color);
     }
   }
 
-  private void addServ(){
+  private void addServ() {
     VBox vBox = new VBox();
     //vBox.setAlignment(Pos.TOP_CENTER);
     vBox.getStyleClass().add("menu-bar-2");
@@ -396,27 +409,12 @@ public class NewUI2Controller implements Initializable {
     iw.setFitWidth(150);
     vBox.getChildren().add(iw);
 
-    JFXButton jfxButton = new JFXButton("server1");
-    jfxButton.setPrefSize(Double.MAX_VALUE, 60);
-    jfxButton.setOnAction(event -> AffichageIRCClick());
-
-    JFXButton jfxButton2 = new JFXButton("server2");
-    jfxButton2.setPrefSize(Double.MAX_VALUE, 60);
-    jfxButton2.setOnAction(event -> AffichageIRCClick());
-
-    JFXButton jfxButton3 = new JFXButton("server3");
-    jfxButton3.setPrefSize(Double.MAX_VALUE, 60);
-    jfxButton3.setOnAction(event -> AffichageIRCClick());
-
-    JFXButton jfxButton4 = new JFXButton("server4");
-    jfxButton4.setPrefSize(Double.MAX_VALUE, 60);
-    jfxButton4.setOnAction(event -> AffichageIRCClick());
-
-    vBox.getChildren().add(jfxButton);
-    vBox.getChildren().add(jfxButton2);
-    vBox.getChildren().add(jfxButton3);
-    vBox.getChildren().add(jfxButton4);
-
+    for (int i = 1; i < 5; i++) {
+      JFXButton jfxButton = new JFXButton("server" + i);
+      jfxButton.setPrefSize(Double.MAX_VALUE, 60);
+      jfxButton.setOnAction(event -> AffichageIRCClick());
+      vBox.getChildren().add(jfxButton);
+    }
     drawer.setSidePane(vBox);
   }
 }

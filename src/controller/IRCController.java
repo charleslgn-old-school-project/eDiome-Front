@@ -1,5 +1,7 @@
 package controller;
 
+import Utils.XMLDataFinder;
+import com.jfoenix.controls.JFXButton;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,6 +16,9 @@ import javafx.scene.layout.VBox;
 import inter.ServerInterface;
 import javafx.stage.Stage;
 import metier.Message;
+import resource.lang.Translate;
+import resource.lang.typetrad.ButonName;
+import resource.lang.typetrad.LabelName;
 import start.Main;
 
 import java.net.MalformedURLException;
@@ -24,6 +29,13 @@ import java.rmi.RemoteException;
 import java.util.*;
 
 public class IRCController implements Initializable {
+
+    @FXML
+    private JFXButton btnSend;
+
+    @FXML
+    private Label lblPseudo;
+
 
     @FXML
     private ScrollPane paneChat;
@@ -57,6 +69,10 @@ public class IRCController implements Initializable {
             e.printStackTrace();
         }
 
+        textPseudo.setText(XMLDataFinder.getPseudo());
+
+        textPseudo.setOnKeyReleased(e -> XMLDataFinder.setPseudo(textPseudo.getText()) );
+
         paneChat.setVvalue(paneChat.getVmax());
 
         textMessage.setOnKeyPressed(event -> {
@@ -69,8 +85,14 @@ public class IRCController implements Initializable {
             @Override
             public void handle(long now) {
                 printChat();
+                translate();
             }
         }.start();
+    }
+
+    private void translate(){
+        lblPseudo.setText(Translate.haveIt(LabelName.PSEUDO, Main.getLangue().label) + " : ");
+        btnSend.setText(Translate.haveIt(ButonName.SEND, Main.getLangue().butonName));
     }
 
     private void printChat(){
