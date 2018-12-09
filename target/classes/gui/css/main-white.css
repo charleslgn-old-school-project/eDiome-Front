@@ -1,45 +1,19 @@
 @import url("main.css");
 
 * {
-    -pn-zone-principale-color : rgb(173, 204, 210);
-    -ecriture-clor            : black;
+    -first-color  : rgb(125, 148, 158);
+    -second-color : rgb(137, 161, 171);
+    -third-color  : rgb(173, 204, 210);
+
+    -text-color                   : black;
+    -button-text-color            : black;
+    -button-text-color-OVER       : black;
+    -button-close-text-color-OVER : red;
 
     /*___ chat CSS ___*/
     -text-field-color         : white;
     -scroll-bar-color         : rgb(125, 148, 158);
 
-
-    /*___ Menu Bar CSS ___*/
-    -menu-item-color          : rgb(125, 148, 158);
-    -menu-item-color-OVER     : rgb(210, 210, 206);
-
-    -menu-bar-color           : rgb(125, 148, 158);
-    -menu-bar-2-color         : rgb(137, 161, 171);
-
-    /*___ Buton CSS ___*/
-    -button-color :     rgb(125, 148, 158);
-    -button-text-color: black;
-
-    -button-color-OVER : rgb(82, 101, 109);
-    -button-text-color-OVER: black;
-
-    /*___ Button Dashboard CSS ___*/
-    -button-dashboard-color :     rgb(125, 148, 158);
-    -button-dashboard-text-color: black;
-
-    -button-dashboard-color-OVER : rgb(173, 204, 210);
-
     -separator-color : rgb(238,238,238);
-
-    /*___ Button Close CSS ___*/
-    -button-close-color :     rgb(125, 148, 158);
-    -button-close-text-color: black;
-
-    -button-close-color-OVER : rgb(200,200,200);
-    -button-close-text-color-OVER : red;
-
-    /*___ Sandwitch Menu ___*/
-
-    -jfx-hamburger-button-color : black;
 }
 

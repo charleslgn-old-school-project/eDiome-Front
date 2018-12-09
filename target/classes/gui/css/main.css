@@ -5,5 +5,5 @@
 @import url("object/button-close.css");
 
 .pn-zone-travail {
-    -fx-background-color:  -pn-zone-principale-color;
+    -fx-background-color:  -third-color;
 }

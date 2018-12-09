@@ -1,16 +1,17 @@
 .menu-item{
-    -fx-border-color:     -menu-item-color ;
-    -fx-background-color: -menu-bar-color ;
+    -fx-border-color:     -first-color;
+    -fx-background-color: -first-color;
 }
 
 
 .menu-bar-1, .menu{
-    -fx-background-color:  -menu-bar-color;
-    -fx-border-color:      -menu-bar-color;
+    -fx-background-color:  -first-color;
+    -fx-border-color:      -first-color;
 }
 
 .menu-bar-1 {
-    -fx-border-color: -menu-item-color;
+    -fx-border-color: -first-color;
+    -fx-background-color: -first-color;
 }
 
 
@@ -19,16 +20,16 @@
 }
 
 .menu-item:hover{
-    -fx-background-color: -menu-item-color-OVER;
-    -fx-border-color: -menu-item-color-OVER;
+    -fx-background-color: -third-color;
+    -fx-border-color: -third-color;
 }
 
 .menu-bar-2{
-    -fx-background-color: -menu-bar-2-color;
-    -fx-border-color: -menu-bar-2-color;
+    -fx-background-color: -second-color;
+    -fx-border-color: -second-color;
 }
 
 .jfx-hamburger StackPane{
-    -fx-background-color: -jfx-hamburger-button-color;
+    -fx-background-color: -button-text-color;
 }
 

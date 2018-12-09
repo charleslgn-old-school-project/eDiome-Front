@@ -13,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -44,50 +43,28 @@ public class NewUI2Controller implements Initializable {
   private static double xOffset = 0;
   private static double yOffset = 0;
 
-  private boolean canBeResizeN;
-  private boolean canBeResizeNW;
-  private boolean canBeResizeNE;
-
-  @FXML
-  private MenuItem whiteTheme;
-  @FXML
-  private MenuItem blackTheme;
-  @FXML
-  private MenuItem greenTheme;
-  @FXML
-  private MenuItem pinkTheme;
-
-
-  @FXML
-  private GridPane pnPrincipal;
-
-  @FXML
-  private BorderPane pnZoneTravail;
-
   @FXML
   private MenuBar mnuBar;
-
   @FXML
-  private Menu mnuMenu;
-
+  private Menu mnuMenu,
+               mnuLanguage;
   @FXML
-  private Menu mnuLanguage;
+  private Menu mnuStyle,
+               mnuHelp;
   @FXML
-  private Menu mnuStyle;
-
+  private MenuItem mnuAbout,
+                   whiteTheme,
+                   blackTheme,
+                   pinkTheme,
+                   greenTheme;
   @FXML
-  private Menu mnuHelp;
-
+  private GridPane pnPrincipal;
   @FXML
-  private MenuItem mnuAbout;
-
+  private BorderPane pnZoneTravail;
   @FXML
   private Label lbTitre;
-
-
   @FXML
   private JFXHamburger hamburger;
-
   @FXML
   private JFXDrawer drawer;
 
@@ -99,10 +76,10 @@ public class NewUI2Controller implements Initializable {
 
     //Si l'utilisateur clique sur la zone d'irc, le drawer se fermera
     pnZoneTravail.setOnMouseClicked(e -> drawer.close());
+    //windows move management
     mnuBar.setOnMousePressed(this::mousePressed);
     mnuBar.setOnMouseDragged(this::mouseDrag);
     mnuBar.setOnMouseReleased(this::mouseRelease);
-    mnuBar.setOnMouseMoved(this::mouseMove);
 
     //language Management
     Main.setLangue(getLang(XMLDataFinder.getLangage()));
@@ -151,10 +128,8 @@ public class NewUI2Controller implements Initializable {
    * call when we need to show an IRC
    */
   private void AffichageIRCClick() {
-    //this.lbTitre.setText("Français vers Morse");
     fadeout(pnZoneTravail);
     fadeout(pnZoneTravail);
-    //titre = TitleName.LANGUAGE_TO_MORSE;
     loadFxml("..//gui/IRC.fxml");
 
   }
@@ -177,10 +152,6 @@ public class NewUI2Controller implements Initializable {
 
       pan.getChildren().clear();
       Pane newLoadedPane = FXMLLoader.load(getClass().getResource(form));
-      //newLoadedPane.setPrefWidth(pnZoneTravail.getPrefWidth());
-      //newLoadedPane.setMinWidth(pnZoneTravail.getPrefWidth());
-      //newLoadedPane.setMaxWidth(pnZoneTravail.getPrefHeight());
-      //newLoadedPane.setPrefHeight(pnZoneTravail.getPrefHeight());
       pnZoneTravail.setCenter(newLoadedPane);
     } catch (Exception ex) {
       System.err.println(ex);
@@ -206,10 +177,6 @@ public class NewUI2Controller implements Initializable {
    * call to move the window
    */
   private void mouseDrag(MouseEvent event) {
-    Main.getPrimaryStage().getScene().setCursor(canBeResizeN ? Cursor.N_RESIZE :
-            canBeResizeNE ? Cursor.NE_RESIZE :
-                    canBeResizeNW ? Cursor.NW_RESIZE : Cursor.CLOSED_HAND);
-
     Main.getPrimaryStage().setMaximized(false);
     setOpacity(0.8);
 
@@ -231,9 +198,6 @@ public class NewUI2Controller implements Initializable {
    */
   private void mouseRelease(MouseEvent event) {
     mouseClicked(event);
-    Main.getPrimaryStage().getScene().setCursor(canBeResizeN ? Cursor.N_RESIZE :
-            canBeResizeNE ? Cursor.NE_RESIZE :
-                    canBeResizeNW ? Cursor.NW_RESIZE : Cursor.OPEN_HAND);
     if (Main.getPrimaryStage().getY() < 0) {
       Main.getPrimaryStage().setY(0);
     }
@@ -241,35 +205,9 @@ public class NewUI2Controller implements Initializable {
   }
 
   /**
-   * set the cursor on the tittle bar
-   */
-  private void mouseMove(MouseEvent event) {
-    canBeResizeN = false;
-    canBeResizeNE = false;
-    canBeResizeNW = false;
-
-    if (event.getSceneX() < 4) {
-      canBeResizeNW = true;
-      Main.getPrimaryStage().getScene().setCursor(Cursor.NW_RESIZE);
-    } else if (event.getSceneX() > Main.getPrimaryStage().getScene().getWidth() - 4) {
-      canBeResizeNE = true;
-      Main.getPrimaryStage().getScene().setCursor(Cursor.NE_RESIZE);
-    } else if (event.getSceneY() < 4) {
-      canBeResizeN = true;
-      Main.getPrimaryStage().getScene().setCursor(Cursor.N_RESIZE);
-    } else {
-      Main.getPrimaryStage().getScene().setCursor(Cursor.OPEN_HAND);
-    }
-  }
-
-  /**
    * move the window
    */
   private void mousePressed(MouseEvent event) {
-    Main.getPrimaryStage().getScene().setCursor(canBeResizeN ? Cursor.N_RESIZE :
-            canBeResizeNE ? Cursor.NE_RESIZE :
-                    canBeResizeNW ? Cursor.NW_RESIZE : Cursor.CLOSED_HAND);
-
     xOffset = event.getSceneX();
     yOffset = event.getSceneY();
   }

@@ -1,5 +1,5 @@
 .label {
-    -fx-text-fill: -ecriture-clor ;
+    -fx-text-fill: -text-color ;
     -fx-font-family: 'emojione-svg';
 }
 
@@ -46,5 +46,5 @@
 
 .text-input{
     -fx-font-family: 'emojione-svg';
-    -fx-text-fill: -ecriture-clor;
+    -fx-text-fill: -text-color;
 }

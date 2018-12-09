@@ -3,11 +3,11 @@
     -fx-font-size: 20;
     -fx-padding: 0 0 0 0;
     -fx-background-radius: 0;
-    -fx-background-color: -button-close-color;
-    -fx-text-fill: -button-close-text-color;
+    -fx-background-color: -first-color;
+    -fx-text-fill: -button-text-color;
 }
 
 .btn-close:hover{
-    -fx-background-color: -button-close-color-OVER;
+    -fx-background-color: -third-color;
     -fx-text-fill: -button-close-text-color-OVER;
 }
