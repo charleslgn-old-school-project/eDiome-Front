@@ -12,6 +12,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import inter.ServerInterface;
 import javafx.stage.Stage;
@@ -30,12 +32,19 @@ import java.util.*;
 
 public class IRCController implements Initializable {
 
+    private String tabEmoji[] = {"1","2","3","4","5","6","7","9","10","11","12","13","14","15","16","17","18","19","20","21"};
+
     @FXML
     private JFXButton btnSend;
 
     @FXML
-    private Label lblPseudo;
+    private Pane PaneEmoji;
 
+    @FXML
+    private JFXButton btnemoji;
+
+    @FXML
+    private Label lblPseudo;
 
     @FXML
     private ScrollPane paneChat;
@@ -92,6 +101,8 @@ public class IRCController implements Initializable {
                 translate();
             }
         }.start();
+
+        loadEmoji();
     }
 
     private void translate(){
@@ -139,11 +150,23 @@ public class IRCController implements Initializable {
 
     @FXML
     public void displayEmoji(){
-        try {
-
-
-        } catch (Exception e) {
-            System.out.println(e);
+        if(PaneEmoji.isVisible()){
+            PaneEmoji.setVisible(false);
+        }else{
+            PaneEmoji.setVisible(true);
         }
+    }
+
+    public void loadEmoji(){
+        HBox hbox = new HBox();
+        //hbox.getStyleClass().add("menu-bar-2");
+        for(int i = 0; i <= 15; i++) {
+            JFXButton jfxb = new JFXButton(tabEmoji[i]);
+            jfxb.setPrefSize(20, 20);
+            System.out.println(PaneEmoji);
+            hbox.getChildren().add(jfxb);
+        }
+
+        PaneEmoji.getChildren().add(hbox);
     }
 }
