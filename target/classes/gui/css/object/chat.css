@@ -1,6 +1,5 @@
 .label {
     -fx-text-fill: -text-color ;
-    -fx-font-family: 'emojione-svg';
 }
 
 .text-field, .text-area .content{
@@ -45,6 +44,5 @@
 }
 
 .text-input{
-    -fx-font-family: 'emojione-svg';
     -fx-text-fill: -text-color;
 }

@@ -4,6 +4,11 @@
 @import url("object/button-dashboard.css");
 @import url("object/button-close.css");
 
+.root{
+    -fx-font-size: 9pt;
+    -fx-font-family: "EmojiOneColor";
+}
+
 .pn-zone-travail {
     -fx-background-color:  -third-color;
 }

@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+
 <GridPane fx:id="pnPrincipal" prefHeight="756.0" prefWidth="1280.0" styleClass="menu-bar-1" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewUI2Controller">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,11 +27,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-<<<<<<< HEAD
       <GridPane fx:id="fullmenubar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="38.0" prefWidth="1240.0" GridPane.hgrow="NEVER" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
-=======
-      <GridPane fx:id="fullmenubar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="1240.0" GridPane.hgrow="SOMETIMES" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
->>>>>>> [feat] ignore css.txt
         <columnConstraints>
           <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="-Infinity" minWidth="10.0" percentWidth="90.0" prefWidth="1224.0" />
             <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="NEVER" maxWidth="-Infinity" minWidth="10.0" percentWidth="14.0" prefWidth="100.0" />

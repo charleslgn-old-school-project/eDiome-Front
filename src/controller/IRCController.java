@@ -2,6 +2,7 @@ package controller;
 
 import Utils.XMLDataFinder;
 import com.jfoenix.controls.JFXButton;
+import inter.ServerInterface;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,8 +11,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import inter.ServerInterface;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import metier.Message;
@@ -20,14 +19,15 @@ import resource.lang.typetrad.ButonName;
 import resource.lang.typetrad.LabelName;
 import start.Main;
 
-import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class IRCController implements Initializable {
 
@@ -69,8 +69,8 @@ public class IRCController implements Initializable {
         sc = new Scanner(System.in);
         int port = 8000;
 
-        String ip = "192.168.1.11";
-               ip = "localhost";
+        String ip = "192.168.1.13";
+
         try {
             obj = (ServerInterface) Naming.lookup("rmi://"+ip+":" + port + "/serv"+nbServ);
         } catch (MalformedURLException | RemoteException | NotBoundException e) {

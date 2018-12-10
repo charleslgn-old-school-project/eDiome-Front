@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import resource.lang.Lang;
@@ -37,7 +38,6 @@ public class Main extends Application {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
 
         prStage.getIcons().add(new Image(".//resource/Images/ediome2.png"));
-
         primaryStage.setScene(new Scene(root, 1280, 720));
         Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("..//gui/css/main-"+ XMLDataFinder.getTheme() +".css").toExternalForm());
 
