@@ -129,8 +129,8 @@ public class NewUI2Controller implements Initializable {
    */
   private void AffichageIRCClick(int nbServ) {
     fadeout(pnZoneTravail);
-    loadFxml(nbServ);
     fadeout(pnZoneTravail);
+    loadFxml(nbServ);
 
   }
 
