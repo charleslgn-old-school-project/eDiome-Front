@@ -127,10 +127,10 @@ public class NewUI2Controller implements Initializable {
   /**
    * call when we need to show an IRC
    */
-  private void AffichageIRCClick() {
+  private void AffichageIRCClick(int nbServ) {
     fadeout(pnZoneTravail);
+    loadFxml(nbServ);
     fadeout(pnZoneTravail);
-    loadFxml("..//gui/IRC.fxml");
 
   }
 
@@ -146,13 +146,22 @@ public class NewUI2Controller implements Initializable {
   /**
    * load the new stage in the work zone pane
    */
-  private void loadFxml(String form) {
+  private void loadFxml(int nbServ) {
     try {
-      Pane pan = pnZoneTravail;
+      pnZoneTravail.getChildren().clear();
 
-      pan.getChildren().clear();
-      Pane newLoadedPane = FXMLLoader.load(getClass().getResource(form));
-      pnZoneTravail.setCenter(newLoadedPane);
+      IRCController ircController =
+              new IRCController(nbServ);
+
+      FXMLLoader loader = new FXMLLoader(
+              getClass().getResource("..//gui/IRC.fxml"
+              )
+      );
+      loader.setController(ircController);
+
+      Pane mainPane = loader.load();
+
+      pnZoneTravail.setCenter(mainPane);
     } catch (Exception ex) {
       System.err.println(ex);
     }
@@ -347,10 +356,12 @@ public class NewUI2Controller implements Initializable {
     iw.setFitWidth(150);
     vBox.getChildren().add(iw);
 
-    for (int i = 1; i < 5; i++) {
+    for (int i = 0; i < 4; i++) {
+      int finalI = i;
+
       JFXButton jfxButton = new JFXButton("server" + i);
       jfxButton.setPrefSize(Double.MAX_VALUE, 60);
-      jfxButton.setOnAction(event -> AffichageIRCClick());
+      jfxButton.setOnAction(event -> AffichageIRCClick(finalI));
       vBox.getChildren().add(jfxButton);
     }
     drawer.setSidePane(vBox);

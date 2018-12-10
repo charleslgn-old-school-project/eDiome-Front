@@ -54,21 +54,25 @@ public class IRCController implements Initializable {
 
     ServerInterface obj;
 
+    private int nbServ;
+
     @SuppressWarnings("unused")
     private static Scanner sc;
 
+    public IRCController(int nbServ){
+        this.nbServ = nbServ;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         sc = new Scanner(System.in);
         int port = 8000;
         try {
-            obj = (ServerInterface) Naming.lookup("rmi://localhost:" + port + "/serv0");
+            obj = (ServerInterface) Naming.lookup("rmi://localhost:" + port + "/serv"+nbServ);
         } catch (MalformedURLException | RemoteException | NotBoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         textPseudo.setText(XMLDataFinder.getPseudo());
 
         textPseudo.setOnKeyReleased(e -> XMLDataFinder.setPseudo(textPseudo.getText()) );
@@ -142,6 +146,4 @@ public class IRCController implements Initializable {
             System.out.println(e);
         }
     }
-
-
 }
