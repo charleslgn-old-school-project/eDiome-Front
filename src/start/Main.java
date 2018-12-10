@@ -1,7 +1,6 @@
 package start;
 
 import Utils.ResizeHelper;
-import Utils.ThemeSaver;
 import Utils.XMLDataFinder;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
@@ -9,18 +8,13 @@ import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinUser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.text.Font;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import resource.lang.Lang;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class Main extends Application {
 

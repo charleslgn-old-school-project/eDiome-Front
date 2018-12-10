@@ -3,28 +3,29 @@ package controller;
 import Utils.XMLDataFinder;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import inter.ServerInterface;
-import javafx.stage.Stage;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import metier.Message;
 import resource.lang.Translate;
 import resource.lang.typetrad.ButonName;
 import resource.lang.typetrad.LabelName;
 import start.Main;
 
+import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -76,8 +77,11 @@ public class IRCController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         sc = new Scanner(System.in);
         int port = 8000;
+
+        String ip = "192.168.1.11";
+               ip = "localhost";
         try {
-            obj = (ServerInterface) Naming.lookup("rmi://localhost:" + port + "/serv"+nbServ);
+            obj = (ServerInterface) Naming.lookup("rmi://"+ip+":" + port + "/serv"+nbServ);
         } catch (MalformedURLException | RemoteException | NotBoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -110,6 +114,9 @@ public class IRCController implements Initializable {
         btnSend.setText(Translate.haveIt(ButonName.SEND, Main.getLangue().butonName));
     }
 
+    private ArrayList<Message> oldMessage=null;
+    private boolean sendByYou = false;
+
     private void printChat(){
         try {
             ArrayList<Message> messages = obj.getMessages();
@@ -121,8 +128,24 @@ public class IRCController implements Initializable {
                 vBox.getChildren().add(label);
             }
             paneChat.contentProperty().setValue(vBox);
+
+            if(oldMessage != null && oldMessage.size() < messages.size() && !sendByYou){
+                makeSound();
+            }
+            oldMessage = messages;
+            sendByYou = false;
         } catch (RemoteException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void makeSound(){
+        try{
+            MediaPlayer mp = new MediaPlayer(new Media(Paths.get("src/resource/alert2.mp3").toUri().toString()));
+
+            mp.play();
+        } catch (Exception e) {
+            System.err.println(e);
         }
     }
 
@@ -133,6 +156,7 @@ public class IRCController implements Initializable {
                 obj.send(textPseudo.getText(), textMessage.getText());
                 textMessage.setText("");
                 paneChat.setVvalue(paneChat.getVmax());
+                sendByYou = true;
             }
         } catch (RemoteException e) {
             e.printStackTrace();
