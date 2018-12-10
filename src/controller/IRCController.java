@@ -11,14 +11,17 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.FileChooser;
 import metier.Message;
 import resource.lang.Translate;
 import resource.lang.typetrad.ButonName;
 import resource.lang.typetrad.LabelName;
 import start.Main;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -31,12 +34,22 @@ import java.util.Scanner;
 
 public class IRCController implements Initializable {
 
+    private String tabEmoji[] = {"\uD83D\uDE00","\uD83D\uDE01","\uD83D\uDE02","\uD83E\uDD23","\uD83D\uDE03","\uD83D\uDE04","\uD83D\uDE05"
+            ,"\uD83D\uDE06","\uD83D\uDE09 ","\uD83D\uDE0A","\uD83D\uDE0B","\uD83D\uDE0E","\uD83D\uDE0D","\uD83D\uDE18","\uD83D\uDE17","\uD83D\uDE19","\uD83D\uDE1A","\uD83D\uDE2B",
+            "\uD83D\uDE0C ","\uD83D\uDE2D"};
+
+
     @FXML
     private JFXButton btnSend;
 
     @FXML
-    private Label lblPseudo;
+    private FlowPane PaneEmoji;
 
+    @FXML
+    private JFXButton btnemoji;
+
+    @FXML
+    private Label lblPseudo;
 
     @FXML
     private ScrollPane paneChat;
@@ -96,6 +109,8 @@ public class IRCController implements Initializable {
                 translate();
             }
         }.start();
+
+        loadEmoji();
     }
 
     private void translate(){
@@ -154,20 +169,37 @@ public class IRCController implements Initializable {
 
     @FXML
     public void attachments(){
-        try {
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Envoyer fichier");
+        File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
+        System.out.println(file);
     }
 
     @FXML
     public void displayEmoji(){
-        try {
-
-
-        } catch (Exception e) {
-            System.out.println(e);
+        if(PaneEmoji.isVisible()){
+            PaneEmoji.setVisible(false);
+        }else{
+            PaneEmoji.setVisible(true);
         }
+    }
+
+    public void loadEmoji(){
+        //FlowPane fp = new FlowPane();
+        //fp.setPrefSize(PaneEmoji.getPrefWidth(), PaneEmoji.getPrefHeight());
+        //fp.getStyleClass().add("menu-bar-2");
+        for(int i = 0; i <= 15; i++) {
+            JFXButton jfxb = new JFXButton(tabEmoji[i]);
+            jfxb.setPrefSize(40, 40);
+            jfxb.setOnAction(event -> WriteEmoji(jfxb));
+            PaneEmoji.getChildren().add(jfxb);
+        }
+
+        AnchorPane.setBottomAnchor(PaneEmoji, 0.0);
+        //PaneEmoji.getChildren().add(fp);
+    }
+
+    private void WriteEmoji(JFXButton emoji) {
+        textMessage.appendText(emoji.getText());
     }
 }
