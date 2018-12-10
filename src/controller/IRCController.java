@@ -8,14 +8,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import inter.ServerInterface;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Box;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import metier.Message;
 import resource.lang.Translate;
 import resource.lang.typetrad.ButonName;
@@ -23,6 +23,7 @@ import resource.lang.typetrad.LabelName;
 import start.Main;
 
 import java.awt.*;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -33,13 +34,16 @@ import java.util.*;
 
 public class IRCController implements Initializable {
 
-    private String tabEmoji[] = {"1","2","3","4","5","6","7","9","10","11","12","13","14","15","16","17","18","19","20","21"};
+    private String tabEmoji[] = {"\uD83D\uDE00","\uD83D\uDE01","\uD83D\uDE02","\uD83E\uDD23","\uD83D\uDE03","\uD83D\uDE04","\uD83D\uDE05"
+            ,"\uD83D\uDE06","\uD83D\uDE09 ","\uD83D\uDE0A","\uD83D\uDE0B","\uD83D\uDE0E","\uD83D\uDE0D","\uD83D\uDE18","\uD83D\uDE17","\uD83D\uDE19","\uD83D\uDE1A","\uD83D\uDE2B",
+            "\uD83D\uDE0C ","\uD83D\uDE2D"};
+
 
     @FXML
     private JFXButton btnSend;
 
     @FXML
-    private Pane PaneEmoji;
+    private FlowPane PaneEmoji;
 
     @FXML
     private JFXButton btnemoji;
@@ -165,11 +169,10 @@ public class IRCController implements Initializable {
 
     @FXML
     public void attachments(){
-        try {
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Envoyer fichier");
+        File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
+        System.out.println(file);
     }
 
     @FXML
@@ -182,15 +185,21 @@ public class IRCController implements Initializable {
     }
 
     public void loadEmoji(){
-        HBox hbox = new HBox();
-        //hbox.getStyleClass().add("menu-bar-2");
+        //FlowPane fp = new FlowPane();
+        //fp.setPrefSize(PaneEmoji.getPrefWidth(), PaneEmoji.getPrefHeight());
+        //fp.getStyleClass().add("menu-bar-2");
         for(int i = 0; i <= 15; i++) {
             JFXButton jfxb = new JFXButton(tabEmoji[i]);
-            jfxb.setPrefSize(20, 20);
-            System.out.println(PaneEmoji);
-            hbox.getChildren().add(jfxb);
+            jfxb.setPrefSize(40, 40);
+            jfxb.setOnAction(event -> WriteEmoji(jfxb));
+            PaneEmoji.getChildren().add(jfxb);
         }
 
-        PaneEmoji.getChildren().add(hbox);
+        AnchorPane.setBottomAnchor(PaneEmoji, 0.0);
+        //PaneEmoji.getChildren().add(fp);
+    }
+
+    private void WriteEmoji(JFXButton emoji) {
+        textMessage.appendText(emoji.getText());
     }
 }

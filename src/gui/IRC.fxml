@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -88,9 +89,9 @@
       <Pane prefHeight="200.0" prefWidth="20.0" />
    </left>
    <right>
-      <AnchorPane prefWidth="20.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="20.0" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <Pane fx:id="PaneEmoji" layoutX="-142.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="406.0" prefWidth="161.0" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-300.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="400.0" />
+            <FlowPane fx:id="PaneEmoji" layoutX="-268.0" layoutY="366.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="289.0" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-268.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="366.0" />
          </children>
       </AnchorPane>
    </right>
