@@ -82,7 +82,7 @@ public class IRCController implements Initializable {
         sc = new Scanner(System.in);
         int port = 8000;
 
-        String ip = "192.168.1.13";
+        String ip = "localhost";
 
         try {
             obj = (ServerInterface) Naming.lookup("rmi://"+ip+":" + port + "/serv"+nbServ);

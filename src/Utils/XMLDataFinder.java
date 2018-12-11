@@ -34,7 +34,7 @@ public class XMLDataFinder {
       NodeList res1 = XPathFinder("./src/resource/data.xml", expr);
       return res1.item(0).getTextContent();
     } catch (ParserConfigurationException | IOException | SAXException | XPathExpressionException e) {
-      createXML("", "White","En");
+      createXML("", "white","En");
       return casError;
     }
   }
