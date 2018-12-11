@@ -1,6 +1,0 @@
-projectKey=groupId:artifactid
-serverUrl=http://localhost:9000
-serverVersion=7.4.0.18908
-dashboardUrl=http://localhost:9000/dashboard?id=groupId%3Aartifactid
-ceTaskId=AWd1NjRtSQBWRlXvojyf
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AWd1NjRtSQBWRlXvojyf
