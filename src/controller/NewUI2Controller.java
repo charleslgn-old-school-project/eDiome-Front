@@ -154,7 +154,7 @@ public class NewUI2Controller implements Initializable {
               new IRCController(nbServ);
 
       FXMLLoader loader = new FXMLLoader(
-              getClass().getResource("..//gui/IRC.fxml"
+              getClass().getResource("../gui/IRC.fxml"
               )
       );
       loader.setController(ircController);
