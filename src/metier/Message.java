@@ -2,6 +2,7 @@ package metier;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -44,5 +45,20 @@ public class Message implements Serializable {
     public String toString() {
         return  pseudo + ' ' + date +
                 " - " + contenu;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Message message = (Message) o;
+        return Objects.equals(pseudo, message.pseudo) &&
+                Objects.equals(date, message.date) &&
+                Objects.equals(contenu, message.contenu);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pseudo, date, contenu);
     }
 }

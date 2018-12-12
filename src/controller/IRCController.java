@@ -5,9 +5,14 @@ import com.jfoenix.controls.JFXButton;
 import inter.ServerInterface;
 import com.vdurmont.emoji.EmojiParser;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -19,6 +24,8 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import metier.Constante;
 import metier.Message;
 import resource.lang.Translate;
@@ -27,6 +34,7 @@ import resource.lang.typetrad.LabelName;
 import start.Main;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -35,6 +43,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -84,19 +93,6 @@ public class IRCController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-      //System.setProperty("java.rmi.server.hostname","home.rscharff.fr");
-      //System.setProperty("java.rmi.server.disableHttp","true");
-        sc = new Scanner(System.in);
-        //int port = 8000;
-        int port = Constante.PORT;
-      try {
-        String ip = Constante.IP;
-        LocateRegistry.getRegistry(port);
-            obj = (ServerInterface) Naming.lookup("//"+ip+":" + port + "/serv"+nbServ);
-        } catch (MalformedURLException | RemoteException | NotBoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         textPseudo.setText(XMLDataFinder.getPseudo());
 
         textPseudo.setOnKeyReleased(e -> XMLDataFinder.setPseudo(textPseudo.getText()) );
@@ -111,13 +107,19 @@ public class IRCController implements Initializable {
             }
         });
 
-        new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                printChat();
-                translate();
+        /**new AnimationTimer() {
+          private long lastUpdate = 0 ;
+          @Override
+          public void handle(long now) {
+            if (now - (lastUpdate + 500_000_000) >= 999_000_000) {
+              printChat();
+              lastUpdate = now ;
             }
-        }.start();
+            translate();
+          }
+        }.start();*/
+
+        new Thread(new chatDispayer()).start();
      loadEmoji();
   }
 
@@ -129,56 +131,7 @@ public class IRCController implements Initializable {
   private ArrayList<Message> oldMessage = null;
   private boolean sendByYou = false;
 
-  private void printChat() {
-    try {
-      ArrayList<Message> messages = obj.getMessages();
-      VBox vBox = new VBox();
-      vBox.setSpacing(10);
 
-      for (Message message : messages) {
-        HBox hBox = new HBox();
-        String affichage = message.toString();
-        affichage = EmojiParser.parseToAliases(affichage);
-        String[] list = affichage.split(":");
-        boolean wasLastAnEmoji = false;
-        Label l = new Label(list[0]);
-        hBox.getChildren().add(l);
-
-        for (int i = 1; i < list.length; i++) {
-          String str = EmojiParser.parseToHtmlHexadecimal(EmojiParser.parseToUnicode(':' + list[i] + ':'));
-          if(str.equals(':'+list[i]+':')){
-            Label label;
-            if(!wasLastAnEmoji){
-              label= new Label(':'+list[i]);
-            } else {
-              label= new Label(list[i]);
-            }
-            hBox.getChildren().add(label);
-            wasLastAnEmoji = false;
-          } else {
-            str = str.substring(3, str.length() - 1);
-            Image image = new Image(Paths.get("src/resource/emoji/" + str + ".png").toUri().toString());
-            ImageView imageView = new ImageView(image);
-            imageView.setFitHeight(16);
-            imageView.setFitWidth(16);
-            hBox.getChildren().add(imageView);
-            wasLastAnEmoji = true;
-          }
-        }
-        hBox.setAlignment(Pos.CENTER_LEFT);
-        vBox.getChildren().add(hBox);
-      }
-      paneChat.contentProperty().setValue(vBox);
-
-      if (oldMessage != null && oldMessage.size() < messages.size() && !sendByYou) {
-        makeSound();
-      }
-      oldMessage = messages;
-      sendByYou = false;
-    } catch (RemoteException e) {
-      e.printStackTrace();
-    }
-  }
 
   private void makeSound() {
     try {
@@ -238,5 +191,97 @@ public class IRCController implements Initializable {
 
   private void WriteEmoji(JFXButton emoji) {
     textMessage.appendText(EmojiParser.parseToAliases(emoji.getText()));
+  }
+
+  class chatDispayer extends Task {
+
+    @Override
+    public Object call() throws IOException, InterruptedException{
+      sc = new Scanner(System.in);
+      int port = Constante.PORT;
+      try {
+        String ip = Constante.IP;
+        LocateRegistry.getRegistry(port);
+
+        obj = (ServerInterface) Naming.lookup("//"+ip+":" + port + "/serv"+nbServ);
+      } catch (MalformedURLException | RemoteException | NotBoundException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      Platform.runLater(new Runnable() {
+        @Override
+        public void run() {
+          new AnimationTimer() {
+            private long lastUpdate = 0 ;
+            @Override
+            public void handle(long now) {
+              if (now - (lastUpdate + 500_000_000) >= 999_000_000) {
+                printChat();
+                lastUpdate = now ;
+              }
+              translate();
+            }
+          }.start();
+        }
+      });
+      return null;
+    }
+
+    private void printChat() {
+      try {
+        ArrayList<Message> messages = obj.getMessages();
+        if(!messages.equals(oldMessage)){
+          VBox vBox = (VBox) paneChat.contentProperty().getValue();
+
+          if(oldMessage == null || messages.size()>oldMessage.size()){
+            int size = oldMessage == null ? messages.size() : messages.size()- oldMessage.size();
+            List<Message> messages1 = messages.subList(messages.size()-size, messages.size());
+
+            for (Message message : messages1) {
+              HBox hBox = new HBox();
+              String affichage = message.toString();
+              affichage = EmojiParser.parseToAliases(affichage);
+              String[] list = affichage.split(":");
+              boolean wasLastAnEmoji = false;
+              Label l = new Label(list[0]);
+              hBox.getChildren().add(l);
+
+              for (int i = 1; i < list.length; i++) {
+                String str = EmojiParser.parseToHtmlHexadecimal(EmojiParser.parseToUnicode(':' + list[i] + ':'));
+                if(str.equals(':'+list[i]+':')){
+                  Label label;
+                  if(!wasLastAnEmoji){
+                    label= new Label(':'+list[i]);
+                  } else {
+                    label= new Label(list[i]);
+                  }
+                  hBox.getChildren().add(label);
+                  wasLastAnEmoji = false;
+                } else {
+                  str = str.substring(3, str.length() - 1);
+                  Image image = new Image(Paths.get("src/resource/emoji/" + str + ".png").toUri().toString());
+                  ImageView imageView = new ImageView(image);
+                  imageView.setFitHeight(16);
+                  imageView.setFitWidth(16);
+                  hBox.getChildren().add(imageView);
+                  wasLastAnEmoji = true;
+                }
+              }
+              hBox.setAlignment(Pos.CENTER_LEFT);
+              vBox.getChildren().add(hBox);
+            }
+          }
+          paneChat.contentProperty().setValue(vBox);
+
+          if (oldMessage != null && oldMessage.size() < messages.size() && !sendByYou) {
+            makeSound();
+          }
+          oldMessage = messages;
+          sendByYou = false;
+        }
+      } catch (RemoteException e) {
+        e.printStackTrace();
+      }
+    }
   }
 }
