@@ -1,0 +1,35 @@
+.menu-item{
+    -fx-border-color:     -first-color;
+    -fx-background-color: -first-color;
+}
+
+
+.menu-bar-1, .menu{
+    -fx-background-color:  -first-color;
+    -fx-border-color:      -first-color;
+}
+
+.menu-bar-1 {
+    -fx-border-color: -first-color;
+    -fx-background-color: -first-color;
+}
+
+
+.context-menu {
+    -fx-padding: 0;
+}
+
+.menu-item:hover{
+    -fx-background-color: -third-color;
+    -fx-border-color: -third-color;
+}
+
+.menu-bar-2{
+    -fx-background-color: -second-color;
+    -fx-border-color: -second-color;
+}
+
+.jfx-hamburger StackPane{
+    -fx-background-color: -button-text-color;
+}
+

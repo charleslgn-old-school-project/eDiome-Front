@@ -1,0 +1,14 @@
+@import url("object/menu-bar.css");
+@import url("object/chat.css");
+@import url("object/button.css");
+@import url("object/button-dashboard.css");
+@import url("object/button-close.css");
+
+.root{
+    -fx-font-size: 12pt;
+    -fx-font-family: "EmojiOneColor";
+}
+
+.pn-zone-travail {
+    -fx-background-color:  -third-color;
+}

@@ -1,0 +1,21 @@
+@import url("main.css");
+
+* {
+    -first-color  : rgb(39,105,85);
+    -second-color : rgb(65,165,141);
+    -third-color  : rgb(209,237,231);
+
+    -text-color                   : black;
+    -button-text-color            : black;
+    -button-text-color-OVER       : black;
+    -button-close-text-color-OVER : red;
+
+    /*___ chat CSS ___*/
+    -text-field-color         : white;
+    -scroll-bar-color         : rgb(39,105,85);
+
+    -separator-color : rgb(17,17,17);
+}
+
+
+
