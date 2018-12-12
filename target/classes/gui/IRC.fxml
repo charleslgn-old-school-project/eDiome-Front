@@ -45,7 +45,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="btnSend" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" onAction="#send" minWidth="-Infinity" prefHeight="31.0" prefWidth="109.0" text="Envoyer">
+                  <JFXButton fx:id="btnSend" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#send" prefHeight="31.0" prefWidth="109.0" text="Envoyer">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -91,7 +91,11 @@
    <right>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="20.0" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <FlowPane fx:id="PaneEmoji" layoutX="-268.0" layoutY="366.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="289.0" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-268.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="366.0" />
+            <ScrollPane fx:id="ScrollPaneEmoji" fitToWidth="true" layoutX="-531.0" layoutY="353.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="113.0" prefWidth="531.0" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-531.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="353.0">
+               <content>
+                  <FlowPane fx:id="PaneEmoji" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+               </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
    </right>

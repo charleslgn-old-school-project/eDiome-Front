@@ -40,8 +40,11 @@ public class IRCController implements Initializable {
 
   private String tabEmoji[] = {"\uD83D\uDE00", "\uD83D\uDE01", "\uD83D\uDE02", "\uD83E\uDD23", "\uD83D\uDE03", "\uD83D\uDE04", "\uD83D\uDE05"
           , "\uD83D\uDE06", "\uD83D\uDE09 ", "\uD83D\uDE0A", "\uD83D\uDE0B", "\uD83D\uDE0E", "\uD83D\uDE0D", "\uD83D\uDE18", "\uD83D\uDE17", "\uD83D\uDE19", "\uD83D\uDE1A", "\uD83D\uDE2B",
-          "\uD83D\uDE0C ", "\uD83D\uDE2D"};
+          "\uD83D\uDE0C ", "\uD83E\uDD20", "\uD83D\uDE24", "\uD83E\uDD74", "\uD83E\uDD76"
+  };
 
+  @FXML
+  private ScrollPane ScrollPaneEmoji;
 
   @FXML
   private JFXButton btnSend;
@@ -83,10 +86,14 @@ public class IRCController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+      //System.setProperty("java.rmi.server.hostname","home.rscharff.fr");
+      //System.setProperty("java.rmi.server.disableHttp","true");
         sc = new Scanner(System.in);
-        int port = 8000;
+        //int port = 8000;
+        int port = 186;
 
-        String ip = "localhost";
+        String ip = "home.rscharff.fr";
+        //String ip = "localhost";
 
         try {
             obj = (ServerInterface) Naming.lookup("rmi://"+ip+":" + port + "/serv"+nbServ);
@@ -99,6 +106,8 @@ public class IRCController implements Initializable {
         textPseudo.setOnKeyReleased(e -> XMLDataFinder.setPseudo(textPseudo.getText()) );
 
         paneChat.setVvalue(paneChat.getVmax());
+
+        borderPane.setOnMouseClicked(e -> ScrollPaneEmoji.setVisible(false));
 
         textMessage.setOnKeyPressed(event -> {
             if(event.getCode().getName().equalsIgnoreCase("enter")){
@@ -209,10 +218,10 @@ public class IRCController implements Initializable {
 
   @FXML
   public void displayEmoji() {
-    if (PaneEmoji.isVisible()) {
-      PaneEmoji.setVisible(false);
+    if (ScrollPaneEmoji.isVisible()) {
+      ScrollPaneEmoji.setVisible(false);
     } else {
-      PaneEmoji.setVisible(true);
+      ScrollPaneEmoji.setVisible(true);
     }
   }
 
@@ -220,9 +229,9 @@ public class IRCController implements Initializable {
     //FlowPane fp = new FlowPane();
     //fp.setPrefSize(PaneEmoji.getPrefWidth(), PaneEmoji.getPrefHeight());
     //fp.getStyleClass().add("menu-bar-2");
-    for (int i = 0; i <= 15; i++) {
+    for (int i = 0; i <= tabEmoji.length-1; i++) {
       JFXButton jfxb = new JFXButton(tabEmoji[i]);
-      jfxb.setPrefSize(40, 40);
+      jfxb.setPrefSize(50, 50);
       jfxb.setOnAction(event -> WriteEmoji(jfxb));
       PaneEmoji.getChildren().add(jfxb);
     }
