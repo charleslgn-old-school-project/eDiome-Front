@@ -19,6 +19,7 @@ import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
+import metier.Constante;
 import metier.Message;
 import resource.lang.Translate;
 import resource.lang.typetrad.ButonName;
@@ -32,13 +33,14 @@ import java.nio.file.Paths;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class IRCController implements Initializable {
 
-  private String tabEmoji[] = {"\uD83D\uDE00", "\uD83D\uDE01", "\uD83D\uDE02", "\uD83E\uDD23", "\uD83D\uDE03", "\uD83D\uDE04", "\uD83D\uDE05"
+  private String[] tabEmoji = {"\uD83D\uDE00", "\uD83D\uDE01", "\uD83D\uDE02", "\uD83E\uDD23", "\uD83D\uDE03", "\uD83D\uDE04", "\uD83D\uDE05"
           , "\uD83D\uDE06", "\uD83D\uDE09 ", "\uD83D\uDE0A", "\uD83D\uDE0B", "\uD83D\uDE0E", "\uD83D\uDE0D", "\uD83D\uDE18", "\uD83D\uDE17", "\uD83D\uDE19", "\uD83D\uDE1A", "\uD83D\uDE2B",
           "\uD83D\uDE0C ", "\uD83E\uDD20", "\uD83D\uDE24", "\uD83E\uDD74", "\uD83E\uDD76"
   };
@@ -47,13 +49,11 @@ public class IRCController implements Initializable {
   private ScrollPane ScrollPaneEmoji;
 
   @FXML
-  private JFXButton btnSend;
+  private JFXButton btnSend,
+                    btnemoji;
 
   @FXML
   private FlowPane PaneEmoji;
-
-  @FXML
-  private JFXButton btnemoji;
 
   @FXML
   private Label lblPseudo;
@@ -62,10 +62,8 @@ public class IRCController implements Initializable {
   private ScrollPane paneChat;
 
   @FXML
-  private TextField textMessage;
-
-  @FXML
-  private TextField textPseudo;
+  private TextField textMessage,
+                    textPseudo;
 
   @FXML
   private BorderPane borderPane;
@@ -73,7 +71,7 @@ public class IRCController implements Initializable {
   @FXML
   private VBox VboxMere;
 
-  ServerInterface obj;
+  private ServerInterface obj;
 
   private int nbServ;
 
@@ -90,13 +88,11 @@ public class IRCController implements Initializable {
       //System.setProperty("java.rmi.server.disableHttp","true");
         sc = new Scanner(System.in);
         //int port = 8000;
-        int port = 186;
-
-        String ip = "home.rscharff.fr";
-        //String ip = "localhost";
-
-        try {
-            obj = (ServerInterface) Naming.lookup("rmi://"+ip+":" + port + "/serv"+nbServ);
+        int port = Constante.PORT;
+      try {
+        String ip = Constante.IP;
+        LocateRegistry.getRegistry(port);
+            obj = (ServerInterface) Naming.lookup("//"+ip+":" + port + "/serv"+nbServ);
         } catch (MalformedURLException | RemoteException | NotBoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
