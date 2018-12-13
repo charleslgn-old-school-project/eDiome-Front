@@ -1,4 +1,4 @@
-package test.java.com.ircfront;
+package com.ircfront;
 
 import com.vdurmont.emoji.EmojiParser;
 

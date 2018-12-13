@@ -1,4 +1,4 @@
-package test.java.com.ircfront;
+package com.ircfront;
 
 public class TestXMLDataFinder {
     public static void main(String[] args){
