@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" styleClass="pn-zone-travail" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"> <!-- fx:controller="controller.IRCController"> -->
+<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" styleClass="pn-zone-travail" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"> <!-- fx:controller="controller.IRCController"> -->
    <bottom>
       <GridPane>
          <BorderPane.margin>
@@ -95,7 +95,7 @@
    <right>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="20.0" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <ScrollPane fx:id="ScrollPaneEmoji" fitToWidth="true" layoutX="-531.0" layoutY="353.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="113.0" prefWidth="531.0" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-531.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="353.0">
+            <ScrollPane fx:id="ScrollPaneEmoji" fitToWidth="true" layoutX="-531.0" layoutY="353.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="113.0" prefWidth="531.0" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-531.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="353.0">
                <content>
                   <FlowPane fx:id="PaneEmoji" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                </content>

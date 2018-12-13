@@ -131,6 +131,9 @@ public class IRCController implements Initializable {
         translate();
       }
     }.start();
+
+    //ScrollPaneEmoji.setStyle("-fx-background-color: lightgrey;");
+    ScrollPaneEmoji.getStyleClass().add("menu-emoji");
     loadEmoji();
   }
 
@@ -159,8 +162,8 @@ public class IRCController implements Initializable {
       if (!textMessage.getText().equalsIgnoreCase("")) {
         obj.send(textPseudo.getText(), textMessage.getText());
         textMessage.setText("");
-        paneChat.setVvalue(paneChat.getVmax());
         sendByYou = true;
+        paneChat.setVvalue(paneChat.getVmax());
       }
     } catch (RemoteException e) {
       e.printStackTrace();
@@ -192,7 +195,8 @@ public class IRCController implements Initializable {
       Button jfxb = new Button("", getEmoji(tabEmoji[i]));
 
       jfxb.setUserData(tabEmoji[i]);
-      jfxb.setPrefSize(50, 50);
+      jfxb.setPrefSize(20, 20);
+      jfxb.setStyle("-fx-background-color: transparent;");
       jfxb.setOnAction(event -> WriteEmoji(jfxb));
       PaneEmoji.getChildren().add(jfxb);
     }

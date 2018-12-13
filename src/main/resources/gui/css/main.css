@@ -3,6 +3,7 @@
 @import url("object/button.css");
 @import url("object/button-dashboard.css");
 @import url("object/button-close.css");
+@import url("object/menu-emoji.css");
 
 .root{
     -fx-font-size: 12pt;

@@ -89,6 +89,8 @@ public class NewUI2Controller implements Initializable {
         translate();
       }
     }.start();
+
+
   }
 
   /**
