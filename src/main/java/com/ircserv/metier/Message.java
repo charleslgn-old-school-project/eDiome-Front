@@ -2,16 +2,17 @@ package com.ircserv.metier;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String pseudo;
-    private LocalDate date;
+    private LocalDateTime date;
     private String contenu;
 
-    public Message(String pseudo, LocalDate date, String contenu) {
+    public Message(String pseudo, LocalDateTime date, String contenu) {
         this.pseudo = pseudo;
         this.date = date;
         this.contenu = contenu;
@@ -25,11 +26,11 @@ public class Message implements Serializable {
         this.pseudo = pseudo;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

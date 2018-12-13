@@ -43,6 +43,7 @@ import java.util.Scanner;
 
 public class IRCController implements Initializable {
 
+  private int nbMessages = 5;
   private String[] tabEmoji = {"\uD83D\uDE00", "\uD83D\uDE01", "\uD83D\uDE02", "\uD83E\uDD23", "\uD83D\uDE03"
   };
 
@@ -51,7 +52,7 @@ public class IRCController implements Initializable {
 
   @FXML
   private JFXButton btnSend,
-                    btnemoji;
+          btnemoji;
 
   @FXML
   private FlowPane PaneEmoji;
@@ -64,7 +65,7 @@ public class IRCController implements Initializable {
 
   @FXML
   private TextField textMessage,
-                    textPseudo;
+          textPseudo;
 
   @FXML
   private BorderPane borderPane;
@@ -79,40 +80,58 @@ public class IRCController implements Initializable {
   @SuppressWarnings("unused")
   private static Scanner sc;
 
-    public IRCController(int nbServ){
-        this.nbServ = nbServ;
+  public IRCController(int nbServ) {
+    this.nbServ = nbServ;
+  }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    textPseudo.setText(XMLDataFinder.getPseudo());
+
+    textPseudo.setOnKeyReleased(e -> XMLDataFinder.setPseudo(textPseudo.getText()));
+
+    paneChat.setVvalue(paneChat.getVmax());
+
+    borderPane.setOnMouseClicked(e -> ScrollPaneEmoji.setVisible(false));
+
+    textMessage.setOnKeyPressed(event -> {
+      if (event.getCode().getName().equalsIgnoreCase("enter")) {
+        send();
+      }
+    });
+
+    /**new AnimationTimer() {
+     private long lastUpdate = 0 ;
+     @Override public void handle(long now) {
+     if (now - (lastUpdate + 500_000_000) >= 999_000_000) {
+     printChat();
+     lastUpdate = now ;
+     }
+     translate();
+     }
+     }.start();*/
+
+    sc = new Scanner(System.in);
+    int port = Constante.PORT;
+    try {
+      String ip = Constante.IP;
+      LocateRegistry.getRegistry(port);
+
+      obj = (ServerInterface) Naming.lookup("//" + ip + ":" + port + "/serv" + nbServ);
+      printChat(true);
+
+    } catch (MalformedURLException | RemoteException | NotBoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        textPseudo.setText(XMLDataFinder.getPseudo());
-
-        textPseudo.setOnKeyReleased(e -> XMLDataFinder.setPseudo(textPseudo.getText()) );
-
-        paneChat.setVvalue(paneChat.getVmax());
-
-        borderPane.setOnMouseClicked(e -> ScrollPaneEmoji.setVisible(false));
-
-        textMessage.setOnKeyPressed(event -> {
-            if(event.getCode().getName().equalsIgnoreCase("enter")){
-                send();
-            }
-        });
-
-        /**new AnimationTimer() {
-          private long lastUpdate = 0 ;
-          @Override
-          public void handle(long now) {
-            if (now - (lastUpdate + 500_000_000) >= 999_000_000) {
-              printChat();
-              lastUpdate = now ;
-            }
-            translate();
-          }
-        }.start();*/
-
-        new Thread(new chatDispayer()).start();
-     loadEmoji();
+    new AnimationTimer() {
+      @Override
+      public void handle(long now) {
+        printChat(false);
+        translate();
+      }
+    }.start();
+    loadEmoji();
   }
 
   private void translate() {
@@ -122,7 +141,6 @@ public class IRCController implements Initializable {
 
   private ArrayList<Message> oldMessage = null;
   private boolean sendByYou = false;
-
 
 
   private void makeSound() {
@@ -170,7 +188,7 @@ public class IRCController implements Initializable {
     //FlowPane fp = new FlowPane();
     //fp.setPrefSize(PaneEmoji.getPrefWidth(), PaneEmoji.getPrefHeight());
     //fp.getStyleClass().add("menu-bar-2");
-    for (int i = 0; i <= tabEmoji.length-1; i++) {
+    for (int i = 0; i <= tabEmoji.length - 1; i++) {
       Button jfxb = new Button("", getEmoji(tabEmoji[i]));
 
       jfxb.setUserData(tabEmoji[i]);
@@ -184,12 +202,12 @@ public class IRCController implements Initializable {
   }
 
   private void WriteEmoji(Button emoji) {
-    textMessage.appendText(EmojiParser.parseToAliases((String)emoji.getUserData()));
+    textMessage.appendText(EmojiParser.parseToAliases((String) emoji.getUserData()));
   }
 
-  private ImageView getEmoji(String emmoji){
+  private ImageView getEmoji(String emmoji) {
     String emo = EmojiParser.parseToHtmlHexadecimal(emmoji);
-    emo = emo.substring(3, emo.length()-1);
+    emo = emo.substring(3, emo.length() - 1);
     Image img = new Image(getClass().getResource("../../../emoji/" + emo + ".png").toString());
     ImageView img1 = new ImageView(img);
     img1.setFitWidth(16);
@@ -197,87 +215,66 @@ public class IRCController implements Initializable {
     return img1;
   }
 
-  class chatDispayer extends Task {
 
-    @Override
-    public Object call(){
-      sc = new Scanner(System.in);
-      int port = Constante.PORT;
-      try {
-        String ip = Constante.IP;
-        LocateRegistry.getRegistry(port);
+  Message lastMessage;
+  private void printChat(boolean initialize) {
+    try {
+      ArrayList<Message> messages;
+      VBox vBox = (VBox) paneChat.contentProperty().getValue();
+      if (initialize) {
+        messages = obj.getMessages();
 
-        obj = (ServerInterface) Naming.lookup("//"+ip+":" + port + "/serv"+nbServ);
-      } catch (MalformedURLException | RemoteException | NotBoundException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-      Platform.runLater(() -> new AnimationTimer() {
-        private long lastUpdate = 0 ;
-        @Override
-        public void handle(long now) {
-          if (now - (lastUpdate + 500_000_000) >= 999_000_000) {
-            printChat();
-            lastUpdate = now ;
-          }
-          translate();
+        for (Message message : messages) {
+          vBox.getChildren().add(createMessage(message));
         }
-      }.start());
-      return null;
-    }
-
-    private void printChat() {
-      try {
-        ArrayList<Message> messages = obj.getMessages();
-        if(!messages.equals(oldMessage)){
-          VBox vBox = (VBox) paneChat.contentProperty().getValue();
-
-          if(oldMessage == null || messages.size()>oldMessage.size()){
-            int size = oldMessage == null ? messages.size() : messages.size()- oldMessage.size();
-            List<Message> messages1 = messages.subList(messages.size()-size, messages.size());
-
-            for (Message message : messages1) {
-              HBox hBox = new HBox();
-              String affichage = message.toString();
-              affichage = EmojiParser.parseToAliases(affichage);
-              String[] list = affichage.split(":");
-              boolean wasLastAnEmoji = false;
-              Label l = new Label(list[0]);
-              hBox.getChildren().add(l);
-
-              for (int i = 1; i < list.length; i++) {
-                String str = EmojiParser.parseToHtmlHexadecimal(EmojiParser.parseToUnicode(':' + list[i] + ':'));
-                if(str.equals(':'+list[i]+':')){
-                  Label label;
-                  if (list[i].equals("")) {
-                    label = new Label(':' + list[i]);
-                  } else if (!wasLastAnEmoji) {
-                    label = new Label(':' + list[i]);
-                  } else {
-                    label = new Label(list[i]);
-                  }
-                  hBox.getChildren().add(label);
-                  wasLastAnEmoji = false;
-                } else {
-                  hBox.getChildren().add(getEmoji(str));
-                  wasLastAnEmoji = true;
-                }
-              }
-              hBox.setAlignment(Pos.CENTER_LEFT);
-              vBox.getChildren().add(hBox);
-            }
-          }
-          paneChat.contentProperty().setValue(vBox);
-
+        lastMessage = messages.get(messages.size()-1);
+      } else {
+        messages = obj.getMessages(1);
+        if (!lastMessage.equals(messages.get(0))) {
+          lastMessage=messages.get(0);
+          vBox.getChildren().add(createMessage(messages.get(0)));
           if (oldMessage != null && oldMessage.size() < messages.size() && !sendByYou) {
             makeSound();
           }
-          oldMessage = messages;
           sendByYou = false;
         }
-      } catch (RemoteException e) {
-        e.printStackTrace();
       }
+    } catch (RemoteException e) {
+      e.printStackTrace();
     }
   }
+
+  private HBox createMessage(Message msg) {
+    HBox hBox = new HBox();
+    String affichage = msg.toString();
+    affichage = EmojiParser.parseToAliases(affichage);
+    String[] list = affichage.split(":");
+    boolean wasLastAnEmoji = false;
+    Label l = new Label(list[0]);
+    hBox.getChildren().add(l);
+
+    for (int i = 1; i < list.length; i++) {
+      String str = EmojiParser.parseToHtmlHexadecimal(EmojiParser.parseToUnicode(':' + list[i] + ':'));
+      if (str.equals(':' + list[i] + ':')) {
+        Label label;
+        if (list[i].equals("")) {
+          label = new Label(':' + list[i]);
+        } else if (!wasLastAnEmoji) {
+          label = new Label(':' + list[i]);
+        } else {
+          label = new Label(list[i]);
+        }
+        hBox.getChildren().add(label);
+        wasLastAnEmoji = false;
+      } else {
+        hBox.getChildren().add(getEmoji(str));
+        wasLastAnEmoji = true;
+      }
+    }
+    hBox.setAlignment(Pos.CENTER_LEFT);
+
+    return hBox;
+  }
+
+
 }
