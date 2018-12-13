@@ -18,8 +18,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="artifactid" />
         <module name="eDiome-Front" />
+        <module name="irc-front" />
       </profile>
     </annotationProcessing>
   </component>
