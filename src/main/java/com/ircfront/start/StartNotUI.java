@@ -20,7 +20,7 @@ public class StartNotUI {
 
       ServerInterface obj = (ServerInterface) Naming.lookup("rmi://"+ip+":" + port + "/serv0");
 
-      System.out.println(obj.getMessages());
+      System.out.println(obj.getMessages().size());
       obj.send("serveur", "test !");
     } catch (MalformedURLException | RemoteException | NotBoundException e) {
       // TODO Auto-generated catch block

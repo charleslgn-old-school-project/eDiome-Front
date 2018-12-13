@@ -21,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import com.ircserv.metier.*;
 import com.ircfront.lang.Translate;
@@ -43,7 +44,7 @@ import java.util.Scanner;
 
 public class IRCController implements Initializable {
 
-  private int nbMessages = 5;
+  private int nbMessages = 25;
   private String[] tabEmoji = {"\uD83D\uDE00", "\uD83D\uDE01", "\uD83D\uDE02", "\uD83E\uDD23", "\uD83D\uDE03"
   };
 
@@ -159,8 +160,8 @@ public class IRCController implements Initializable {
   @FXML
   public void send() {
     try {
-      if (!textMessage.getText().equalsIgnoreCase("")) {
-        obj.send(textPseudo.getText(), textMessage.getText());
+      if (!textMessage.getText().trim().equalsIgnoreCase("")) {
+        obj.send(textPseudo.getText().trim(), textMessage.getText().trim());
         textMessage.setText("");
         sendByYou = true;
         paneChat.setVvalue(paneChat.getVmax());
@@ -221,6 +222,8 @@ public class IRCController implements Initializable {
 
 
   Message lastMessage;
+  boolean wasLastSend = false;
+
   private void printChat(boolean initialize) {
     try {
       ArrayList<Message> messages;
@@ -241,6 +244,10 @@ public class IRCController implements Initializable {
             makeSound();
           }
           sendByYou = false;
+          wasLastSend = true;
+        } else if (wasLastSend){
+          paneChat.setVvalue(paneChat.getVmax());
+          wasLastSend=false;
         }
       }
     } catch (RemoteException e) {
@@ -248,14 +255,23 @@ public class IRCController implements Initializable {
     }
   }
 
-  private HBox createMessage(Message msg) {
-    HBox hBox = new HBox();
-    String affichage = msg.toString();
+  private VBox createMessage(Message msg) {
+    VBox vBox = new VBox();
+    HBox hBox1 = new HBox(),
+         hBox2 = new HBox();
+    Label label1 = new Label(msg.getPseudo() + " - " + msg.getStringDate());
+    label1.setFont(new Font(13));
+    hBox1.getChildren().add(label1);
+
+    vBox.getChildren().add(hBox1);
+
+
+    String affichage = msg.getContenu();
     affichage = EmojiParser.parseToAliases(affichage);
     String[] list = affichage.split(":");
     boolean wasLastAnEmoji = false;
-    Label l = new Label(list[0]);
-    hBox.getChildren().add(l);
+    Label l = new Label("      "+list[0]);
+    hBox2.getChildren().add(l);
 
     for (int i = 1; i < list.length; i++) {
       String str = EmojiParser.parseToHtmlHexadecimal(EmojiParser.parseToUnicode(':' + list[i] + ':'));
@@ -268,16 +284,18 @@ public class IRCController implements Initializable {
         } else {
           label = new Label(list[i]);
         }
-        hBox.getChildren().add(label);
+        hBox2.getChildren().add(label);
         wasLastAnEmoji = false;
       } else {
-        hBox.getChildren().add(getEmoji(str));
+        hBox2.getChildren().add(getEmoji(str));
         wasLastAnEmoji = true;
       }
     }
-    hBox.setAlignment(Pos.CENTER_LEFT);
+    hBox2.setAlignment(Pos.CENTER_LEFT);
 
-    return hBox;
+    vBox.getChildren().add(hBox2);
+
+    return vBox;
   }
 
 

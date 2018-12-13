@@ -42,10 +42,16 @@ public class    Message implements Serializable {
         this.contenu = contenu;
     }
 
+    public String getStringDate(){
+        return  "" + date.getDayOfMonth()+'-'+ date.getMonthValue() + '-' + date.getYear() + ' ' +
+                     date.getHour()+':'+ date.getMinute() + ':' + date.getSecond();
+    }
+
     @Override
     public String toString() {
-        return  pseudo + ' ' + date +
-                " - " + contenu;
+        return  pseudo + ' ' + date.getDayOfMonth()+'-'+ date.getMonthValue() + '-' + date.getYear() + ' ' +
+                               date.getHour()+':'+ date.getMinute() + ':' + date.getSecond() +
+                "    " + contenu;
     }
 
     @Override
