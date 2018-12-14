@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import com.ircfront.lang.Lang;
 
+import java.io.File;
+
 public class Main extends Application {
 
     private static Lang langue;
@@ -59,9 +61,9 @@ public class Main extends Application {
             }
 
             ResizeHelper.addResizeListener(getPrimaryStage());
+
         } catch (Exception e){
             e.printStackTrace();
-            System.out.println(getClass().getResource("../../../gui/NewUI2.fxml"));
         }
     }
 
