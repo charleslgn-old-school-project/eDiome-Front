@@ -11,7 +11,7 @@ Project made by
 ## project description
 An IRC is a online chat, which made a group able to discuss with each other by text, image, document or voice.
 
-
+![diagramm](src/main/resources/image/interface.png)
 
 [![Sprint 1](https://img.shields.io/badge/eDiome-Sprint%201-brightgreen.svg)](https://trello.com/b/PkO7KebO/ediome-sprint-1)
 [![Sprint 2](https://img.shields.io/badge/eDiome-Sprint%202-brightgreen.svg)](https://trello.com/b/YNmwezgZ/ediome-sprint-2)
