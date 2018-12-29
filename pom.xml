@@ -43,6 +43,11 @@
             <artifactId>emoji-java</artifactId>
             <version>4.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.gitective</groupId>
+            <artifactId>gitective-core</artifactId>
+            <version>0.9.9</version>
+        </dependency>
     </dependencies>
 
     <build>
