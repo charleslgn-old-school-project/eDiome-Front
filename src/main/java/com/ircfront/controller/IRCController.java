@@ -25,6 +25,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -257,8 +259,25 @@ public class IRCController implements Initializable {
    * @param msg Le message envoyé
    * @return le message formater dans uns VBox
    */
-  private VBox createMessage(Message msg) {
+  private HBox createMessage(Message msg) {
     NodeFinder nodeFinder = new HyperText(new Smilley(new Word(null)));
+    HBox hBoxtotal = new HBox();
+    hBoxtotal.setSpacing(10);
+    hBoxtotal.setAlignment(Pos.CENTER_LEFT);
+
+    //add the logo
+    try {
+      String firstLetter = ("" +msg.getPseudo().charAt(0)).toUpperCase();
+      ImageView img = new ImageView();
+      Image image = new Image("logo/"+firstLetter+".png");
+      img.setImage(image);
+      img.getStyleClass().add("profile-logo");
+      img.setFitHeight(40);
+      img.setFitWidth(40);
+      hBoxtotal.getChildren().add(img);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
     VBox vBox = new VBox();
     HBox hBoxData = new HBox();
@@ -283,7 +302,10 @@ public class IRCController implements Initializable {
     hBoxMessage.setPadding(new Insets(0, 30, 0, 30));
     hBoxMessage.setAlignment(Pos.CENTER_LEFT);
     vBox.getChildren().add(hBoxMessage);
-    return vBox;
+
+    //add all content
+    hBoxtotal.getChildren().add(vBox);
+    return hBoxtotal;
   }
 
 

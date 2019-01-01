@@ -28,6 +28,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -371,10 +372,11 @@ public class NewUI2Controller implements Initializable {
       vBox.getStyleClass().add("menu-bar-2");
       vBox.setSpacing(20);
       vBox.setPadding(new Insets(10, 10, 0, 10));
+
       ImageView iw = new ImageView();
 
       Image logo = new Image("image/logov4.png");
-      //Image logo = new Image("https://techcrunch.com/wp-content/uploads/2018/07/logo-2.png?w=300", true);
+      //Image logo = new Image("https://www.pngarts.com/files/3/Letter-A-PNG-High-Quality-Image.png", true);
       iw.setImage(logo);
       iw.setFitHeight(34.5);
       iw.setFitWidth(150);

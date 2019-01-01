@@ -4,6 +4,7 @@
 @import url("object/button-dashboard.css");
 @import url("object/button-close.css");
 @import url("object/menu-emoji.css");
+@import url("object/profile-logo.css");
 
 .root{
     -fx-font-size: 13pt;

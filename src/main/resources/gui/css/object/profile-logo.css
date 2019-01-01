@@ -1,0 +1,7 @@
+.profile-logo {
+    -fx-padding: 10;
+    -fx-background-color: firebrick;
+
+    -fx-border-radius : 0;
+    -fx-background-radius : 0;
+}
