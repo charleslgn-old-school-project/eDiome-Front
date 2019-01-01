@@ -7,7 +7,7 @@ public class RU extends Lang {
 
     @Override
     protected String[] getBoutonName() {
-        String send       = "Послать";
+        String send       = "Отослать";
 
         return new String[] {send};
     }
@@ -25,7 +25,7 @@ public class RU extends Lang {
 
     @Override
     protected String[] getLabel() {
-        String pseudo  = "Псевдо";
+        String pseudo  = "Псевдоним";
 
         return new String[] {pseudo};
     }
@@ -35,7 +35,7 @@ public class RU extends Lang {
         String menuMenu     = "Меню";
         String menuHelp     = "Помощь";
         String menuLangage  = "Язык";
-        String menuAbout    = "О";
+        String menuAbout    = "О программе";
         String menuStyle    = "Стиль";
         return new String[] {menuMenu, menuHelp, menuLangage, menuAbout, menuStyle};
     }
@@ -43,7 +43,7 @@ public class RU extends Lang {
     @Override
     protected String[] getDisclimer() {
         int[] date = XMLDataFinder.getBuildDate();
-        String lblBuild   = "Сделано на "+  date[0] + " " + getMois()[date[1]-1] + " " + date[2];
+        String lblBuild   = "сделано "+  date[0] + " " + getMois()[date[1]-1] + " " + date[2];
         String lblRealise = "Режиссер :";
         String lblCadre   = "Для курса \"Управление проектом\"";
         String lblVersion   = "Версия";
@@ -52,18 +52,18 @@ public class RU extends Lang {
 
     @Override
     protected String[] getMois() {
-        String january   = "январь";
-        String february  = "февраль";
-        String march     = "Марс";
-        String april     = "апреля";
-        String may       = "может";
-        String june      = "июнь";
-        String july      = "июль";
-        String august    = "августейший";
-        String september = "сентябрь";
-        String october   = "октября";
-        String november  = "ноябрь";
-        String december  = "декабрь";
+        String january   = "Январь";
+        String february  = "Февраль";
+        String march     = "Март";
+        String april     = "Aпрель";
+        String may       = "Май";
+        String june      = "Июнь";
+        String july      = "Июль";
+        String august    = "Aвгуст";
+        String september = "Сентябрь";
+        String october   = "Октябрь";
+        String november  = "Ноябрь";
+        String december  = "Декабрь";
 
         return new String[] {january, february, march, april, may,
                 june, july, august, september, october, november, december};
