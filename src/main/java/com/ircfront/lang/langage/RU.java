@@ -1,22 +1,23 @@
 package com.ircfront.lang.langage;
 
+import com.ircfront.Utils.XMLDataFinder;
 import com.ircfront.lang.Lang;
 
 public class RU extends Lang {
 
     @Override
     protected String[] getBoutonName() {
-        String send       = "Send";
+        String send       = "Послать";
 
         return new String[] {send};
     }
 
     @Override
     protected String[] getThemeName() {
-        String black = "Black but more Russian";
-        String white = "White but more Russian";
-        String pink  = "Pink but more Russian";
-        String green = "Green but more Russian";
+        String black = "Черный";
+        String white = "белый";
+        String pink  = "Розовый";
+        String green = "Зеленый";
 
         return new String[] {black, white,
                 pink, green};
@@ -24,7 +25,7 @@ public class RU extends Lang {
 
     @Override
     protected String[] getLabel() {
-        String pseudo  = "Написать на русском";
+        String pseudo  = "Псевдо";
 
         return new String[] {pseudo};
     }
@@ -35,15 +36,36 @@ public class RU extends Lang {
         String menuHelp     = "Помощь";
         String menuLangage  = "Язык";
         String menuAbout    = "О";
-        String menuStyle    = "О";
+        String menuStyle    = "Стиль";
         return new String[] {menuMenu, menuHelp, menuLangage, menuAbout, menuStyle};
     }
 
     @Override
     protected String[] getDisclimer() {
-        String lblBuild   = "Build n°40969d7 du 07 Novembre 2018";
-        String lblRealise = "Réalisé par :";
-        String lblCadre   = "Dans le cadre de la matière \"Algo Java\"";
-        return new String[]{lblBuild, lblRealise, lblCadre};
+        int[] date = XMLDataFinder.getBuildDate();
+        String lblBuild   = "Сделано на "+  date[0] + " " + getMois()[date[1]-1] + " " + date[2];
+        String lblRealise = "Режиссер :";
+        String lblCadre   = "Для курса \"Управление проектом\"";
+        String lblVersion   = "Версия";
+        return new String[]{lblBuild, lblRealise, lblCadre, lblVersion};
+    }
+
+    @Override
+    protected String[] getMois() {
+        String january   = "январь";
+        String february  = "февраль";
+        String march     = "Марс";
+        String april     = "апреля";
+        String may       = "может";
+        String june      = "июнь";
+        String july      = "июль";
+        String august    = "августейший";
+        String september = "сентябрь";
+        String october   = "октября";
+        String november  = "ноябрь";
+        String december  = "декабрь";
+
+        return new String[] {january, february, march, april, may,
+                june, july, august, september, october, november, december};
     }
 }

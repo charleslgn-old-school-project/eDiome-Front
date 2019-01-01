@@ -1,44 +1,39 @@
 package com.ircfront.controller;
 
+import com.ircfront.Utils.IRCUtils;
 import com.ircfront.Utils.XMLDataFinder;
-import com.jfoenix.controls.JFXButton;
-import com.ircserv.inter.*;
-import com.vdurmont.emoji.EmojiParser;
-import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.text.Font;
-import javafx.stage.FileChooser;
-import com.ircserv.metier.*;
+import com.ircfront.Utils.chaineofresponsability.HyperText;
+import com.ircfront.Utils.chaineofresponsability.NodeFinder;
+import com.ircfront.Utils.chaineofresponsability.Smilley;
+import com.ircfront.Utils.chaineofresponsability.Word;
 import com.ircfront.lang.Translate;
 import com.ircfront.lang.typetrad.ButonName;
 import com.ircfront.lang.typetrad.LabelName;
 import com.ircfront.start.Main;
+import com.ircserv.inter.ServerInterface;
+import com.ircserv.metier.Constante;
+import com.ircserv.metier.Message;
+import com.jfoenix.controls.JFXButton;
+import com.vdurmont.emoji.EmojiParser;
+import javafx.animation.AnimationTimer;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -65,8 +60,9 @@ public class IRCController implements Initializable {
   private ScrollPane paneChat;
 
   @FXML
-  private TextField textMessage,
-          textPseudo;
+  private TextField textMessage;
+  @FXML
+  private TextField textPseudo;
 
   @FXML
   private BorderPane borderPane;
@@ -133,7 +129,6 @@ public class IRCController implements Initializable {
       }
     }.start();
 
-    //ScrollPaneEmoji.setStyle("-fx-background-color: lightgrey;");
     ScrollPaneEmoji.getStyleClass().add("menu-emoji");
     loadEmoji();
   }
@@ -146,19 +141,8 @@ public class IRCController implements Initializable {
   private ArrayList<Message> oldMessage = null;
   private boolean sendByYou = false;
 
-
-  private void makeSound() {
-    try {
-      MediaPlayer mp = new MediaPlayer(new Media(getClass().getResource("../../../resource/alert2.mp3").toString()));
-
-      mp.play();
-    } catch (Exception e) {
-      System.err.println(e);
-    }
-  }
-
   @FXML
-  public void send() {
+  private void send() {
     try {
       if (!textMessage.getText().trim().equalsIgnoreCase("")) {
         obj.send(textPseudo.getText().trim(), textMessage.getText().trim());
@@ -188,12 +172,12 @@ public class IRCController implements Initializable {
     }
   }
 
-  public void loadEmoji() {
+  private void loadEmoji() {
     //FlowPane fp = new FlowPane();
     //fp.setPrefSize(PaneEmoji.getPrefWidth(), PaneEmoji.getPrefHeight());
     //fp.getStyleClass().add("menu-bar-2");
     for (int i = 0; i <= tabEmoji.length - 1; i++) {
-      Button jfxb = new Button("", getEmoji(tabEmoji[i]));
+      Button jfxb = new Button("", IRCUtils.getEmoji(tabEmoji[i]));
 
       jfxb.setUserData(tabEmoji[i]);
       jfxb.setPrefSize(20, 20);
@@ -206,95 +190,99 @@ public class IRCController implements Initializable {
     //PaneEmoji.getChildren().add(fp);
   }
 
+  /**
+   * add the emoji alias in the message
+   */
   private void WriteEmoji(Button emoji) {
     textMessage.appendText(EmojiParser.parseToAliases((String) emoji.getUserData()));
   }
 
-  private ImageView getEmoji(String emmoji) {
-    String emo = EmojiParser.parseToHtmlHexadecimal(emmoji);
-    emo = emo.substring(3, emo.length() - 1);
-    Image img = new Image(getClass().getResource("../../../emoji/" + emo + ".png").toString());
-    ImageView img1 = new ImageView(img);
-    img1.setFitWidth(16);
-    img1.setFitHeight(16);
-    return img1;
+
+  private Message lastMessage;
+  private boolean wasLastSend = false;
+
+  /**
+   * if initialize then initialize chat else add the last message if someone send a new message
+   */
+  private void printChat(boolean initialize) {
+    VBox vBox = (VBox) paneChat.contentProperty().getValue();
+    if (initialize) {
+      printAllChat(vBox);
+    } else {
+      printLastMessage(vBox);
+    }
   }
 
-
-  Message lastMessage;
-  boolean wasLastSend = false;
-
-  private void printChat(boolean initialize) {
+  /**
+   * initialize chat
+   */
+  private void printAllChat(VBox vBox) {
+    ArrayList<Message> messages;
     try {
-      ArrayList<Message> messages;
-      VBox vBox = (VBox) paneChat.contentProperty().getValue();
-      if (initialize) {
-        messages = obj.getMessages();
+      messages = obj.getMessages();
+      for (Message message : messages) {
+        vBox.getChildren().add(createMessage(message));
+      }
+      lastMessage = messages.get(messages.size() - 1);
+    } catch (RemoteException e) {
+      e.printStackTrace();
+    }
+  }
 
-        for (Message message : messages) {
-          vBox.getChildren().add(createMessage(message));
+  /**
+   * add the last message if someone send a new message
+   */
+  private void printLastMessage(VBox vBox) {
+    ArrayList<Message> messages;
+    try {
+      messages = obj.getMessages(1);
+      if (messages.size() != 0 && !lastMessage.equals(messages.get(0))) {
+        lastMessage = messages.get(0);
+        vBox.getChildren().add(createMessage(messages.get(0)));
+        if (oldMessage != null && oldMessage.size() < messages.size() && !sendByYou) {
+          IRCUtils.makeSound();
         }
-        lastMessage = messages.get(messages.size()-1);
-      } else {
-        messages = obj.getMessages(1);
-        if (!lastMessage.equals(messages.get(0))) {
-          lastMessage=messages.get(0);
-          vBox.getChildren().add(createMessage(messages.get(0)));
-          if (oldMessage != null && oldMessage.size() < messages.size() && !sendByYou) {
-            makeSound();
-          }
-          sendByYou = false;
-          wasLastSend = true;
-        } else if (wasLastSend){
-          paneChat.setVvalue(paneChat.getVmax());
-          wasLastSend=false;
-        }
+        sendByYou = false;
+        wasLastSend = true;
+      } else if (wasLastSend) {
+        paneChat.setVvalue(paneChat.getVmax());
+        wasLastSend = false;
       }
     } catch (RemoteException e) {
       e.printStackTrace();
     }
   }
 
+  /**
+   * @param msg Le message envoyé
+   * @return le message formater dans uns VBox
+   */
   private VBox createMessage(Message msg) {
+    NodeFinder nodeFinder = new HyperText(new Smilley(new Word(null)));
+
     VBox vBox = new VBox();
-    HBox hBox1 = new HBox(),
-         hBox2 = new HBox();
+    HBox hBoxData = new HBox();
+    FlowPane hBoxMessage = new FlowPane();
+
+    //identifiant de message (pseudo + date)
     Label label1 = new Label(msg.getPseudo() + " - " + msg.getStringDate());
     label1.setFont(new Font(13));
-    hBox1.getChildren().add(label1);
-
-    vBox.getChildren().add(hBox1);
-
-
+    hBoxData.getChildren().add(label1);
+    vBox.getChildren().add(hBoxData);
+    //le message
     String affichage = msg.getContenu();
     affichage = EmojiParser.parseToAliases(affichage);
-    String[] list = affichage.split(":");
-    boolean wasLastAnEmoji = false;
-    Label l = new Label("      "+list[0]);
-    hBox2.getChildren().add(l);
+    String[] list = affichage.split(" ");
 
-    for (int i = 1; i < list.length; i++) {
-      String str = EmojiParser.parseToHtmlHexadecimal(EmojiParser.parseToUnicode(':' + list[i] + ':'));
-      if (str.equals(':' + list[i] + ':')) {
-        Label label;
-        if (list[i].equals("")) {
-          label = new Label(':' + list[i]);
-        } else if (!wasLastAnEmoji) {
-          label = new Label(':' + list[i]);
-        } else {
-          label = new Label(list[i]);
-        }
-        hBox2.getChildren().add(label);
-        wasLastAnEmoji = false;
-      } else {
-        hBox2.getChildren().add(getEmoji(str));
-        wasLastAnEmoji = true;
-      }
+
+    for (String s : list) {
+      Node node = nodeFinder.resolve(s);
+      hBoxMessage.getChildren().add(node);
     }
-    hBox2.setAlignment(Pos.CENTER_LEFT);
-
-    vBox.getChildren().add(hBox2);
-
+    hBoxMessage.setHgap(2);
+    hBoxMessage.setPadding(new Insets(0, 30, 0, 30));
+    hBoxMessage.setAlignment(Pos.CENTER_LEFT);
+    vBox.getChildren().add(hBoxMessage);
     return vBox;
   }
 

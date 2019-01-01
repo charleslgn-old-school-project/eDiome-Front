@@ -1,5 +1,6 @@
 package com.ircfront.controller;
 
+import com.ircfront.Utils.XMLDataFinder;
 import com.ircfront.start.Main;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
@@ -27,6 +28,8 @@ public class ProposController implements Initializable{
     private Label lblCadre;
     @FXML
     private Label lblTitle;
+    @FXML
+    private Label lblNoBuild, lblVersion;
 
    /**
     * Initialisation de la fenêtre, lance la traduction en fonction de la langue sélectionnée
@@ -35,14 +38,14 @@ public class ProposController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
       BackgroundImage myBI;
       try{
-        myBI= new BackgroundImage(new Image("/main/resource/image/back1.jpg",1280,600,true,true),
+        myBI= new BackgroundImage(new Image("image/a-propo.png",640,400,true,true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, new BackgroundPosition(Side.LEFT, 25, true, Side.TOP, -25, false),
                 BackgroundSize.DEFAULT);
         panClasse.setBackground(new Background(myBI));
       } catch (Exception e){
         System.err.println(e);
       }
-
+      lblNoBuild.setText(" "+ XMLDataFinder.getBuildNum()+" ");
         new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -60,5 +63,6 @@ public class ProposController implements Initializable{
         lblBuild.setText(Translate.haveIt(DisclimerName.LBL_BUILD, lang.disclimer));
         lblCadre.setText(Translate.haveIt(DisclimerName.LBL_CADRE, lang.disclimer));
         lblRealise.setText(Translate.haveIt(DisclimerName.LBL_REALISE, lang.disclimer));
+        lblVersion.setText(Translate.haveIt(DisclimerName.LBL_VERSION, lang.disclimer) + " " + XMLDataFinder.getVersion());
     }
 }

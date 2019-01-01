@@ -1,5 +1,6 @@
 package com.ircfront.lang.langage;
 
+import com.ircfront.Utils.XMLDataFinder;
 import com.ircfront.lang.Lang;
 
 public class FR extends Lang {
@@ -24,7 +25,7 @@ public class FR extends Lang {
 
     @Override
     protected String[] getLabel() {
-        String pseudo  = "pseudo";
+        String pseudo  = "Pseudo";
 
         return new String[] {pseudo};
     }
@@ -34,17 +35,38 @@ public class FR extends Lang {
         String menuMenu     = "Menu";
         String menuHelp     = "Aide";
         String menuLangage  = "Langue";
-        String menuAbout    = "A propos";
+        String menuAbout    = "À propos";
         String menuStyle    = "Theme";
         return new String[] {menuMenu, menuHelp, menuLangage, menuAbout, menuStyle};
     }
 
     @Override
     protected String[] getDisclimer() {
-        String lblBuild   = "Build n°40969d7 du 07 Novembre 2018";
+        int[] date = XMLDataFinder.getBuildDate();
+        String lblBuild   = "fait le "+  date[0] + " " + getMois()[date[1]-1] + " " + date[2];
         String lblRealise = "Réalisé par :";
-        String lblCadre   = "Dans le cadre de la matière \"Algo Java\"";
-        return new String[]{lblBuild, lblRealise, lblCadre};
+        String lblCadre   = "Dans le cadre de la matière \"Gestion de projet\"";
+        String lblVersion = "Version";
+        return new String[]{lblBuild, lblRealise, lblCadre, lblVersion};
+    }
+
+    @Override
+    protected String[] getMois() {
+        String january   = "Janvier";
+        String february  = "Février";
+        String march     = "Mars";
+        String april     = "Avril";
+        String may       = "Mai";
+        String june       = "Juin";
+        String july      = "Juillet";
+        String august    = "Août";
+        String september = "Septembre";
+        String october   = "Octobre";
+        String november  = "Novembre";
+        String december  = "Décembre";
+
+        return new String[] {january, february, march, april, may,
+                june, july, august, september, october, november, december};
     }
 
 

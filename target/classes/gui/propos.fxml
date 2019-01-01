@@ -6,89 +6,178 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="panShadow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="600.0" style="-fx-effect: dropshadow(three-pass-box, derive(black, -10%), 10, 0, 4, 4); -fx-background-color: derive(rgb(255, 255, 255), -20%);" stylesheets="@css/object/a-propos.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ircfront.controller.ProposController">
+<StackPane fx:id="panShadow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ircfront.controller.ProposController">
    <children>
-      <GridPane prefHeight="400.0" prefWidth="600.0" style="-fx-effect: dropshadow(three-pass-box,  black, 50, 0, 0, 0); -fx-background-color: rgb(50, 50, 60);">
+      <GridPane prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: #242424;">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="400.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="88.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="191.0" minHeight="10.0" prefHeight="174.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="191.0" minHeight="10.0" percentHeight="50.0" prefHeight="174.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="94.0" minHeight="9.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="94.0" minHeight="9.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="94.0" minHeight="9.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <GridPane fx:id="panClasse" prefHeight="90.0" prefWidth="600.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="77.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.0" minWidth="10.0" prefWidth="97.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="306.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="76.0" minWidth="10.0" prefWidth="52.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" percentWidth="25.0" prefWidth="77.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" percentWidth="50.0" prefWidth="306.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="76.0" minWidth="10.0" percentWidth="25.0" prefWidth="52.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label fx:id="lblTitle" text="Traducteur" textFill="WHITE" GridPane.columnIndex="2">
-                     <font>
-                        <Font name="Calibri" size="50.0" />
-                     </font>
+                  <ImageView fitHeight="98.0" fitWidth="288.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                     <image>
+                        <Image url="@../image/logov4.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" />
+               </GridPane.margin>
+            </GridPane>
+            <GridPane prefHeight="170.0" prefWidth="600.0" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="65.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <FlowPane prefHeight="29.0" prefWidth="649.0" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                     <children>
+                        <Label alignment="BOTTOM_CENTER" text="Build" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Label>
+                        <Label fx:id="lblNoBuild" alignment="BOTTOM_CENTER" nodeOrientation="LEFT_TO_RIGHT" text=" 40969d7 " textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Label>
+                        <Label fx:id="lblBuild" alignment="BOTTOM_CENTER" nodeOrientation="LEFT_TO_RIGHT" text="built on november 06, 2018" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Label>
+                     </children>
                      <padding>
-                        <Insets left="20.0" />
+                        <Insets left="60.0" />
                      </padding>
+                  </FlowPane>
+                  <FlowPane alignment="CENTER" columnHalignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <children>
+                        <Label fx:id="lblRealise" text="Réalisé par :" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Label>
+                        <Label text=" Green Lobster" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Label>
+                     </children>
+                  </FlowPane>
+                  <Separator prefWidth="200.0" GridPane.valignment="TOP" />
+                  <GridPane GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Charles" textFill="#286954" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label text="Lucas" textFill="#286954" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label text="Cyril" textFill="#286954" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <Label text="Loïc" textFill="#286954" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
+                        <ImageView fitHeight="103.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/137b6c1b9315fd6ae686c6bf75920096.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="91.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                           <image>
+                              <Image url="@../image/822f1410de3b55ac08e46db36da43709.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="91.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                           <image>
+                              <Image url="@../image/DHqqNmBW0AAddrT.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="91.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                           <image>
+                              <Image url="@../image/terracid.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <Label fx:id="lblVersion" prefHeight="27.0" prefWidth="682.0" text="Label" textFill="WHITE" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets left="60.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
                   </Label>
+               </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </GridPane>
+            <Label fx:id="lblCadre" text="Dans le cadre de la matière &quot;Conduite De Projet&quot;" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <GridPane prefHeight="52.0" prefWidth="646.0" GridPane.rowIndex="3">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="BOTTOM_LEFT" prefHeight="52.0" prefWidth="354.0" text="copyright  © : 2018 - 2019 Green Lobster" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
                   <ImageView fitHeight="105.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                      <image>
-                        <Image url="@../image/icon2.png" />
+                        <Image url="@../image/Logo_GreenLobster.png" />
                      </image>
                   </ImageView>
                </children>
             </GridPane>
-            <GridPane prefHeight="170.0" prefWidth="600.0" GridPane.rowIndex="1">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Label fx:id="lblRealise" text="Réalisé par :" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label text="LIGONY Charles" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label text="CHALLOUATTE Cyril" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblBuild" text="Build 40969d7 built on november 06, 2018" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Separator prefWidth="200.0" GridPane.valignment="TOP" />
-               </children>
-            </GridPane>
-            <Label fx:id="lblCadre" text="Dans le cadre de la matière &quot;Algo Java&quot;" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
          </children>
       </GridPane>
    </children>

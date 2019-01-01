@@ -19,7 +19,8 @@ import java.io.IOException;
 
 public class XMLDataFinder {
 
-  private static String path = "data.xml";
+  private static String pathPersonalData = "personal-data.xml";
+  private static String pathSetting = "setting.xml";
 
   private static NodeList XPathFinder(String url, String expression) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -31,9 +32,9 @@ public class XMLDataFinder {
     return (NodeList)expr.evaluate(doc, XPathConstants.NODESET);
   }
 
-  private static String getSomething(String expr, String casError){
+  private static String getPersonnalData(String expr, String casError){
     try {
-      NodeList res1 = XPathFinder(path, expr);
+      NodeList res1 = XPathFinder(pathPersonalData, expr);
       return res1.item(0).getTextContent();
     } catch (ParserConfigurationException | IOException | SAXException | XPathExpressionException e) {
       createXML("", "white","En");
@@ -41,7 +42,16 @@ public class XMLDataFinder {
     }
   }
 
-  private static void createXML(String PSEUDO, String THEME, String LANGUAGE){
+  private static String getSetting(String expr){
+    try {
+      return XPathFinder(pathSetting, expr).item(0).getTextContent();
+    } catch (ParserConfigurationException | IOException | SAXException | XPathExpressionException e) {
+      return "";
+    }
+  }
+
+
+    private static void createXML(String PSEUDO, String THEME, String LANGUAGE){
     try {
       DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -66,21 +76,18 @@ public class XMLDataFinder {
       language.appendChild(doc.createTextNode(LANGUAGE));
       rootElement.appendChild(language);
 
-      new File(path).delete();
+      new File(pathPersonalData).delete();
 
       // write the content into xml file
       TransformerFactory transformerFactory = TransformerFactory.newInstance();
       Transformer transformer = transformerFactory.newTransformer();
       DOMSource source = new DOMSource(doc);
-      StreamResult result = new StreamResult(new File(path));
+      StreamResult result = new StreamResult(new File(pathPersonalData));
 
       // Output to console for testing
       // StreamResult result = new StreamResult(System.out);
 
       transformer.transform(source, result);
-
-      System.out.println("File saved!");
-
     } catch (ParserConfigurationException pce) {
       pce.printStackTrace();
     } catch (TransformerException tfe) {
@@ -89,15 +96,23 @@ public class XMLDataFinder {
   }
 
   public static String getPseudo() {
-    return getSomething("//pseudo", "");
+    return getPersonnalData("//pseudo", "");
   }
 
   public static String getTheme() {
-    return getSomething("//theme", "white");
+    return getPersonnalData("//theme", "white");
   }
 
   public static String getLangage() {
-    return getSomething("//language", "En");
+    return getPersonnalData("//language", "En");
+  }
+
+  public static String getBuildNum() { return getSetting("//numero"); }
+  public static String getVersion() { return getSetting("//version"); }
+
+  public static int[] getBuildDate() {
+    String[] str = getSetting("//date").split("-");
+    return new int[]{Integer.parseInt(str[0]), Integer.parseInt(str[1]), Integer.parseInt(str[2])};
   }
 
   public static void setPseudo(String pseudo) {

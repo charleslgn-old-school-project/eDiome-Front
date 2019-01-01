@@ -1,19 +1,20 @@
 package com.ircfront.lang.langage;
 
+import com.ircfront.Utils.XMLDataFinder;
 import com.ircfront.lang.Lang;
 
 public class DE extends Lang {
 
     @Override
     protected String[] getBoutonName() {
-        String send = "Send";
+        String send = "Senden";
         return new String[] {send};
     }
 
     @Override
     protected String[] getThemeName() {
         String black = "Schwarz";
-        String white = "WeiBe";
+        String white = "Weiß";
         String pink  = "Rosa";
         String green = "Grün";
 
@@ -23,7 +24,7 @@ public class DE extends Lang {
 
     @Override
     protected String[] getLabel() {
-        String pseudo  = "pseudo";
+        String pseudo  = "Pseudo";
 
         return new String[] {pseudo};
     }
@@ -40,9 +41,19 @@ public class DE extends Lang {
 
     @Override
     protected String[] getDisclimer() {
-        String lblBuild   = "Build 40969d7 von 07. November 2018";
+        int[] date = XMLDataFinder.getBuildDate();
+        String lblBuild   = "von " + date[0] + ". " + getMois()[date[1]-1] + " " + date[2];
         String lblRealise = "Macht bei :";
-        String lblCadre   = "Für \"Algo Java\" Untericht";
-        return new String[]{lblBuild, lblRealise, lblCadre};
+        String lblCadre   = "Für \"Projektmanagement\" Untericht";
+        String lblVersion = "Version";
+        return new String[]{lblBuild, lblRealise, lblCadre, lblVersion};
     }
+
+    @Override
+    protected String[] getMois() {
+        return new String[] {"Januar", "Februar", "März", "April", "May",
+                "Juni", "Juli", "August", "September", "Oktober", "November", "December"};
+    }
+
+
 }

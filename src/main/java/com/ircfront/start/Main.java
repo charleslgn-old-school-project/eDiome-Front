@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import com.ircfront.lang.Lang;
@@ -37,7 +38,7 @@ public class Main extends Application {
             primaryStage.setTitle("IRC");
             primaryStage.getIcons().add(new Image(getClass().getResource("../../../image/ediome2.png").toString()));
             primaryStage.initStyle(StageStyle.TRANSPARENT);
-
+            Font.loadFont("Roboto-Black.ttf", 10);
             primaryStage.setScene(new Scene(root, 1280, 720));
             Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("../../../gui/css/main-"+ XMLDataFinder.getTheme() +".css").toExternalForm());
 

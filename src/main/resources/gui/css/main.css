@@ -6,8 +6,8 @@
 @import url("object/menu-emoji.css");
 
 .root{
-    -fx-font-size: 12pt;
-    -fx-font-family: "EmojiOneColor";
+    -fx-font-size: 13pt;
+    -fx-font-family: "Roboto-Black";
 }
 
 .pn-zone-travail {

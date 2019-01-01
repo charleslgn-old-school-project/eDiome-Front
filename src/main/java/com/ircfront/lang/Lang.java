@@ -14,6 +14,7 @@ public abstract class Lang {
     protected abstract String[] getLabel();
     protected abstract String[] getMenu();
     protected abstract String[] getDisclimer();
+    protected abstract String[] getMois();
 
     public LambdaString butonName = (pos) -> getBoutonName()[pos];
     public LambdaString themeName = (pos) -> getThemeName()[pos];

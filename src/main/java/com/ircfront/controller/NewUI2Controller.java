@@ -156,8 +156,7 @@ public class NewUI2Controller implements Initializable {
               new IRCController(nbServ);
 
       FXMLLoader loader = new FXMLLoader(
-              getClass().getResource("../../../gui/IRC.fxml"
-              )
+              getClass().getResource("../../../gui/IRC.fxml")
       );
       loader.setController(ircController);
 
@@ -316,7 +315,7 @@ public class NewUI2Controller implements Initializable {
       st.initStyle(StageStyle.UNDECORATED);
 
       Parent root = FXMLLoader.load(getClass().getResource("../../../gui/propos.fxml"));
-      Scene scene = new Scene(root, 500, 300);
+      Scene scene = new Scene(root);
       st.setScene(scene);
       st.setResizable(false);
       st.show();
