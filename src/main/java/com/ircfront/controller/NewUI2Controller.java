@@ -1,6 +1,10 @@
 package com.ircfront.controller;
 
 import com.ircfront.Utils.XMLDataFinder;
+import com.ircserv.inter.MenuInterface;
+import com.ircserv.inter.ServerInterface;
+import com.ircserv.metier.Constante;
+import com.ircserv.metier.Server;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -36,7 +40,13 @@ import com.ircfront.lang.typetrad.MenuName;
 import com.ircfront.start.Main;
 
 import java.lang.reflect.Constructor;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NewUI2Controller implements Initializable {
@@ -345,26 +355,42 @@ public class NewUI2Controller implements Initializable {
   }
 
   private void addServ() {
-    VBox vBox = new VBox();
-    //vBox.setAlignment(Pos.TOP_CENTER);
-    vBox.getStyleClass().add("menu-bar-2");
-    vBox.setSpacing(20);
-    vBox.setPadding(new Insets(10, 10, 0, 10));
-    ImageView iw = new ImageView();
-    Image logo = new Image("image/logov4.png");
-    iw.setImage(logo);
-    iw.setFitHeight(34.5);
-    iw.setFitWidth(150);
-    vBox.getChildren().add(iw);
+    MenuInterface obj;
+    ArrayList<Server> servers;
+    int port = Constante.PORT;
+    try {
+      String ip = Constante.IP;
+      LocateRegistry.getRegistry(port);
 
-    for (int i = 0; i < 4; i++) {
-      int finalI = i;
+      obj = (MenuInterface) Naming.lookup("//" + ip + ":" + port + "/menu");
 
-      JFXButton jfxButton = new JFXButton("server" + i);
-      jfxButton.setPrefSize(Double.MAX_VALUE, 60);
-      jfxButton.setOnAction(event -> AffichageIRCClick(finalI));
-      vBox.getChildren().add(jfxButton);
+      servers = obj.findServerByUser(1);
+
+      VBox vBox = new VBox();
+      //vBox.setAlignment(Pos.TOP_CENTER);
+      vBox.getStyleClass().add("menu-bar-2");
+      vBox.setSpacing(20);
+      vBox.setPadding(new Insets(10, 10, 0, 10));
+      ImageView iw = new ImageView();
+
+      Image logo = new Image("image/logov4.png");
+      //Image logo = new Image("https://techcrunch.com/wp-content/uploads/2018/07/logo-2.png?w=300", true);
+      iw.setImage(logo);
+      iw.setFitHeight(34.5);
+      iw.setFitWidth(150);
+      vBox.getChildren().add(iw);
+
+      for (Server server : servers) {
+        JFXButton jfxButton = new JFXButton(server.getName());
+        jfxButton.setPrefSize(Double.MAX_VALUE, 60);
+        jfxButton.setOnAction(event -> AffichageIRCClick(server.getId()));
+        vBox.getChildren().add(jfxButton);
+      }
+      drawer.setSidePane(vBox);
+
+    } catch (MalformedURLException | RemoteException | NotBoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
-    drawer.setSidePane(vBox);
   }
 }
