@@ -37,7 +37,7 @@ public class XMLDataFinder {
       NodeList res1 = XPathFinder(pathPersonalData, expr);
       return res1.item(0).getTextContent();
     } catch (ParserConfigurationException | IOException | SAXException | XPathExpressionException e) {
-      createXML("", "white","En");
+      createXML("", "white","En", "");
       return casError;
     }
   }
@@ -51,7 +51,7 @@ public class XMLDataFinder {
   }
 
 
-    private static void createXML(String PSEUDO, String THEME, String LANGUAGE){
+    private static void createXML(String PSEUDO, String THEME, String LANGUAGE, String PASSWORD){
     try {
       DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -65,6 +65,11 @@ public class XMLDataFinder {
       Element pseudo = doc.createElement("pseudo");
       pseudo.appendChild(doc.createTextNode(PSEUDO));
       rootElement.appendChild(pseudo);
+
+      // pseudo elements
+      Element password = doc.createElement("password");
+      password.appendChild(doc.createTextNode(PASSWORD));
+      rootElement.appendChild(password);
 
       // theme elements
       Element theme = doc.createElement("theme");
@@ -88,10 +93,8 @@ public class XMLDataFinder {
       // StreamResult result = new StreamResult(System.out);
 
       transformer.transform(source, result);
-    } catch (ParserConfigurationException pce) {
-      pce.printStackTrace();
-    } catch (TransformerException tfe) {
-      tfe.printStackTrace();
+    } catch (ParserConfigurationException | TransformerException e) {
+      e.printStackTrace();
     }
   }
 
@@ -107,6 +110,10 @@ public class XMLDataFinder {
     return getPersonnalData("//language", "En");
   }
 
+  public static String getPassword() {
+    return getPersonnalData("//password", "");
+  }
+
   public static String getBuildNum() { return getSetting("//numero"); }
   public static String getVersion() { return getSetting("//version"); }
 
@@ -116,15 +123,19 @@ public class XMLDataFinder {
   }
 
   public static void setPseudo(String pseudo) {
-    createXML(pseudo, getTheme(), getLangage());
+    createXML(pseudo, getTheme(), getLangage(), getPassword());
   }
 
   public static void setTheme(String theme) {
-    createXML(getPseudo(), theme, getLangage());
+    createXML(getPseudo(), theme, getLangage(), getPassword());
   }
 
   public static void setLangage(String language) {
-    createXML(getPseudo(), getTheme(), language);
+    createXML(getPseudo(), getTheme(), language, getPassword());
+  }
+
+  public static void setPassword(String password) {
+    createXML(getPseudo(), getTheme(), getLangage(), password);
   }
 
 }

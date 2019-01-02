@@ -1,8 +1,6 @@
 package com.ircfront.controller;
 
 import com.ircfront.Utils.XMLDataFinder;
-import com.ircserv.inter.MenuInterface;
-import com.ircserv.inter.ServerInterface;
 import com.ircserv.metier.Constante;
 import com.ircserv.metier.Server;
 import com.jfoenix.controls.JFXButton;
@@ -28,7 +26,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -41,12 +38,8 @@ import com.ircfront.lang.typetrad.MenuName;
 import com.ircfront.start.Main;
 
 import java.lang.reflect.Constructor;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -58,7 +51,7 @@ public class NewUI2Controller implements Initializable {
   private MenuBar mnuBar;
   @FXML
   private Menu mnuMenu,
-               mnuLanguage;
+          mnuLanguage;
   @FXML
   private Menu mnuStyle,
                mnuHelp;
@@ -79,9 +72,16 @@ public class NewUI2Controller implements Initializable {
   @FXML
   private JFXDrawer drawer;
 
+  private int nbUser;
+
+  public NewUI2Controller(int nbUser) {
+    this.nbUser = nbUser;
+  }
+
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     createDrawer();
+
     addServ();
     BorderPane.setAlignment(this.pnZoneTravail, Pos.CENTER);
 
@@ -100,8 +100,6 @@ public class NewUI2Controller implements Initializable {
         translate();
       }
     }.start();
-
-
   }
 
   /**
@@ -121,11 +119,7 @@ public class NewUI2Controller implements Initializable {
     });
 
     drawer.setOnDrawerOpening(e -> {
-      drawer.setPrefWidth(260);
-      drawer.setMinWidth(260);
-      drawer.setMaxWidth(260);
-      this.pnZoneTravail.setPadding(new Insets(0, 0, 0, 260));
-      changeBurger(burgertask);
+      open(burgertask);
     });
 
     hamburger.setOnMousePressed(e -> {
@@ -135,6 +129,15 @@ public class NewUI2Controller implements Initializable {
         drawer.toggle();
       }
     });
+    drawer.toggle();
+  }
+
+  public void  open(HamburgerBackArrowBasicTransition burgertask){
+    drawer.setPrefWidth(260);
+    drawer.setMinWidth(260);
+    drawer.setMaxWidth(260);
+    this.pnZoneTravail.setPadding(new Insets(0, 0, 0, 260));
+    changeBurger(burgertask);
   }
 
   /**
@@ -161,21 +164,15 @@ public class NewUI2Controller implements Initializable {
    */
   private void loadFxml(int nbServ) {
     try {
+
       pnZoneTravail.getChildren().clear();
-
-      IRCController ircController =
-              new IRCController(nbServ);
-
-      FXMLLoader loader = new FXMLLoader(
-              getClass().getResource("../../../gui/IRC.fxml")
-      );
+      IRCController ircController = new IRCController(nbServ);
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/IRC.fxml"));
       loader.setController(ircController);
-
       Pane mainPane = loader.load();
-
       pnZoneTravail.setCenter(mainPane);
     } catch (Exception ex) {
-      System.err.println(ex);
+      ex.printStackTrace();
     }
   }
 
@@ -308,9 +305,9 @@ public class NewUI2Controller implements Initializable {
       Class<?> clazz = Class.forName("com.ircfront.lang.langage." + language.toUpperCase());
       Constructor<?> ctor = clazz.getConstructor();
       Object object = ctor.newInstance();
-      return  (Lang) object;
+      return (Lang) object;
     } catch (Exception e) {
-      System.err.println(e);
+      e.printStackTrace();
     }
     return new EN();
   }
@@ -337,7 +334,7 @@ public class NewUI2Controller implements Initializable {
       });
 
     } catch (Exception ex) {
-      System.out.println(ex);
+      ex.printStackTrace();
     }
   }
 
@@ -356,43 +353,37 @@ public class NewUI2Controller implements Initializable {
   }
 
   private void addServ() {
-    MenuInterface obj;
-    ArrayList<Server> servers;
-    int port = Constante.PORT;
+    ArrayList<Server> servers = new ArrayList<>();
     try {
-      String ip = Constante.IP;
-      LocateRegistry.getRegistry(port);
-
-      obj = (MenuInterface) Naming.lookup("//" + ip + ":" + port + "/menu");
-
-      servers = obj.findServerByUser(1);
-
-      VBox vBox = new VBox();
-      //vBox.setAlignment(Pos.TOP_CENTER);
-      vBox.getStyleClass().add("menu-bar-2");
-      vBox.setSpacing(20);
-      vBox.setPadding(new Insets(10, 10, 0, 10));
-
-      ImageView iw = new ImageView();
-
-      Image logo = new Image("image/logov4.png");
-      //Image logo = new Image("https://www.pngarts.com/files/3/Letter-A-PNG-High-Quality-Image.png", true);
-      iw.setImage(logo);
-      iw.setFitHeight(34.5);
-      iw.setFitWidth(150);
-      vBox.getChildren().add(iw);
-
-      for (Server server : servers) {
-        JFXButton jfxButton = new JFXButton(server.getName());
-        jfxButton.setPrefSize(Double.MAX_VALUE, 60);
-        jfxButton.setOnAction(event -> AffichageIRCClick(server.getId()));
-        vBox.getChildren().add(jfxButton);
-      }
-      drawer.setSidePane(vBox);
-
-    } catch (MalformedURLException | RemoteException | NotBoundException e) {
-      // TODO Auto-generated catch block
+      servers = Constante.menu.findServerByUser(nbUser);
+    } catch (RemoteException e) {
       e.printStackTrace();
     }
+
+    VBox vBox = new VBox();
+    //vBox.setAlignment(Pos.TOP_CENTER);
+    vBox.getStyleClass().add("menu-bar-2");
+    vBox.setSpacing(20);
+    vBox.setPadding(new Insets(10, 10, 0, 10));
+
+    ImageView iw = new ImageView();
+
+    Image logo = new Image("image/logov4.png");
+    //Image logo = new Image("https://www.pngarts.com/files/3/Letter-A-PNG-High-Quality-Image.png", true);
+    iw.setImage(logo);
+    iw.setFitHeight(34.5);
+    iw.setFitWidth(150);
+    vBox.getChildren().add(iw);
+
+    for (Server server : servers) {
+      JFXButton jfxButton = new JFXButton(server.getName());
+      jfxButton.setPrefSize(Double.MAX_VALUE, 60);
+      jfxButton.setOnAction(event -> {
+        AffichageIRCClick(server.getId());
+        lbTitre.setText(server.getName());
+      });
+      vBox.getChildren().add(jfxButton);
+    }
+    drawer.setSidePane(vBox);
   }
 }

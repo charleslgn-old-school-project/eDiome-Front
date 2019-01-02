@@ -16,6 +16,7 @@ import com.ircserv.metier.Message;
 import com.jfoenix.controls.JFXButton;
 import com.vdurmont.emoji.EmojiParser;
 import javafx.animation.AnimationTimer;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -28,6 +29,7 @@ import javafx.stage.FileChooser;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -74,7 +76,7 @@ public class IRCController implements Initializable {
 
   private ServerInterface obj;
 
-  private int nbServ;
+  private int    nbServ;
 
   @SuppressWarnings("unused")
   private static Scanner sc;
@@ -87,7 +89,7 @@ public class IRCController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     textPseudo.setText(XMLDataFinder.getPseudo());
 
-    textPseudo.setOnKeyReleased(e -> XMLDataFinder.setPseudo(textPseudo.getText()));
+    textPseudo.setDisable(true);
 
     paneChat.setVvalue(paneChat.getVmax());
 
@@ -99,16 +101,8 @@ public class IRCController implements Initializable {
       }
     });
 
-    /**new AnimationTimer() {
-     private long lastUpdate = 0 ;
-     @Override public void handle(long now) {
-     if (now - (lastUpdate + 500_000_000) >= 999_000_000) {
-     printChat();
-     lastUpdate = now ;
-     }
-     translate();
-     }
-     }.start();*/
+    VBox vBox = (VBox) paneChat.contentProperty().getValue();
+    vBox.setSpacing(10);
 
     sc = new Scanner(System.in);
     int port = Constante.PORT;
@@ -123,6 +117,7 @@ public class IRCController implements Initializable {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+
     new AnimationTimer() {
       @Override
       public void handle(long now) {
@@ -269,7 +264,13 @@ public class IRCController implements Initializable {
     try {
       String firstLetter = ("" +msg.getPseudo().charAt(0)).toUpperCase();
       ImageView img = new ImageView();
+
       Image image = new Image("logo/"+firstLetter+".png");
+
+      BufferedImage icon = SwingFXUtils.fromFXImage(image, null);;
+      BufferedImage rounded = IRCUtils.makeRoundedCorner(icon, 500);
+      image = SwingFXUtils.toFXImage(rounded, null);
+
       img.setImage(image);
       img.getStyleClass().add("profile-logo");
       img.setFitHeight(40);
