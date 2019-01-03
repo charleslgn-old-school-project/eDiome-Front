@@ -18,6 +18,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="artifactid" />
         <module name="eDiome-Front" />
+        <module name="IRCFront" />
       </profile>
     </annotationProcessing>
   </component>
