@@ -26,8 +26,9 @@ public class FR extends Lang {
     @Override
     protected String[] getLabel() {
         String pseudo  = "Pseudo";
+        String fichier = "Envoyer un ficher";
 
-        return new String[] {pseudo};
+        return new String[] {pseudo, fichier};
     }
 
     @Override
@@ -68,6 +69,4 @@ public class FR extends Lang {
         return new String[] {january, february, march, april, may,
                 june, july, august, september, october, november, december};
     }
-
-
 }

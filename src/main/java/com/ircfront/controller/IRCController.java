@@ -2,10 +2,7 @@ package com.ircfront.controller;
 
 import com.ircfront.Utils.IRCUtils;
 import com.ircfront.Utils.XMLDataFinder;
-import com.ircfront.Utils.chaineofresponsability.HyperText;
-import com.ircfront.Utils.chaineofresponsability.NodeFinder;
-import com.ircfront.Utils.chaineofresponsability.Smilley;
-import com.ircfront.Utils.chaineofresponsability.Word;
+import com.ircfront.Utils.chaineofresponsability.*;
 import com.ircfront.lang.Translate;
 import com.ircfront.lang.typetrad.ButonName;
 import com.ircfront.lang.typetrad.LabelName;
@@ -28,9 +25,11 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.apache.commons.io.FileUtils;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.Naming;
@@ -76,7 +75,7 @@ public class IRCController implements Initializable {
 
   private ServerInterface obj;
 
-  private int    nbServ;
+  private int nbServ;
 
   @SuppressWarnings("unused")
   private static Scanner sc;
@@ -154,10 +153,18 @@ public class IRCController implements Initializable {
 
   @FXML
   public void attachments() {
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Envoyer fichier");
-    File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
-    System.out.println(file);
+    try {
+
+      FileChooser fileChooser = new FileChooser();
+      fileChooser.setTitle(Translate.haveIt(LabelName.FICHIER, Main.getLangue().label));
+      File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
+      if(file != null) {
+        byte[] data = FileUtils.readFileToByteArray(file);
+        obj.uploadFile(textPseudo.getText().trim(), data, file.getName());
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @FXML
@@ -255,19 +262,24 @@ public class IRCController implements Initializable {
    * @return le message formater dans uns VBox
    */
   private HBox createMessage(Message msg) {
-    NodeFinder nodeFinder = new HyperText(new Smilley(new Word(null)));
+    NodeFinder nodeFinder = new HyperText(
+            new Smilley(
+                    new Picture(
+                            new AudioFile(
+                                    new DefaultFile(
+                                            new Word(null))))));
     HBox hBoxtotal = new HBox();
     hBoxtotal.setSpacing(10);
     hBoxtotal.setAlignment(Pos.CENTER_LEFT);
 
     //add the logo
     try {
-      String firstLetter = ("" +msg.getPseudo().charAt(0)).toUpperCase();
+      String firstLetter = ("" + msg.getPseudo().charAt(0)).toUpperCase();
       ImageView img = new ImageView();
 
-      Image image = new Image("logo/"+firstLetter+".png");
+      Image image = new Image("logo/" + firstLetter + ".png");
 
-      BufferedImage icon = SwingFXUtils.fromFXImage(image, null);;
+      BufferedImage icon = SwingFXUtils.fromFXImage(image, null);
       BufferedImage rounded = IRCUtils.makeRoundedCorner(icon, 500);
       image = SwingFXUtils.toFXImage(rounded, null);
 

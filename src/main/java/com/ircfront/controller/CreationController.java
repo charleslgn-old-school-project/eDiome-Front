@@ -38,11 +38,10 @@ public class CreationController implements Initializable {
       String psw2 = pasword2.getText();
       if (psw1.equals(psw2)){
         int id = Constante.menu.createUser(name.getText(),HashPassword.hash(psw1));
-        IRCUtils.load(new FXMLLoader(getClass().getResource("../../../gui/NewUI2.fxml")), id);
+        IRCUtils.load(new FXMLLoader(getClass().getResource("../../../gui/dashboard.fxml")), id);
       } else {
         lblEror.setVisible(true);
       }
-      System.out.println("VALIDE");
     } catch (Exception e){
       lblEror.setVisible(true);
     }

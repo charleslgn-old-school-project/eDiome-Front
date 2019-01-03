@@ -10,11 +10,9 @@ public class HashPassword {
     MessageDigest digest = MessageDigest.getInstance("SHA-256");
     byte[] hash = digest.digest(passwordToHash.getBytes(StandardCharsets.UTF_8));
     StringBuilder sb = new StringBuilder();
-    for(int i=0; i< hash.length ;i++)
-    {
-      sb.append(Integer.toString((hash[i] & 0xff) + 0x100, 16).substring(1));
+    for (byte hash1 : hash) {
+      sb.append(Integer.toString((hash1 & 0xff) + 0x100, 16).substring(1));
     }
-    System.out.println(sb.toString());
     return sb.toString();
   }
 }

@@ -8,8 +8,12 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * Part of a chain of Responsability
+ * if the object is a web address -> return a hyperlink
+ * else                           -> retunr null (to continue)
+ */
 public class HyperText extends NodeFinder {
-  private final String regExp = "^(http(s|)://(www\\.|)|www\\.)[a-z0-9]+([\\-.][a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(/.*)?$";
 
   public HyperText(NodeFinder expertSuivant) {
     super(expertSuivant);
@@ -17,6 +21,7 @@ public class HyperText extends NodeFinder {
 
   @Override
   public Node resolve1(String label) {
+    String regExp = "^(http(s|)://(www\\.|)|www\\.)[a-z0-9]+([\\-.][a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(/.*)?$";
     if(label.matches(regExp)) {
       Hyperlink hyperlink = new Hyperlink(label);
       hyperlink.setOnAction(e -> {

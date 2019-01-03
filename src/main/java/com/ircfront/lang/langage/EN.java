@@ -26,8 +26,9 @@ public class EN extends Lang {
   @Override
   protected String[] getLabel() {
     String pseudo = "pseudo";
+    String fichier = "Send a file";
 
-    return new String[]{pseudo};
+    return new String[] {pseudo, fichier};
   }
 
   @Override

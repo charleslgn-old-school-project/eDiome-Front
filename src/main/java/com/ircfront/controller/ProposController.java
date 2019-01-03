@@ -43,7 +43,7 @@ public class ProposController implements Initializable{
                 BackgroundSize.DEFAULT);
         panClasse.setBackground(new Background(myBI));
       } catch (Exception e){
-        System.err.println(e);
+        e.printStackTrace();
       }
       lblNoBuild.setText(" "+ XMLDataFinder.getBuildNum()+" ");
         new AnimationTimer() {

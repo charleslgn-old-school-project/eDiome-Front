@@ -1,6 +1,6 @@
 package com.ircfront.Utils;
 
-import com.ircfront.controller.NewUI2Controller;
+import com.ircfront.controller.Dashboardontroller;
 import com.ircfront.start.Main;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
@@ -11,8 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -22,14 +21,14 @@ import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 
+/**
+ * all function used in the IRC controller but which could be use somewhere else
+ */
 public class IRCUtils {
 
   /**
-   * print the colored Image of the emoji
+   * print the colored Picture of the emoji
    *
    * @param emoji the Unicode character
    * @return the colored ImageView of the emoji
@@ -52,11 +51,12 @@ public class IRCUtils {
       MediaPlayer mp = new MediaPlayer(new Media("alert2.mp3"));
       mp.play();
     } catch (Exception e) {
-      System.err.println(e);
+      e.printStackTrace();
     }
   }
 
   /**
+   * to roundify the prophile picture
    * @param image        the image to get round
    * @param cornerRadius the rounded percentage (not in percent but in pixel)
    * @return a rounded image
@@ -81,18 +81,26 @@ public class IRCUtils {
     return output;
   }
 
+  /**
+   * to load an fxml
+   * @param userId the user we need to load his menu (dedicated server)
+   */
   public static void load(FXMLLoader loader, int userId) {
     try {
-      NewUI2Controller newUI2Controller = new NewUI2Controller(userId);
-      loader.setController(newUI2Controller);
-      GridPane root = loader.load();
+
+      if(userId != -1){
+        Dashboardontroller newUI2Controller = new Dashboardontroller(userId);
+        loader.setController(newUI2Controller);
+      }
+
+      Pane root = loader.load();
 
       Stage stage = new Stage();
       stage.setTitle("Traducteur");
       stage.initStyle(StageStyle.UNDECORATED);
 
       assert root != null;
-      Scene scene = new Scene(root, 1280, 720);
+      Scene scene = new Scene(root);
       stage.setScene(scene);
       stage.setTitle("IRC");
       stage.getIcons().add(new Image("image/ediome2.png"));
@@ -128,24 +136,6 @@ public class IRCUtils {
   }
 
   public static void load(FXMLLoader loader) {
-    try {
-      StackPane root = loader.load();
-      Stage stage = new Stage();
-
-      assert root != null;
-      Scene scene = new Scene(root);
-      stage.setScene(scene);
-      stage.setTitle("IRC");
-      stage.getIcons().add(new Image("image/ediome2.png"));
-      stage.initStyle(StageStyle.TRANSPARENT);
-
-      stage.setResizable(true);
-
-      stage.show();
-
-      Main.setPrimaryStage(stage);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    load(loader, -1);
   }
 }

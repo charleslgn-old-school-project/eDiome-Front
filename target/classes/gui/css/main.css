@@ -5,6 +5,8 @@
 @import url("object/button-close.css");
 @import url("object/menu-emoji.css");
 @import url("object/profile-logo.css");
+@import url("object/audio-player.css");
+@import url("object/progress-bar.css");
 
 .root{
     -fx-font-size: 13pt;

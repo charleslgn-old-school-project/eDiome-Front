@@ -5,6 +5,8 @@ import com.ircfront.Utils.IRCUtils;
 import com.ircfront.Utils.XMLDataFinder;
 import com.ircfront.start.Main;
 import com.ircserv.metier.Constante;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,9 +27,9 @@ public class ConnectionController implements Initializable {
   private static double yOffset = 0;
 
   @FXML
-  private TextField name;
+  private JFXTextField name;
   @FXML
-  private PasswordField psw;
+  private JFXPasswordField psw;
   @FXML
   private Label lblEror;
   @FXML
@@ -86,7 +88,7 @@ public class ConnectionController implements Initializable {
   }
 
   private void loadIRC(int userId) {
-    IRCUtils.load(new FXMLLoader(getClass().getResource("../../../gui/NewUI2.fxml")), userId);
+    IRCUtils.load(new FXMLLoader(getClass().getResource("../../../gui/dashboard.fxml")), userId);
     ((Stage) panParent.getScene().getWindow()).close();
   }
 

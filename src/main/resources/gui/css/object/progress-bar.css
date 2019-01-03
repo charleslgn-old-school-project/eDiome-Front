@@ -1,0 +1,9 @@
+/*si splash screen mis en place*/
+
+.track{
+    -fx-background-color: -text-field-color;
+}
+
+.bar{
+    -fx-background-color: -second-color;
+}

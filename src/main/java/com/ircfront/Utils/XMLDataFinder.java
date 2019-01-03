@@ -88,10 +88,6 @@ public class XMLDataFinder {
       Transformer transformer = transformerFactory.newTransformer();
       DOMSource source = new DOMSource(doc);
       StreamResult result = new StreamResult(new File(pathPersonalData));
-
-      // Output to console for testing
-      // StreamResult result = new StreamResult(System.out);
-
       transformer.transform(source, result);
     } catch (ParserConfigurationException | TransformerException e) {
       e.printStackTrace();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -16,7 +16,7 @@
 
 <StackPane fx:id="panParent" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ircfront.controller.CreationController">
    <children>
-      <GridPane fx:id="movablePan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="pn-zone-travail" stylesheets="@css/main-black.css">
+      <GridPane fx:id="movablePan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pn-zone-travail" stylesheets="@css/main-black.css">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="23.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -52,8 +52,8 @@
             </ImageView>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Button mnemonicParsing="false" onAction="#validate" prefWidth="131.0" text="Validate" />
-                  <Button mnemonicParsing="false" onAction="#cancel" prefWidth="131.0" text="Cancel" />
+                  <JFXButton mnemonicParsing="false" onAction="#validate" prefWidth="131.0" text="Validate" />
+                  <JFXButton mnemonicParsing="false" onAction="#cancel" prefWidth="131.0" text="Cancel" />
                </children>
             </HBox>
          </children>

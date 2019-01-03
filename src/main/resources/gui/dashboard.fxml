@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="pnPrincipal" prefHeight="756.0" prefWidth="1280.0" styleClass="menu-bar-1" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="pnPrincipal" prefHeight="756.0" prefWidth="1280.0" styleClass="menu-bar-1" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -49,10 +49,11 @@
                         </Menu>
                         <Menu fx:id="mnuLanguage" mnemonicParsing="false" text="Langue">
                            <items>
-                              <MenuItem fx:id="mnuFr" mnemonicParsing="false" onAction="#changeLanguage" text="Français" userData="FR" />
-                              <MenuItem fx:id="mnuEn" mnemonicParsing="false" onAction="#changeLanguage" text="English" userData="EN" />
-                              <MenuItem fx:id="mnuDe" mnemonicParsing="false" onAction="#changeLanguage" text="Deutsch" userData="DE" />
-                              <MenuItem fx:id="mnuRu" mnemonicParsing="false" onAction="#changeLanguage" text="Русский" userData="RU" />
+                               <MenuItem fx:id="mnuDe" mnemonicParsing="false" onAction="#changeLanguage" text="Deutsch" userData="DE" />
+                               <MenuItem fx:id="mnuEn" mnemonicParsing="false" onAction="#changeLanguage" text="English" userData="EN" />
+                               <MenuItem fx:id="mnuEs" mnemonicParsing="false" onAction="#changeLanguage" text="Español" userData="ES" />
+                               <MenuItem fx:id="mnuFr" mnemonicParsing="false" onAction="#changeLanguage" text="Français" userData="FR" />
+                               <MenuItem fx:id="mnuRu" mnemonicParsing="false" onAction="#changeLanguage" text="Русский" userData="RU" />
                            </items>
                         </Menu>
                      </items>

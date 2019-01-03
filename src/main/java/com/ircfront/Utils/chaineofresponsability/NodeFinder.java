@@ -3,10 +3,13 @@ package com.ircfront.Utils.chaineofresponsability;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
+/**
+ * A chain of responsability to find the corect object in a message
+ */
 public abstract class NodeFinder implements Finder{
   private NodeFinder suivant;
 
-  public NodeFinder(NodeFinder expertSuivant){
+  NodeFinder(NodeFinder expertSuivant){
     this.suivant=expertSuivant;
   }
 

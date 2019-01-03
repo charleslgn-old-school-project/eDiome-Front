@@ -43,7 +43,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class NewUI2Controller implements Initializable {
+public class Dashboardontroller implements Initializable {
   private static double xOffset = 0;
   private static double yOffset = 0;
 
@@ -74,7 +74,7 @@ public class NewUI2Controller implements Initializable {
 
   private int nbUser;
 
-  public NewUI2Controller(int nbUser) {
+  public Dashboardontroller(int nbUser) {
     this.nbUser = nbUser;
   }
 
@@ -118,9 +118,7 @@ public class NewUI2Controller implements Initializable {
       changeBurger(burgertask);
     });
 
-    drawer.setOnDrawerOpening(e -> {
-      open(burgertask);
-    });
+    drawer.setOnDrawerOpening(e -> open(burgertask));
 
     hamburger.setOnMousePressed(e -> {
       if (drawer.isOpened()) {
@@ -132,7 +130,7 @@ public class NewUI2Controller implements Initializable {
     drawer.toggle();
   }
 
-  public void  open(HamburgerBackArrowBasicTransition burgertask){
+  private void  open(HamburgerBackArrowBasicTransition burgertask){
     drawer.setPrefWidth(260);
     drawer.setMinWidth(260);
     drawer.setMaxWidth(260);
@@ -248,6 +246,10 @@ public class NewUI2Controller implements Initializable {
     ((Stage) pnPrincipal.getScene().getWindow()).close();
   }
 
+  /**
+   * maximize palication size
+   */
+  @FXML
   public void Maximize() {
     if (((Stage) pnPrincipal.getScene().getWindow()).isMaximized()) {
       ((Stage) pnPrincipal.getScene().getWindow()).setMaximized(false);
@@ -260,6 +262,7 @@ public class NewUI2Controller implements Initializable {
   /**
    * shrink application
    */
+  @FXML
   public void Shrink() {
     ((Stage) pnPrincipal.getScene().getWindow()).setIconified(true);
   }
@@ -285,6 +288,7 @@ public class NewUI2Controller implements Initializable {
   /**
    * change language
    */
+  @FXML
   public void changeLanguage(ActionEvent event) {
     Object node = event.getSource();
     if (node instanceof MenuItem) {
@@ -315,6 +319,7 @@ public class NewUI2Controller implements Initializable {
   /**
    * generate the about window
    */
+  @FXML
   public void about() {
     try {
       Stage st = new Stage();
@@ -341,6 +346,7 @@ public class NewUI2Controller implements Initializable {
   /**
    * change color of the application
    */
+  @FXML
   public void changeTheme(ActionEvent event) {
     Object node = event.getSource();
     if (node instanceof MenuItem) {
@@ -369,7 +375,7 @@ public class NewUI2Controller implements Initializable {
     ImageView iw = new ImageView();
 
     Image logo = new Image("image/logov4.png");
-    //Image logo = new Image("https://www.pngarts.com/files/3/Letter-A-PNG-High-Quality-Image.png", true);
+    //Picture logo = new Picture("https://www.pngarts.com/files/3/Letter-A-PNG-High-Quality-Image.png", true);
     iw.setImage(logo);
     iw.setFitHeight(34.5);
     iw.setFitWidth(150);

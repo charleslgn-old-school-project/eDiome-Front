@@ -4,6 +4,11 @@ import com.ircfront.Utils.IRCUtils;
 import com.vdurmont.emoji.EmojiParser;
 import javafx.scene.Node;
 
+/**
+ * Part of a chain of Responsability
+ * if the object is a smiley -> return Image of the coresponded smiley
+ * else                      -> retunr null (to continue)
+ */
 public class Smilley extends NodeFinder {
 
   public Smilley(NodeFinder expertSuivant) {

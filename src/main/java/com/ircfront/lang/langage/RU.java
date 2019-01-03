@@ -26,8 +26,9 @@ public class RU extends Lang {
     @Override
     protected String[] getLabel() {
         String pseudo  = "Псевдоним";
+        String fichier = "Отправить файл";
 
-        return new String[] {pseudo};
+        return new String[] {pseudo, fichier};
     }
 
     @Override

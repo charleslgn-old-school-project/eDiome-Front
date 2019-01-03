@@ -17,6 +17,7 @@
 
 .context-menu {
     -fx-padding: 0;
+    -fx-effect: dropshadow(two-pass-box, -third-color, 5, 0, 0, 2);
 }
 
 .menu-item:hover{

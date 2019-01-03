@@ -3,6 +3,10 @@ package com.ircfront.Utils.chaineofresponsability;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
+/**
+ * Part of a chain of Responsability
+ * the default res -> return the text
+ */
 public class Word extends NodeFinder {
 
   public Word(NodeFinder expertSuivant) {
