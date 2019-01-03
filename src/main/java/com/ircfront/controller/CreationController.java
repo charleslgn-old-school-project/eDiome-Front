@@ -3,6 +3,7 @@ package com.ircfront.controller;
 import com.ircfront.Utils.HashPassword;
 import com.ircfront.Utils.IRCUtils;
 import com.ircserv.metier.Constante;
+import com.ircserv.metier.Utilisateur;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class CreationController implements Initializable {
   @FXML
-  private TextField name;
+  private TextField nom;
   @FXML
   private PasswordField pasword1;
   @FXML
@@ -26,6 +27,19 @@ public class CreationController implements Initializable {
   private Label lblEror;
   @FXML
   private StackPane panParent;
+  @FXML
+  private TextField prenom;
+  @FXML
+  private TextField identifiant;
+  @FXML
+  private TextField mail_pro;
+  @FXML
+  private TextField tel_pro;
+  @FXML
+  private TextField date_naiss;
+
+
+
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -37,7 +51,8 @@ public class CreationController implements Initializable {
       String psw1 = pasword1.getText();
       String psw2 = pasword2.getText();
       if (psw1.equals(psw2)){
-        int id = Constante.menu.createUser(name.getText(),HashPassword.hash(psw1));
+          Utilisateur user = new Utilisateur();
+        int id = Constante.menu.createUser(nom.getText(),HashPassword.hash(psw1));
         IRCUtils.load(new FXMLLoader(getClass().getResource("../../../gui/dashboard.fxml")), id);
       } else {
         lblEror.setVisible(true);

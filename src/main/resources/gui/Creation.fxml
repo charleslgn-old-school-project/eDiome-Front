@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -18,9 +19,11 @@
    <children>
       <GridPane fx:id="movablePan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pn-zone-travail" stylesheets="@css/main-black.css">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="23.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="23.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
@@ -30,19 +33,20 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <children>
-                  <Label text="Pseudo" />
-                  <TextField fx:id="name" />
+                  <Label text="Nom" />
+                  <TextField fx:id="nom" prefHeight="27.0" prefWidth="168.0" />
                   <Label />
+                  <Label text="Prenom" />
+                  <TextField fx:id="prenom" />
                   <Label />
                   <Label text="Password" />
                   <PasswordField fx:id="pasword1" />
                   <Label />
                   <Label text="Password again" />
                   <PasswordField fx:id="pasword2" />
-                  <Label fx:id="lblEror" style="-fx-text-fill: red; -fx-font-size: 24px;" text="azertyuiop" />
                </children>
             </VBox>
-            <ImageView fitHeight="131.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fitHeight="131.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@../image/logov4.png" />
                </image>
@@ -53,9 +57,21 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <JFXButton mnemonicParsing="false" onAction="#validate" prefWidth="131.0" text="Validate" />
-                  <JFXButton mnemonicParsing="false" onAction="#cancel" prefWidth="131.0" text="Cancel" />
                </children>
             </HBox>
+            <Label fx:id="lblEror" prefHeight="35.0" prefWidth="170.0" style="-fx-text-fill: red; -fx-font-size: 24px;" text="azertyuiop" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <JFXButton mnemonicParsing="false" onAction="#cancel" prefWidth="131.0" text="Cancel" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <children>
+                  <Label text="Indetifiant" />
+                  <TextField fx:id="identifiant" />
+                  <Label text="e-mail professionel" />
+                  <TextField fx:id="mail_pro" />
+                  <Label text="Téléphone professionel" />
+                  <TextField fx:id="tel_pro" />
+                  <Label text="Date de Naissance" />
+                  <DatePicker fx:id="date_naiss" />
+               </children></VBox>
          </children>
       </GridPane>
    </children>
