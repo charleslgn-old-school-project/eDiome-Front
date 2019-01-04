@@ -1,0 +1,17 @@
+.play-pause {
+    -fx-image: url("../../../image/icon/play.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.play-pause:selected {
+    -fx-image: url("../../../image/icon/pause.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.stop {
+    -fx-image: url("../../../image/icon/stop.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
