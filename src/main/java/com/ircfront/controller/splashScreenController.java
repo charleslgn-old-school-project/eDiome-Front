@@ -51,7 +51,7 @@ public class splashScreenController implements Initializable {
 
     @Override
     public Object call() throws InterruptedException {
-  //    Thread.sleep(3000);
+      Thread.sleep(1000);
       try {
         LocateRegistry.getRegistry(ServerConstante.PORT);
         ServerConstante.MENU = (MenuInterface) Naming.lookup("//" + ServerConstante.IP + ":" + ServerConstante.PORT + "/menu");

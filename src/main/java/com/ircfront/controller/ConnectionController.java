@@ -33,9 +33,7 @@ public class ConnectionController implements Initializable {
   @FXML
   private Label lblEror;
   @FXML
-  private StackPane panParent;
-  @FXML
-  private GridPane movablePan;
+  private GridPane panParent;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -45,9 +43,9 @@ public class ConnectionController implements Initializable {
       lblEror.setVisible(false);
       name.setText(XMLDataFinder.getPseudo());
       psw.setText("");
-      movablePan.setOnMousePressed(this::mousePressed);
-      movablePan.setOnMouseDragged(this::mouseDrag);
-      movablePan.setOnMouseReleased(this::mouseRelease);
+      panParent.setOnMousePressed(this::mousePressed);
+      panParent.setOnMouseDragged(this::mouseDrag);
+      panParent.setOnMouseReleased(this::mouseRelease);
     }
     catch (Exception e)
     {

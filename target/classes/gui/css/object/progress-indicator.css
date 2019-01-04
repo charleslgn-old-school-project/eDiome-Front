@@ -7,12 +7,6 @@
     -fx-padding: 0.083333em; /* 1 */
 }
 
-.progress-indicator .progress {
-    -fx-background-insets: 0, 1;
-    -fx-padding: 0.75em; /* 9 */
-}
-
-/* TODO: scaling the shape seems to make it disappear */
 .progress-indicator:indeterminate .spinner {
     -fx-padding: 10; /* 10 */
 }
