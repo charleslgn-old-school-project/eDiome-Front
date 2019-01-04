@@ -63,14 +63,12 @@
             <JFXButton mnemonicParsing="false" onAction="#cancel" prefWidth="131.0" text="Cancel" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <Label text="Indetifiant" />
-                  <TextField fx:id="identifiant" />
                   <Label text="e-mail professionel" />
                   <TextField fx:id="mail_pro" />
                   <Label text="Téléphone professionel" />
                   <TextField fx:id="tel_pro" />
                   <Label text="Date de Naissance" />
-                  <DatePicker fx:id="date_naiss" />
+                  <DatePicker />
                </children></VBox>
          </children>
       </GridPane>

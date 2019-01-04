@@ -70,6 +70,7 @@ public class ConnectionController implements Initializable {
   }
 
   public void connect() {
+
     try {
       String user = name.getText();
       String pass = psw.getText();

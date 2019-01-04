@@ -15,8 +15,8 @@ public class Utilisateur implements Serializable {
     private String mail_pro;
     private String telephone_pro;
 
-    public Utilisateur(){}
-
+    public Utilisateur() {
+    }
 
 
     public int getNoUtilisateur() {
@@ -93,3 +93,4 @@ public class Utilisateur implements Serializable {
     public void setTelephone_pro(String telephone_pro) {
         this.telephone_pro = telephone_pro;
     }
+}

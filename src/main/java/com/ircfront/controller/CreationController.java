@@ -2,6 +2,7 @@ package com.ircfront.controller;
 
 import com.ircfront.Utils.HashPassword;
 import com.ircfront.Utils.IRCUtils;
+import com.ircfront.Utils.XMLDataFinder;
 import com.ircserv.metier.Constante;
 import com.ircserv.metier.Utilisateur;
 import javafx.fxml.FXML;
@@ -30,8 +31,6 @@ public class CreationController implements Initializable {
   @FXML
   private TextField prenom;
   @FXML
-  private TextField identifiant;
-  @FXML
   private TextField mail_pro;
   @FXML
   private TextField tel_pro;
@@ -52,13 +51,22 @@ public class CreationController implements Initializable {
       String psw2 = pasword2.getText();
       if (psw1.equals(psw2)){
           Utilisateur user = new Utilisateur();
-        int id = Constante.menu.createUser(nom.getText(),HashPassword.hash(psw1));
+          user.setNom(nom.getText());
+          user.setPrenom(prenom.getText());
+          user.setMot_de_passe(HashPassword.hash(pasword1.getText()));
+          user.setTelephone_pro(tel_pro.getText());
+          user.setMail_pro(mail_pro.getText());
+          user.setIdentifiant(nom.getText()+"_"+prenom.getText());
+        int id = Constante.menu.createUser(user);
+        XMLDataFinder.setPseudo((nom.getText()+"_"+prenom.getText()));
+        XMLDataFinder.setPassword(HashPassword.hash(pasword1.getText()));
         IRCUtils.load(new FXMLLoader(getClass().getResource("../../../gui/dashboard.fxml")), id);
       } else {
         lblEror.setVisible(true);
       }
     } catch (Exception e){
       lblEror.setVisible(true);
+      e.printStackTrace();
     }
   }
 
