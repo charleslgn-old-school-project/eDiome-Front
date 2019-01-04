@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -28,7 +29,7 @@ public class CreationController implements Initializable {
   @FXML
   private Label lblEror;
   @FXML
-  private StackPane panParent;
+  private GridPane panParent;
   @FXML
   private TextField prenom;
   @FXML
