@@ -118,7 +118,7 @@ public class IRCController implements Initializable {
       }
     }.start();
 
-    ScrollPaneEmoji.getStyleClass().add("MENU-emoji");
+    ScrollPaneEmoji.getStyleClass().add("menu-emoji");
     loadEmoji();
   }
 
@@ -172,7 +172,7 @@ public class IRCController implements Initializable {
   private void loadEmoji() {
     //FlowPane fp = new FlowPane();
     //fp.setPrefSize(PaneEmoji.getPrefWidth(), PaneEmoji.getPrefHeight());
-    //fp.getStyleClass().add("MENU-bar-2");
+    //fp.getStyleClass().add("menu-bar-2");
     for (int i = 0; i <= tabEmoji.length - 1; i++) {
       Button jfxb = new Button("", ControllerUtils.getEmoji(tabEmoji[i]));
 
