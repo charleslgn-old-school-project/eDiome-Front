@@ -1,17 +1,29 @@
 .play-pause {
+<<<<<<< HEAD
     -fx-image: url("../../../image/play.png");
+=======
+    -fx-image: url("../../../image/icon/play.png");
+>>>>>>> f7895c526f917bb9265cd0ed696617307ef3962a
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
 
 .play-pause:selected {
+<<<<<<< HEAD
     -fx-image: url("../../../image/pause.png");
+=======
+    -fx-image: url("../../../image/icon/pause.png");
+>>>>>>> f7895c526f917bb9265cd0ed696617307ef3962a
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
 
 .stop {
+<<<<<<< HEAD
     -fx-image: url("../../../image/stop.png");
+=======
+    -fx-image: url("../../../image/icon/stop.png");
+>>>>>>> f7895c526f917bb9265cd0ed696617307ef3962a
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }

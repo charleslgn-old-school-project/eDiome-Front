@@ -1,8 +1,5 @@
 package com.ircfront.controller;
 
-import com.ircfront.Utils.HashPassword;
-import com.ircfront.Utils.IRCUtils;
-import com.ircfront.Utils.XMLDataFinder;
 import com.ircfront.start.Main;
 import com.ircserv.metier.Constante;
 import com.jfoenix.controls.JFXPasswordField;
@@ -12,12 +9,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import com.ircfront.utils.XMLDataFinder;
+import com.ircfront.utils.ControllerUtils;
+import com.ircfront.utils.constante.ServerConstante;
+import com.ircfront.utils.HashPassword;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,11 +51,11 @@ public class ConnectionController implements Initializable {
 
   public void createConnection() {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/Creation.fxml"));
-    IRCUtils.load(loader);
+    ControllerUtils.load(loader);
     ((Stage) panParent.getScene().getWindow()).close();
   }
 
-  public void autoConnect() {
+  private void autoConnect() {
     try {
       String user = XMLDataFinder.getPseudo();
       String pass = XMLDataFinder.getPassword();
@@ -70,12 +70,11 @@ public class ConnectionController implements Initializable {
   }
 
   public void connect() {
-
     try {
       String user = name.getText();
       String pass = psw.getText();
 
-      int res = Constante.menu.connect(user, HashPassword.hash(pass));
+      int res = ServerConstante.MENU.connect(user, HashPassword.hash(pass));
       if (res == -1) {
         lblEror.setVisible(true);
       } else {
@@ -89,7 +88,7 @@ public class ConnectionController implements Initializable {
   }
 
   private void loadIRC(int userId) {
-    IRCUtils.load(new FXMLLoader(getClass().getResource("../../../gui/dashboard.fxml")), userId);
+    ControllerUtils.load(new FXMLLoader(getClass().getResource("../../../gui/dashboard.fxml")), userId);
     ((Stage) panParent.getScene().getWindow()).close();
   }
 

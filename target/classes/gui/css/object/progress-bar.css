@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*si splash screen mis en place*/
 
 .track{
@@ -6,4 +7,14 @@
 
 .bar{
     -fx-background-color: -second-color;
+=======
+/*si splash screen mis en place*/
+
+.track{
+    -fx-background-color: -text-field-color;
+}
+
+.bar{
+    -fx-background-color: -second-color;
+>>>>>>> f7895c526f917bb9265cd0ed696617307ef3962a
 }

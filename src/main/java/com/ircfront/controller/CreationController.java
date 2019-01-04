@@ -1,8 +1,8 @@
 package com.ircfront.controller;
 
-import com.ircfront.Utils.HashPassword;
-import com.ircfront.Utils.IRCUtils;
-import com.ircfront.Utils.XMLDataFinder;
+import com.ircfront.utils.ControllerUtils;
+import com.ircfront.utils.HashPassword;
+import com.ircfront.utils.XMLDataFinder;
 import com.ircserv.metier.Constante;
 import com.ircserv.metier.Utilisateur;
 import javafx.fxml.FXML;
@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CreationController implements Initializable {
+
   @FXML
   private TextField nom;
   @FXML
@@ -36,9 +37,6 @@ public class CreationController implements Initializable {
   private TextField tel_pro;
   @FXML
   private TextField date_naiss;
-
-
-
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -60,7 +58,7 @@ public class CreationController implements Initializable {
         int id = Constante.menu.createUser(user);
         XMLDataFinder.setPseudo((nom.getText()+"_"+prenom.getText()));
         XMLDataFinder.setPassword(HashPassword.hash(pasword1.getText()));
-        IRCUtils.load(new FXMLLoader(getClass().getResource("../../../gui/dashboard.fxml")), id);
+        ControllerUtils.load(new FXMLLoader(getClass().getResource("../../../gui/dashboard.fxml")), id);
         ((Stage) panParent.getScene().getWindow()).close();
 
       } else {
@@ -74,10 +72,7 @@ public class CreationController implements Initializable {
 
   public void cancel(){
     FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/Connection.fxml"));
-    IRCUtils.load(loader);
+    ControllerUtils.load(loader);
     ((Stage) panParent.getScene().getWindow()).close();
   }
-
-
-
 }

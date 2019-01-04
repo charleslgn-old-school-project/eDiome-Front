@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
@@ -74,3 +75,67 @@
       </GridPane>
    </children>
 </StackPane>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="panParent" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ircfront.controller.CreationController">
+   <children>
+      <GridPane fx:id="movablePan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pn-zone-travail" stylesheets="@css/main-black.css">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="23.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="23.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <children>
+                  <Label text="Pseudo" />
+                  <TextField fx:id="name" />
+                  <Label />
+                  <Label />
+                  <Label text="Password" />
+                  <PasswordField fx:id="pasword1" />
+                  <Label />
+                  <Label text="Password again" />
+                  <PasswordField fx:id="pasword2" />
+                  <Label fx:id="lblEror" style="-fx-text-fill: red; -fx-font-size: 24px;" text="azertyuiop" />
+               </children>
+            </VBox>
+            <ImageView fitHeight="131.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+               <image>
+                  <Image url="@../image/logov4.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+            </ImageView>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <JFXButton mnemonicParsing="false" onAction="#validate" prefWidth="131.0" text="Validate" />
+                  <JFXButton mnemonicParsing="false" onAction="#cancel" prefWidth="131.0" text="Cancel" />
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+   </children>
+</StackPane>
+>>>>>>> f7895c526f917bb9265cd0ed696617307ef3962a
