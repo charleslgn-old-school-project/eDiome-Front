@@ -84,7 +84,7 @@ public class ControllerUtils {
 
   /**
    * to load an fxml
-   * @param userId the user we need to load his MENU (dedicated server)
+   * @param userId the user we need to load his menu (dedicated server)
    */
   public static void load(FXMLLoader loader, int userId) {
     try {

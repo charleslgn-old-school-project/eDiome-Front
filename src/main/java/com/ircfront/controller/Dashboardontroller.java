@@ -149,8 +149,8 @@ public class Dashboardontroller implements Initializable {
   }
 
   /**
-   * change the MENU icon to a row when it is open
-   * change the row to a MENU icon when it is close
+   * change the menu icon to a row when it is open
+   * change the row to a menu icon when it is close
    */
   private void changeBurger(HamburgerBackArrowBasicTransition burgertask) {
     burgertask.setRate(burgertask.getRate() * -1);
@@ -368,7 +368,7 @@ public class Dashboardontroller implements Initializable {
 
     VBox vBox = new VBox();
     //vBox.setAlignment(Pos.TOP_CENTER);
-    vBox.getStyleClass().add("MENU-bar-2");
+    vBox.getStyleClass().add("menu-bar-2");
     vBox.setSpacing(20);
     vBox.setPadding(new Insets(10, 10, 0, 10));
 
