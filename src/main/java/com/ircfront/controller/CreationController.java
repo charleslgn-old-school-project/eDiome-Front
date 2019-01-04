@@ -61,6 +61,8 @@ public class CreationController implements Initializable {
         XMLDataFinder.setPseudo((nom.getText()+"_"+prenom.getText()));
         XMLDataFinder.setPassword(HashPassword.hash(pasword1.getText()));
         IRCUtils.load(new FXMLLoader(getClass().getResource("../../../gui/dashboard.fxml")), id);
+        ((Stage) panParent.getScene().getWindow()).close();
+
       } else {
         lblEror.setVisible(true);
       }
