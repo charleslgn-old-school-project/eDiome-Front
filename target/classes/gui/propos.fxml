@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="panShadow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ircfront.controller.ProposController">
+<StackPane fx:id="panShadow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="640.0" styleClass="pn-zone-travail" stylesheets="@css/main-green.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ircfront.controller.ProposController">
    <children>
-      <GridPane prefHeight="400.0" prefWidth="640.0" style="-fx-background-color: #242424;">
+      <GridPane prefHeight="400.0" prefWidth="640.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="400.0" />
          </columnConstraints>
@@ -128,12 +128,12 @@
                         </ImageView>
                         <ImageView fitHeight="91.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                            <image>
-                              <Image url="@../image/DHqqNmBW0AAddrT.png" />
+                              <Image url="@../image/cyril.png" />
                            </image>
                         </ImageView>
                         <ImageView fitHeight="91.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                            <image>
-                              <Image url="@../image/terracid.png" />
+                              <Image url="@../image/loic.png" />
                            </image>
                         </ImageView>
                      </children>

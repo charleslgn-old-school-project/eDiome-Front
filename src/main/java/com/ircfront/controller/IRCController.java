@@ -1,33 +1,34 @@
 package com.ircfront.controller;
 
-import com.ircfront.Utils.IRCUtils;
-import com.ircfront.Utils.XMLDataFinder;
-import com.ircfront.Utils.chaineofresponsability.*;
-import com.ircfront.lang.Translate;
-import com.ircfront.lang.typetrad.ButonName;
-import com.ircfront.lang.typetrad.LabelName;
 import com.ircfront.start.Main;
+import com.ircfront.utils.ControllerUtils;
+import com.ircfront.utils.XMLDataFinder;
+import com.ircfront.utils.chaineofresponsability.NodeFinder;
+import com.ircfront.utils.chaineofresponsability.typemessage.AudioFile;
+import com.ircfront.utils.chaineofresponsability.typemessage.DefaultFile;
+import com.ircfront.utils.chaineofresponsability.typemessage.DefaultMessage;
+import com.ircfront.utils.chaineofresponsability.typemessage.Picture;
+import com.ircfront.utils.constante.ServerConstante;
+import com.ircfront.utils.lang.Translate;
+import com.ircfront.utils.lang.typetrad.ButonName;
+import com.ircfront.utils.lang.typetrad.LabelName;
 import com.ircserv.inter.ServerInterface;
-import com.ircserv.metier.Constante;
 import com.ircserv.metier.Message;
 import com.jfoenix.controls.JFXButton;
 import com.vdurmont.emoji.EmojiParser;
 import javafx.animation.AnimationTimer;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import org.apache.commons.io.FileUtils;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -38,13 +39,10 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class IRCController implements Initializable {
 
-  private int nbMessages = 25;
-  private String[] tabEmoji = {"\uD83D\uDE00", "\uD83D\uDE01", "\uD83D\uDE02", "\uD83E\uDD23", "\uD83D\uDE03"
-  };
+  private String[] tabEmoji = {"\uD83D\uDE00", "\uD83D\uDE01", "\uD83D\uDE02", "\uD83E\uDD23", "\uD83D\uDE03"};
 
   @FXML
   private ScrollPane ScrollPaneEmoji;
@@ -77,9 +75,6 @@ public class IRCController implements Initializable {
 
   private int nbServ;
 
-  @SuppressWarnings("unused")
-  private static Scanner sc;
-
   public IRCController(int nbServ) {
     this.nbServ = nbServ;
   }
@@ -103,17 +98,15 @@ public class IRCController implements Initializable {
     VBox vBox = (VBox) paneChat.contentProperty().getValue();
     vBox.setSpacing(10);
 
-    sc = new Scanner(System.in);
-    int port = Constante.PORT;
+    int port = ServerConstante.PORT;
     try {
-      String ip = Constante.IP;
+      String ip = ServerConstante.IP;
       LocateRegistry.getRegistry(port);
 
       obj = (ServerInterface) Naming.lookup("//" + ip + ":" + port + "/serv" + nbServ);
       printChat(true);
 
     } catch (MalformedURLException | RemoteException | NotBoundException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
 
@@ -125,7 +118,7 @@ public class IRCController implements Initializable {
       }
     }.start();
 
-    ScrollPaneEmoji.getStyleClass().add("menu-emoji");
+    ScrollPaneEmoji.getStyleClass().add("MENU-emoji");
     loadEmoji();
   }
 
@@ -179,9 +172,9 @@ public class IRCController implements Initializable {
   private void loadEmoji() {
     //FlowPane fp = new FlowPane();
     //fp.setPrefSize(PaneEmoji.getPrefWidth(), PaneEmoji.getPrefHeight());
-    //fp.getStyleClass().add("menu-bar-2");
+    //fp.getStyleClass().add("MENU-bar-2");
     for (int i = 0; i <= tabEmoji.length - 1; i++) {
-      Button jfxb = new Button("", IRCUtils.getEmoji(tabEmoji[i]));
+      Button jfxb = new Button("", ControllerUtils.getEmoji(tabEmoji[i]));
 
       jfxb.setUserData(tabEmoji[i]);
       jfxb.setPrefSize(20, 20);
@@ -244,7 +237,7 @@ public class IRCController implements Initializable {
         lastMessage = messages.get(0);
         vBox.getChildren().add(createMessage(messages.get(0)));
         if (oldMessage != null && oldMessage.size() < messages.size() && !sendByYou) {
-          IRCUtils.makeSound();
+          ControllerUtils.makeSound();
         }
         sendByYou = false;
         wasLastSend = true;
@@ -262,60 +255,29 @@ public class IRCController implements Initializable {
    * @return le message formater dans uns VBox
    */
   private HBox createMessage(Message msg) {
-    NodeFinder nodeFinder = new HyperText(
-            new Smilley(
-                    new Picture(
+    NodeFinder nodeFinder = new DefaultMessage(
+                            new Picture(
+                            new DefaultFile(
                             new AudioFile(
-                                    new DefaultFile(
-                                            new Word(null))))));
+                            new DefaultMessage(null)))));
+
     HBox hBoxtotal = new HBox();
     hBoxtotal.setSpacing(10);
     hBoxtotal.setAlignment(Pos.CENTER_LEFT);
 
-    //add the logo
-    try {
-      String firstLetter = ("" + msg.getPseudo().charAt(0)).toUpperCase();
-      ImageView img = new ImageView();
-
-      Image image = new Image("logo/" + firstLetter + ".png");
-
-      BufferedImage icon = SwingFXUtils.fromFXImage(image, null);
-      BufferedImage rounded = IRCUtils.makeRoundedCorner(icon, 500);
-      image = SwingFXUtils.toFXImage(rounded, null);
-
-      img.setImage(image);
-      img.getStyleClass().add("profile-logo");
-      img.setFitHeight(40);
-      img.setFitWidth(40);
-      hBoxtotal.getChildren().add(img);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
     VBox vBox = new VBox();
     HBox hBoxData = new HBox();
-    FlowPane hBoxMessage = new FlowPane();
 
-    //identifiant de message (pseudo + date)
+    //message data(pseudo + date)
     Label label1 = new Label(msg.getPseudo() + " - " + msg.getStringDate());
     label1.setFont(new Font(13));
     hBoxData.getChildren().add(label1);
     vBox.getChildren().add(hBoxData);
-    //le message
-    String affichage = msg.getContenu();
-    affichage = EmojiParser.parseToAliases(affichage);
-    String[] list = affichage.split(" ");
+    //content
+    vBox.getChildren().add(nodeFinder.resolve(msg));
 
-
-    for (String s : list) {
-      Node node = nodeFinder.resolve(s);
-      hBoxMessage.getChildren().add(node);
-    }
-    hBoxMessage.setHgap(2);
-    hBoxMessage.setPadding(new Insets(0, 30, 0, 30));
-    hBoxMessage.setAlignment(Pos.CENTER_LEFT);
-    vBox.getChildren().add(hBoxMessage);
-
+    //add the logo
+    hBoxtotal.getChildren().add(ControllerUtils.getProfilePicture(msg.getPseudo()));
     //add all content
     hBoxtotal.getChildren().add(vBox);
     return hBoxtotal;

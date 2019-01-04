@@ -1,7 +1,7 @@
 package com.ircfront.controller;
 
-import com.ircfront.Utils.XMLDataFinder;
-import com.ircserv.metier.Constante;
+import com.ircfront.utils.XMLDataFinder;
+import com.ircfront.utils.constante.ServerConstante;
 import com.ircserv.metier.Server;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -30,11 +30,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import com.ircfront.lang.Lang;
-import com.ircfront.lang.Translate;
-import com.ircfront.lang.langage.EN;
-import com.ircfront.lang.typetrad.ColorName;
-import com.ircfront.lang.typetrad.MenuName;
+import com.ircfront.utils.lang.Lang;
+import com.ircfront.utils.lang.Translate;
+import com.ircfront.utils.lang.langage.EN;
+import com.ircfront.utils.lang.typetrad.ColorName;
+import com.ircfront.utils.lang.typetrad.MenuName;
 import com.ircfront.start.Main;
 
 import java.lang.reflect.Constructor;
@@ -149,8 +149,8 @@ public class Dashboardontroller implements Initializable {
   }
 
   /**
-   * change the menu icon to a row when it is open
-   * change the row to a menu icon when it is close
+   * change the MENU icon to a row when it is open
+   * change the row to a MENU icon when it is close
    */
   private void changeBurger(HamburgerBackArrowBasicTransition burgertask) {
     burgertask.setRate(burgertask.getRate() * -1);
@@ -306,7 +306,7 @@ public class Dashboardontroller implements Initializable {
    */
   private Lang getLang(String language) {
     try {
-      Class<?> clazz = Class.forName("com.ircfront.lang.langage." + language.toUpperCase());
+      Class<?> clazz = Class.forName("com.ircfront.Utils.lang.langage." + language.toUpperCase());
       Constructor<?> ctor = clazz.getConstructor();
       Object object = ctor.newInstance();
       return (Lang) object;
@@ -361,14 +361,14 @@ public class Dashboardontroller implements Initializable {
   private void addServ() {
     ArrayList<Server> servers = new ArrayList<>();
     try {
-      servers = Constante.menu.findServerByUser(nbUser);
+      servers = ServerConstante.MENU.findServerByUser(nbUser);
     } catch (RemoteException e) {
       e.printStackTrace();
     }
 
     VBox vBox = new VBox();
     //vBox.setAlignment(Pos.TOP_CENTER);
-    vBox.getStyleClass().add("menu-bar-2");
+    vBox.getStyleClass().add("MENU-bar-2");
     vBox.setSpacing(20);
     vBox.setPadding(new Insets(10, 10, 0, 10));
 

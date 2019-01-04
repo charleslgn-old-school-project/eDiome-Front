@@ -1,6 +1,6 @@
 package com.ircfront.controller;
 
-import com.ircfront.Utils.XMLDataFinder;
+import com.ircfront.utils.XMLDataFinder;
 import com.ircfront.start.Main;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
@@ -9,9 +9,9 @@ import javafx.geometry.Side;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import com.ircfront.lang.Lang;
-import com.ircfront.lang.Translate;
-import com.ircfront.lang.typetrad.DisclimerName;
+import com.ircfront.utils.lang.Lang;
+import com.ircfront.utils.lang.Translate;
+import com.ircfront.utils.lang.typetrad.DisclimerName;
 
 import java.net.URL;
 import java.util.ResourceBundle;

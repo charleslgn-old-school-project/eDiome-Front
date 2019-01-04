@@ -1,5 +1,6 @@
 package com.ircfront.start;
 
+import com.ircfront.utils.lang.Lang;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import com.ircfront.lang.Lang;
 
 public class Main extends Application {
 
@@ -16,10 +16,7 @@ public class Main extends Application {
 
   private static Stage prStage;
 
-  private static String[] val;
-
   public static void main(String[] args) {
-    val = args;
     launch(args);
   }
 
@@ -27,19 +24,14 @@ public class Main extends Application {
   public void start(Stage primaryStage) {
     try {
       com.sun.javafx.util.Logging.getJavaFXLogger().setLevel(sun.util.logging.PlatformLogger.Level.OFF);
-
       prStage = primaryStage;
-
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/connection.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/splash-screen.fxml"));
       Parent root = loader.load();
-
       Font.loadFont("Roboto-Black.ttf", 10);
       primaryStage.getIcons().add(new Image(getClass().getResource("../../../image/ediome2.png").toString()));
       primaryStage.initStyle(StageStyle.UNDECORATED);
       primaryStage.setScene(new Scene(root));
-
       primaryStage.show();
-
     } catch (Exception e) {
       e.printStackTrace();
     }

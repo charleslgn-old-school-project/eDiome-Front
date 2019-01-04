@@ -1,9 +1,9 @@
 @import url("main.css");
 
 * {
-    -first-color  : white;
-    -second-color : #CDCDCD;
-    -third-color  : #F5F7F7;
+    -first-color  : rgb(125, 148, 158);
+    -second-color : rgb(137, 161, 171);
+    -third-color  : rgb(173, 204, 210);
 
     -text-color                   : black;
     -button-text-color            : black;

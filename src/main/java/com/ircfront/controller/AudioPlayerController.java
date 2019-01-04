@@ -51,10 +51,10 @@ public class AudioPlayerController implements Initializable {
   private void playPauseClicked() {
     if (playPause.isSelected()) {
       media.play();
-      igmPlay.setImage(new Image("image/pause.png"));
+      igmPlay.setImage(new Image("image/icon/pause.png"));
     } else {
       media.pause();
-      igmPlay.setImage(new Image("image/play.png"));
+      igmPlay.setImage(new Image("image/icon/play.png"));
     }
   }
 

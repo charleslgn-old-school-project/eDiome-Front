@@ -7,6 +7,7 @@
 @import url("object/profile-logo.css");
 @import url("object/audio-player.css");
 @import url("object/progress-bar.css");
+@import url("object/progress-indicator.css");
 
 .root{
     -fx-font-size: 13pt;
