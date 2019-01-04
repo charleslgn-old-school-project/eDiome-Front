@@ -13,11 +13,7 @@
          <graphic>
             <ImageView fx:id="igmPlay">
                <image>
-<<<<<<< HEAD
-                  <Image url="@../image/play.png" />
-=======
                   <Image url="@../image/icon/play.png" />
->>>>>>> f7895c526f917bb9265cd0ed696617307ef3962a
                </image>
             </ImageView>
          </graphic></ToggleButton>
@@ -25,11 +21,7 @@
          <graphic>
             <ImageView>
                <image>
-<<<<<<< HEAD
-                  <Image url="@../image/stop.png" />
-=======
                   <Image url="@../image/icon/stop.png" />
->>>>>>> f7895c526f917bb9265cd0ed696617307ef3962a
                </image>
             </ImageView>
          </graphic></Button>

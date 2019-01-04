@@ -39,14 +39,20 @@ public class ConnectionController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    lblEror.setVisible(false);
-    autoConnect();
-    lblEror.setVisible(false);
-    name.setText(XMLDataFinder.getPseudo());
-    psw.setText("");
-    movablePan.setOnMousePressed(this::mousePressed);
-    movablePan.setOnMouseDragged(this::mouseDrag);
-    movablePan.setOnMouseReleased(this::mouseRelease);
+    try {
+      lblEror.setVisible(false);
+      autoConnect();
+      lblEror.setVisible(false);
+      name.setText(XMLDataFinder.getPseudo());
+      psw.setText("");
+      movablePan.setOnMousePressed(this::mousePressed);
+      movablePan.setOnMouseDragged(this::mouseDrag);
+      movablePan.setOnMouseReleased(this::mouseRelease);
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
   }
 
   public void createConnection() {

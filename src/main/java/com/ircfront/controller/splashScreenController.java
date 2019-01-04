@@ -31,11 +31,10 @@ public class splashScreenController implements Initializable {
 
   @FXML
   ProgressIndicator progressIndicator;
-  @FXML
-  GridPane panPropos;
+
 
   @FXML
-  StackPane panParent;
+  GridPane panParent;
 
   @FXML
   Label identifiant;
@@ -52,10 +51,10 @@ public class splashScreenController implements Initializable {
 
     @Override
     public Object call() throws InterruptedException {
-      Thread.sleep(3000);
+  //    Thread.sleep(3000);
       try {
         LocateRegistry.getRegistry(ServerConstante.PORT);
-        ServerConstante.MENU = (MenuInterface) Naming.lookup("//" + ServerConstante.IP + ":" + ServerConstante.PORT + "/MENU");
+        ServerConstante.MENU = (MenuInterface) Naming.lookup("//" + ServerConstante.IP + ":" + ServerConstante.PORT + "/menu");
         Platform.runLater(() -> {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/Connection.fxml"));
           ControllerUtils.load(loader);

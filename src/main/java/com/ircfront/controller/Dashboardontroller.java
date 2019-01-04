@@ -306,7 +306,7 @@ public class Dashboardontroller implements Initializable {
    */
   private Lang getLang(String language) {
     try {
-      Class<?> clazz = Class.forName("com.ircfront.Utils.lang.langage." + language.toUpperCase());
+      Class<?> clazz = Class.forName("com.ircfront.utils.lang.langage." + language.toUpperCase());
       Constructor<?> ctor = clazz.getConstructor();
       Object object = ctor.newInstance();
       return (Lang) object;
