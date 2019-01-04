@@ -28,7 +28,7 @@ public class Main extends Application {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/splash-screen.fxml"));
       Parent root = loader.load();
       Font.loadFont("Roboto-Black.ttf", 10);
-      primaryStage.getIcons().add(new Image(getClass().getResource("../../../image/ediome2.png").toString()));
+      primaryStage.getIcons().add(new Image(getClass().getResource("../../../image/ediome.png").toString()));
       primaryStage.initStyle(StageStyle.UNDECORATED);
       primaryStage.setScene(new Scene(root));
       primaryStage.show();

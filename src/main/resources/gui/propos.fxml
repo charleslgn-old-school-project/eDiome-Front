@@ -118,22 +118,22 @@
                            </font></Label>
                         <ImageView fitHeight="103.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/137b6c1b9315fd6ae686c6bf75920096.png" />
+                              <Image url="@../image/a-propos/137b6c1b9315fd6ae686c6bf75920096.png" />
                            </image>
                         </ImageView>
                         <ImageView fitHeight="91.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                            <image>
-                              <Image url="@../image/822f1410de3b55ac08e46db36da43709.png" />
+                              <Image url="@../image/a-propos/822f1410de3b55ac08e46db36da43709.png" />
                            </image>
                         </ImageView>
                         <ImageView fitHeight="91.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                            <image>
-                              <Image url="@../image/cyril.png" />
+                              <Image url="@../image/a-propos/cyril.png" />
                            </image>
                         </ImageView>
                         <ImageView fitHeight="91.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                            <image>
-                              <Image url="@../image/loic.png" />
+                              <Image url="@../image/a-propos/loic.png" />
                            </image>
                         </ImageView>
                      </children>

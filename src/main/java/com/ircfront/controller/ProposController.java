@@ -38,7 +38,7 @@ public class ProposController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
       BackgroundImage myBI;
       try{
-        myBI= new BackgroundImage(new Image("image/a-propo.png",640,400,true,true),
+        myBI= new BackgroundImage(new Image("image/a-propos/a-propo.png",640,400,true,true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, new BackgroundPosition(Side.LEFT, 25, true, Side.TOP, -25, false),
                 BackgroundSize.DEFAULT);
         panClasse.setBackground(new Background(myBI));

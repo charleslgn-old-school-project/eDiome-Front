@@ -100,7 +100,7 @@ public class ControllerUtils {
       Scene scene = new Scene(root);
       stage.setScene(scene);
       stage.setTitle("IRC");
-      stage.getIcons().add(new Image("image/ediome2.png"));
+      stage.getIcons().add(new Image("image/ediome.png"));
       stage.initStyle(StageStyle.TRANSPARENT);
       scene.getStylesheets().add("gui/css/main-" + XMLDataFinder.getTheme() + ".css");
       stage.setResizable(true);
