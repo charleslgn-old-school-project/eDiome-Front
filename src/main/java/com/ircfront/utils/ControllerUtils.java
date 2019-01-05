@@ -131,10 +131,11 @@ public class ControllerUtils {
     ImageView img = new ImageView();
 
     Image image = new Image("logo/" + firstLetter + ".png");
+    //Image image = new Image("https://img.icons8.com/color/48/000000/"+firstLetter.toLowerCase()+".png", true);
 
-    BufferedImage icon = SwingFXUtils.fromFXImage(image, null);
-    BufferedImage rounded = ControllerUtils.makeRoundedCorner(icon, 500);
-    image = SwingFXUtils.toFXImage(rounded, null);
+    //BufferedImage icon = SwingFXUtils.fromFXImage(image, null);
+    //BufferedImage rounded = ControllerUtils.makeRoundedCorner(icon, 500);
+    //image = SwingFXUtils.toFXImage(rounded, null);
 
     img.setImage(image);
     img.getStyleClass().add("profile-logo");

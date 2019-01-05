@@ -1,16 +1,7 @@
-<<<<<<< HEAD
 .profile-logo {
     -fx-padding: 10;
     -fx-background-color: firebrick;
 
     -fx-border-radius : 0;
     -fx-background-radius : 0;
-=======
-.profile-logo {
-    -fx-padding: 10;
-    -fx-background-color: firebrick;
-
-    -fx-border-radius : 0;
-    -fx-background-radius : 0;
->>>>>>> f7895c526f917bb9265cd0ed696617307ef3962a
 }
