@@ -24,7 +24,7 @@ public class Picture extends NodeFinder {
   @Override
   protected Node resolve1(Message message) {
     try {
-      if (message.getTypeMessage().equals("image")) {
+      if (message.getTypeMessage().equals("picture")) {
         String res = message.getContenu();
         ImageView imageView = new ImageView();
         File file = new File(res);

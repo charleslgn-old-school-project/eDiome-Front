@@ -23,7 +23,7 @@ public class AudioFile extends NodeFinder {
       if (message.getTypeMessage().equals("audio")) {
         String res = message.getContenu();
         AudioPlayerController fxmlDocumentController = new AudioPlayerController(res);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../../../gui/audio-player.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../../../../gui/audio-player.fxml"));
         fxmlLoader.setController(fxmlDocumentController);
         return fxmlLoader.load();
       }

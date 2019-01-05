@@ -3,7 +3,7 @@ package com.ircfront.controller;
 import com.ircfront.utils.ControllerUtils;
 import com.ircfront.utils.HashPassword;
 import com.ircfront.utils.XMLDataFinder;
-import com.ircserv.metier.Constante;
+import com.ircfront.utils.constante.ServerConstante;
 import com.ircserv.metier.Utilisateur;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -56,7 +55,7 @@ public class CreationController implements Initializable {
           user.setTelephone_pro(tel_pro.getText());
           user.setMail_pro(mail_pro.getText());
           user.setIdentifiant(nom.getText()+"_"+prenom.getText());
-        int id = Constante.menu.createUser(user);
+        int id = ServerConstante.MENU.createUser(user);
         XMLDataFinder.setPseudo((nom.getText()+"_"+prenom.getText()));
         XMLDataFinder.setPassword(HashPassword.hash(pasword1.getText()));
         ControllerUtils.load(new FXMLLoader(getClass().getResource("../../../gui/dashboard.fxml")), id);

@@ -1,7 +1,6 @@
 package com.ircfront.controller;
 
 import com.ircfront.start.Main;
-import com.ircserv.metier.Constante;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
@@ -11,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import com.ircfront.utils.XMLDataFinder;
@@ -64,7 +62,7 @@ public class ConnectionController implements Initializable {
       String user = XMLDataFinder.getPseudo();
       String pass = XMLDataFinder.getPassword();
 
-      int res = Constante.menu.connect(user, pass);
+      int res = ServerConstante.MENU.connect(user, pass);
       if (res != -1) {
         Platform.runLater(() -> loadIRC(res));
       }

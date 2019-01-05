@@ -255,11 +255,10 @@ public class IRCController implements Initializable {
    * @return le message formater dans uns VBox
    */
   private HBox createMessage(Message msg) {
-    NodeFinder nodeFinder = new DefaultMessage(
-                            new Picture(
+    NodeFinder nodeFinder = new Picture(
                             new DefaultFile(
                             new AudioFile(
-                            new DefaultMessage(null)))));
+                            new DefaultMessage(null))));
 
     HBox hBoxtotal = new HBox();
     hBoxtotal.setSpacing(10);
