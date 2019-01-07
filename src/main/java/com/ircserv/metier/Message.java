@@ -1,37 +1,62 @@
 package com.ircserv.metier;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.Objects;
 
-public class    Message implements Serializable {
+public class Message implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String pseudo;
-    private String typeMessage;
-    private LocalDateTime date;
+    private int id;
+    private Server server;
+    private Timestamp date;
+    private Utilisateur user;
     private String contenu;
+    private PieceJointe id_pj;
 
-    public Message(String pseudo, LocalDateTime date, String typeMessage,String contenu) {
-        this.pseudo = pseudo;
+
+    public Message(int id, Utilisateur user, Timestamp date, String contenu, Server server, PieceJointe id_pj) {
+        this.id = id;
+        this.user = user;
+        this.id_pj = id_pj;
         this.date = date;
         this.contenu = contenu;
-        this.typeMessage = typeMessage;
+        this.server = server;
     }
 
-    public String getPseudo() {
-        return pseudo;
+    public Message(){}
+
+    public int getId() {
+        return id;
     }
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public LocalDateTime getDate() {
+
+    public Utilisateur getUser() {
+        return user;
+    }
+
+    public void setUser(Utilisateur user) {
+        this.user = user;
+    }
+
+    public Server getServer() {
+        return server;
+    }
+
+    public void setServer(Server server) {
+        this.server = server;
+    }
+
+
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
@@ -39,26 +64,77 @@ public class    Message implements Serializable {
         return contenu;
     }
 
+    public PieceJointe getId_pj() {
+        return id_pj;
+    }
+
+    public void setId_pj(PieceJointe id_pj) {
+        this.id_pj = id_pj;
+    }
+
     public void setContenu(String contenu) {
         this.contenu = contenu;
     }
 
-    public String getStringDate(){
-        return  "" + date.getDayOfMonth()+'-'+ date.getMonthValue() + '-' + date.getYear() + ' ' +
-                date.getHour()+':'+ date.getMinute() + ':' + date.getSecond();
-    }
-
-    public String getTypeMessage() {
-        return typeMessage;
-    }
-
-    public void setTypeMessage(String typeMessage) {
-        this.typeMessage = typeMessage;
-    }
-
     @Override
     public String toString() {
-        return  pseudo + " : " + contenu;
+        return "Message{" + "id=" + id + ", user=" + user + ", typeMessage='" + id_pj + '\'' + ", date=" + date + ", contenu='" + contenu + '\'' + ", server=" + server + '}';
+    }
+
+    public static class MessageBuilder {
+        private int id;
+        private Server server;
+        private Timestamp date;
+        private Utilisateur user;
+        private String contenu;
+        private PieceJointe id_pj;
+
+        public MessageBuilder() {
+            this.id = -1;
+        }
+
+        public MessageBuilder addNoUser(int id){
+            this.id = id;
+            return this;
+        }
+
+        public MessageBuilder addServ(Server server){
+            this.server = server;
+            return this;
+        }
+
+        public MessageBuilder addPieceJointe(PieceJointe pJ){
+            this.id_pj = pJ;
+            return this;
+        }
+
+        public MessageBuilder setDate(Timestamp date) {
+            this.date = date;
+            return this;
+        }
+
+        public MessageBuilder setUser(Utilisateur user) {
+            this.user = user;
+            return this;
+        }
+
+        public MessageBuilder setContenu(String contenu) {
+            this.contenu = contenu;
+            return this;
+        }
+
+        public Message build(){
+            Message message = new Message();
+
+            message.id          = this.id;
+            message.server      = this.server;
+            message.id_pj       = this.id_pj;
+            message.date        = this.date;
+            message.user        = this.user;
+            message.contenu     = this.contenu;
+
+            return message;
+        }
     }
 
     @Override
@@ -66,14 +142,11 @@ public class    Message implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Message message = (Message) o;
-        return Objects.equals(pseudo, message.pseudo) &&
-                Objects.equals(date, message.date) &&
-                Objects.equals(contenu, message.contenu) &&
-                Objects.equals(typeMessage, message.typeMessage);
+        return id == message.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pseudo, date, contenu, typeMessage);
+        return Objects.hash(id, server, date, user, contenu, id_pj);
     }
 }

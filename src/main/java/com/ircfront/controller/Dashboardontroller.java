@@ -40,7 +40,6 @@ import com.ircfront.start.Main;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -159,7 +158,7 @@ public class Dashboardontroller implements Initializable {
         try {
 
             pnZoneTravail.getChildren().clear();
-            IRCController ircController = new IRCController(nbServ);
+            IRCController ircController = new IRCController(nbServ, this.nbUser);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/IRC.fxml"));
             loader.setController(ircController);
             Pane mainPane = loader.load();
