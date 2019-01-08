@@ -6,6 +6,7 @@ import com.ircserv.metier.Server;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXNodesList;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
@@ -15,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -27,6 +29,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -353,16 +356,42 @@ public class Dashboardontroller implements Initializable {
         }
     }
 
+    /**
+     * generate the about window
+     */
+    public void addNewServer() {
+        try {
+            Stage st = new Stage();
+            st.initModality(Modality.WINDOW_MODAL);
+            st.initOwner(Main.getPrimaryStage().getScene().getWindow());
+            st.initStyle(StageStyle.UNDECORATED);
+
+            Parent root = FXMLLoader.load(getClass().getResource("../../../gui/NewServer.fxml"));
+            Scene scene = new Scene(root);
+            st.setScene(scene);
+            st.show();
+
+            // Center la fenêtre
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            st.setX((primScreenBounds.getWidth() - st.getWidth()) / 2);
+            st.setY((primScreenBounds.getHeight() - st.getHeight()) / 2);
+            st.setResizable(false);
+            // à la fermeture de la fenêtre, recréer le menu de server (pour afficher le serveur nouvellement créé)
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     private void addServ() {
         List<Server> servers;
         try {
-
-
             VBox vBox = new VBox();
             //vBox.setAlignment(Pos.TOP_CENTER);
             vBox.getStyleClass().add("menu-bar-2");
             vBox.setSpacing(20);
             vBox.setPadding(new Insets(10, 10, 0, 10));
+            vBox.setAlignment(Pos.TOP_CENTER);
 
             ImageView iw = new ImageView();
 
@@ -384,6 +413,18 @@ public class Dashboardontroller implements Initializable {
                 });
                 vBox.getChildren().add(jfxButton);
             }
+
+            JFXButton addnewserver = new JFXButton("+");
+            addnewserver.setButtonType(JFXButton.ButtonType.RAISED);
+            addnewserver.getStyleClass().add("addserverbutton");
+            addnewserver.setPrefSize(60, 60);
+            addnewserver.setOnAction(event -> {
+                addNewServer();
+                // Créer un serveur
+                // Rappeler la méthode addserv
+            });
+            vBox.getChildren().add(addnewserver);
+
 
             drawer.setSidePane(vBox);
         } catch (RemoteException e) {

@@ -1,0 +1,10 @@
+.addserverbutton{
+    -fx-pref-width: 50px;
+    -fx-background-radius: 50px;
+    -fx-pref-height: 50px;
+    -fx-text-fill: -third-color;
+    -fx-border-color: -third-color;
+    -fx-border-radius: 50px;
+    -fx-border-width: 2px;
+    -fx-background-color: -first-color;
+}
