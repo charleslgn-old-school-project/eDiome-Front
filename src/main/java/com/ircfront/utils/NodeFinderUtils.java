@@ -14,10 +14,10 @@ import java.io.IOException;
 public class NodeFinderUtils {
   public static Node getFileFormat(Message message) {
     try {
-        String res = message.getContenu();
+        String res = message.getId_pj().getChemin();
         ImageView imageView = new ImageView();
         File file = new File(res);
-        Image img = new Image("image/icon/"+message.getTypeMessage()+".png");
+        Image img = new Image("image/icon/"+message.getId_pj().getId_type_pj().getLibelle()+".png");
         HBox hobx = new HBox();
 
         imageView.setImage(img);

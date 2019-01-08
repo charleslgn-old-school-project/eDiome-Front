@@ -19,7 +19,7 @@ public class DefaultFile extends NodeFinder {
 
   @Override
   protected Node resolve1(Message message) {
-    if (OtherConstante.FILE_TYPE.contains(message.getTypeMessage())) {
+    if (message.getId_pj() != null) {
       return NodeFinderUtils.getFileFormat(message);
     } else {
       return null;

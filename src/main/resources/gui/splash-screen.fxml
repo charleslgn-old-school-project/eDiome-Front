@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <GridPane fx:id="panParent" prefHeight="400.0" prefWidth="400.0" stylesheets="@css/main-green.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ircfront.controller.splashScreenController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

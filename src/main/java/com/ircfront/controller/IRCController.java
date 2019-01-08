@@ -2,6 +2,7 @@ package com.ircfront.controller;
 
 import com.ircfront.start.Main;
 import com.ircfront.utils.ControllerUtils;
+import com.ircfront.utils.DateUtils;
 import com.ircfront.utils.XMLDataFinder;
 import com.ircfront.utils.chaineofresponsability.NodeFinder;
 import com.ircfront.utils.chaineofresponsability.typemessage.AudioFile;
@@ -74,9 +75,11 @@ public class IRCController implements Initializable {
   private ServerInterface obj;
 
   private int nbServ;
+  private int userId;
 
-  public IRCController(int nbServ) {
+  public IRCController(int nbServ, int userId) {
     this.nbServ = nbServ;
+    this.userId = userId;
   }
 
   @Override
@@ -134,7 +137,7 @@ public class IRCController implements Initializable {
   private void send() {
     try {
       if (!textMessage.getText().trim().equalsIgnoreCase("")) {
-        obj.send(textPseudo.getText().trim(), textMessage.getText().trim());
+        obj.send(this.userId, this.nbServ, textMessage.getText().trim());
         textMessage.setText("");
         sendByYou = true;
         paneChat.setVvalue(paneChat.getVmax());
@@ -153,7 +156,7 @@ public class IRCController implements Initializable {
       File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
       if(file != null) {
         byte[] data = FileUtils.readFileToByteArray(file);
-        obj.uploadFile(textPseudo.getText().trim(), data, file.getName());
+        obj.uploadFile(this.userId, this.nbServ, data, file.getName());
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -220,7 +223,7 @@ public class IRCController implements Initializable {
       for (Message message : messages) {
         vBox.getChildren().add(createMessage(message));
       }
-      lastMessage = messages.get(messages.size() - 1);
+      lastMessage = messages.size() > 0 ? messages.get(messages.size() - 1) : new Message();
     } catch (RemoteException e) {
       e.printStackTrace();
     }
@@ -268,7 +271,7 @@ public class IRCController implements Initializable {
     HBox hBoxData = new HBox();
 
     //message data(pseudo + date)
-    Label label1 = new Label(msg.getPseudo() + " - " + msg.getStringDate());
+    Label label1 = new Label(msg.getUser().getIdentifiant() + " - " + DateUtils.getStringDate(msg.getDate()));
     label1.setFont(new Font(13));
     hBoxData.getChildren().add(label1);
     vBox.getChildren().add(hBoxData);
@@ -276,7 +279,7 @@ public class IRCController implements Initializable {
     vBox.getChildren().add(nodeFinder.resolve(msg));
 
     //add the logo
-    hBoxtotal.getChildren().add(ControllerUtils.getProfilePicture(msg.getPseudo()));
+    hBoxtotal.getChildren().add(ControllerUtils.getProfilePicture(msg.getUser().getIdentifiant()));
     //add all content
     hBoxtotal.getChildren().add(vBox);
     return hBoxtotal;

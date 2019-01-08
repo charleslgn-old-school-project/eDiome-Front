@@ -2,6 +2,7 @@ package com.ircfront.utils.chaineofresponsability.typemessage;
 
 import com.ircfront.utils.chaineofresponsability.NodeFinder;
 import com.ircserv.metier.Message;
+import com.ircserv.metier.PieceJointe;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,11 +25,12 @@ public class Picture extends NodeFinder {
   @Override
   protected Node resolve1(Message message) {
     try {
-      if (message.getTypeMessage().equals("picture")) {
-        String res = message.getContenu();
+      PieceJointe pj = message.getId_pj();
+      if (pj != null && pj.getId_type_pj().getLibelle().equals("picture")) {
+        String res = message.getId_pj().getChemin();
         ImageView imageView = new ImageView();
         File file = new File(res);
-        Image img = new Image(file.toURI().toString(), true);
+        Image img = new Image(file.toURI().toString());
 
         imageView.setImage(img);
         imageView.setFitWidth(400);

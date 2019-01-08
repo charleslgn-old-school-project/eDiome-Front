@@ -2,7 +2,7 @@ package com.ircserv.metier;
 
 
 import java.io.Serializable;
-
+import java.util.Objects;
 
 
 public class Server implements Serializable {
@@ -45,5 +45,18 @@ public class Server implements Serializable {
 
   public void setCreateur(Utilisateur createur) {
     this.createur = createur;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Server server = (Server) o;
+    return id == server.id;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, createur);
   }
 }

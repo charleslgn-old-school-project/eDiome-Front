@@ -1,8 +1,6 @@
 package com.ircserv.metier;
 
-import javax.persistence.*;
 import java.io.Serializable;
-
 
 
 public class Droit implements Serializable {
