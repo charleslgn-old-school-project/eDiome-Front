@@ -364,8 +364,10 @@ public class Dashboardontroller implements Initializable {
             st.initModality(Modality.WINDOW_MODAL);
             st.initOwner(Main.getPrimaryStage().getScene().getWindow());
             st.initStyle(StageStyle.UNDECORATED);
-
-            Parent root = FXMLLoader.load(getClass().getResource("../../../gui/NewServer.fxml"));
+            AddNewServerController addNewServerController = new AddNewServerController(nbUser);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/NewServer.fxml"));
+            loader.setController(addNewServerController);
+            Pane root = loader.load();
             Scene scene = new Scene(root);
             st.setScene(scene);
             st.show();
@@ -376,6 +378,11 @@ public class Dashboardontroller implements Initializable {
             st.setY((primScreenBounds.getHeight() - st.getHeight()) / 2);
             st.setResizable(false);
             // à la fermeture de la fenêtre, recréer le menu de server (pour afficher le serveur nouvellement créé)
+
+            root.getScene().getWindow().setOnHiding(event -> {
+                addServ();
+                st.close();
+            });
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -417,11 +424,7 @@ public class Dashboardontroller implements Initializable {
             addnewserver.setButtonType(JFXButton.ButtonType.RAISED);
             addnewserver.getStyleClass().add("addserverbutton");
             addnewserver.setPrefSize(60, 60);
-            addnewserver.setOnAction(event -> {
-                addNewServer();
-                // Créer un serveur
-                // Rappeler la méthode addserv
-            });
+            addnewserver.setOnAction(e -> addNewServer());
             vBox.getChildren().add(addnewserver);
 
 

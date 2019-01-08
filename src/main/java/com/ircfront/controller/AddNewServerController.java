@@ -2,6 +2,8 @@ package com.ircfront.controller;
 import com.ircfront.start.Main;
 import com.ircfront.utils.XMLDataFinder;
 import com.ircfront.utils.constante.ServerConstante;
+import com.ircserv.inter.MenuInterface;
+import com.ircserv.metier.Server;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -12,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.net.URL;
 import java.nio.file.Paths;
@@ -34,7 +37,11 @@ public class AddNewServerController implements Initializable {
     @FXML
     private VBox vbox;
 
+    private int userId;
 
+    public AddNewServerController(int userId){
+        this.userId = userId;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -51,25 +58,12 @@ public class AddNewServerController implements Initializable {
 
     @FXML
     void addserver(ActionEvent event) {
-        // Ici la création du serveur
-
-        // à la fermeture de la fenêtre, recréer le menu de server (pour afficher le serveur nouvellement créé)
-    }
-
- /*   @Override
-    public int createNewServer() throws RemoteException {
         try {
-            int port = ServerConstante.PORT;
-            LocateRegistry.getRegistry(port);
-
-            Naming.rebind("//" + ServerConstante.IP + ":" + port + "/serv" + numServ, new ServerImpl(port, numServ));
-            return numServ++;
-        } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println("echec : " + e);
+            Server serv = ServerConstante.MENU.createNewServer(serverName.getText(), userId);
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
-        return -1;
     }
-*/
-
 }

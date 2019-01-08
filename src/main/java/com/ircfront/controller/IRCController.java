@@ -285,5 +285,27 @@ public class IRCController implements Initializable {
     return hBoxtotal;
   }
 
+  /**
+   * Gère le Markdown
+   * @param chaine
+   */
+  private String markdown(String chaine){
+    // Gras **test**
+    //String input = "FOO[BAR]", extracted;
+    String inputgras = chaine, gras;
+    gras = inputgras.substring(inputgras.indexOf("**"),inputgras.indexOf("**")+1);
+    //gras = inputgras.substring(inputgras.indexOf('['),inputgras.lastIndexOf(']'));
+    if(!gras.equals(null) && !gras.equals("")){
+    }
+
+    return "";
+    // Italique _test_
+
+    // l'autre truc `test`
+  }
+
+
+
+
 
 }

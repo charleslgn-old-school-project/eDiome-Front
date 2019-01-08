@@ -58,6 +58,8 @@ public class CreationController implements Initializable {
         int id = ServerConstante.MENU.createUser(user);
         XMLDataFinder.setPseudo((nom.getText()+"_"+prenom.getText()));
         XMLDataFinder.setPassword(HashPassword.hash(pasword1.getText()));
+
+
         ControllerUtils.load(new FXMLLoader(getClass().getResource("../../../gui/dashboard.fxml")), id);
         ((Stage) panParent.getScene().getWindow()).close();
 
