@@ -1,6 +1,6 @@
 package com.ircfront.utils.chaineofresponsability.typemessage.message;
 
-import com.ircfront.utils.ControllerUtils;
+import com.ircfront.Utils.ControllerUtils;
 import com.vdurmont.emoji.EmojiParser;
 import javafx.scene.Node;
 

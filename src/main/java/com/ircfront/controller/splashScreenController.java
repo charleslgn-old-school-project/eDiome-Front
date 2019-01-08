@@ -1,6 +1,6 @@
 package com.ircfront.controller;
 
-import com.ircfront.utils.ControllerUtils;
+import com.ircfront.Utils.ControllerUtils;
 import com.ircfront.utils.constante.ServerConstante;
 import com.ircserv.inter.MenuInterface;
 import javafx.application.Platform;
@@ -8,17 +8,11 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.Naming;
