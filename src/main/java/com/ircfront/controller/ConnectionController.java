@@ -13,7 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import com.ircfront.utils.XMLDataFinder;
-import com.ircfront.utils.ControllerUtils;
+import com.ircfront.Utils.ControllerUtils;
 import com.ircfront.utils.constante.ServerConstante;
 import com.ircfront.utils.HashPassword;
 

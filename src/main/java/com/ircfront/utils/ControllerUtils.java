@@ -1,6 +1,9 @@
-package com.ircfront.utils;
+package com.ircfront.Utils;
 
 import com.ircfront.controller.Dashboardontroller;
+import com.ircfront.utils.XMLDataFinder;
+import com.ircfront.utils.ResizeHelper;
+
 import com.ircfront.start.Main;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;

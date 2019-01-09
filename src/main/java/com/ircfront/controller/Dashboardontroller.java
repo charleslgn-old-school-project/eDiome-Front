@@ -1,5 +1,6 @@
 package com.ircfront.controller;
 
+import com.ircfront.Utils.ControllerUtils;
 import com.ircfront.utils.XMLDataFinder;
 import com.ircfront.utils.constante.ServerConstante;
 import com.ircserv.metier.Server;
@@ -296,6 +297,13 @@ public class Dashboardontroller implements Initializable {
             XMLDataFinder.setLangage(language);
 
         }
+    }
+
+    public void disconnect(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/Connection.fxml"));
+        XMLDataFinder.setPassword("");
+        ControllerUtils.load(loader);
+        ((Stage) pnPrincipal.getScene().getWindow()).close();
     }
 
     /**
