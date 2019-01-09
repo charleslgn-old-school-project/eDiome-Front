@@ -57,6 +57,7 @@
                                <MenuItem fx:id="mnuRu" mnemonicParsing="false" onAction="#changeLanguage" text="Русский" userData="RU" />
                            </items>
                         </Menu>
+                        <MenuItem mnemonicParsing="false" onAction="#disconnect" text="Deconexion" />
                      </items>
                   </Menu>
                   <Menu fx:id="mnuHelp" mnemonicParsing="false" text="Help">

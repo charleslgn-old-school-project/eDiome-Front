@@ -1,23 +1,26 @@
 package com.ircserv.metier;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 
 public class TypePieceJointe implements Serializable {
 
-    private int id_type_pj;
+    private int id;
     private String libelle;
     private String extension;
 
 
-    public TypePieceJointe() {}
-
-    public int getId_type_pj() {
-        return id_type_pj;
+    public TypePieceJointe() {
+        this.id = -1;
     }
 
-    public void setId_type_pj(int id_type_pj) {
-        this.id_type_pj = id_type_pj;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLibelle() {
@@ -34,5 +37,20 @@ public class TypePieceJointe implements Serializable {
 
     public void setExtension(String extension) {
         this.extension = extension;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TypePieceJointe that = (TypePieceJointe) o;
+        return id == that.id &&
+                Objects.equals(libelle, that.libelle) &&
+                Objects.equals(extension, that.extension);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, libelle, extension);
     }
 }

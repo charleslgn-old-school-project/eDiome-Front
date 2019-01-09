@@ -2,28 +2,31 @@ package com.ircserv.metier;
 
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class PieceJointe implements Serializable {
 
-    private int id_piece_jointe;
+    private int id;
     private String chemin;
-    private TypePieceJointe id_type_pj;
+    private TypePieceJointe typePieceJointe;
 
 
-    public PieceJointe() { }
+    public PieceJointe() {
+        this.id =-1;
+    }
 
-    public PieceJointe(String chemin, TypePieceJointe id_type_pj) {
-        this.id_piece_jointe=-1;
+    public PieceJointe(String chemin, TypePieceJointe typePieceJointe) {
+        this.id =-1;
         this.chemin=chemin;
-        this.id_type_pj=id_type_pj;
+        this.typePieceJointe =typePieceJointe;
     }
 
-    public int getId_piece_jointe() {
-        return id_piece_jointe;
+    public int getId() {
+        return id;
     }
 
-    public void setId_piece_jointe(int id_piece_jointe) {
-        this.id_piece_jointe = id_piece_jointe;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getChemin() {
@@ -34,11 +37,26 @@ public class PieceJointe implements Serializable {
         this.chemin = chemin;
     }
 
-    public TypePieceJointe getId_type_pj() {
-        return id_type_pj;
+    public TypePieceJointe getTypePieceJointe() {
+        return typePieceJointe;
     }
 
-    public void setId_type_pj(TypePieceJointe id_type_pj) {
-        this.id_type_pj = id_type_pj;
+    public void setTypePieceJointe(TypePieceJointe typePieceJointe) {
+        this.typePieceJointe = typePieceJointe;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PieceJointe that = (PieceJointe) o;
+        return id == that.id &&
+                Objects.equals(chemin, that.chemin) &&
+                Objects.equals(typePieceJointe, that.typePieceJointe);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, chemin, typePieceJointe);
     }
 }

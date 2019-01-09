@@ -1,7 +1,7 @@
 package com.ircfront.controller;
 
-import com.ircfront.start.Main;
 import com.ircfront.Utils.ControllerUtils;
+import com.ircfront.start.Main;
 import com.ircfront.utils.DateUtils;
 import com.ircfront.utils.XMLDataFinder;
 import com.ircfront.utils.chaineofresponsability.NodeFinder;
@@ -117,8 +117,6 @@ public class IRCController implements Initializable {
       ServerConstante.SERVER = (ServerInterface) Naming.lookup("//" + ip + ":" + port + "/serv" + nbServ);
       printChat(true);
 
-      obj = ServerConstante.SERVER;
-
     } catch (MalformedURLException | RemoteException | NotBoundException e) {
       e.printStackTrace();
     }
@@ -147,7 +145,7 @@ public class IRCController implements Initializable {
   private void send() {
     try {
       if (!textMessage.getText().trim().equalsIgnoreCase("")) {
-        obj.send(this.userId, this.nbServ, textMessage.getText().trim());
+        ServerConstante.SERVER.send(this.userId, this.nbServ, textMessage.getText().trim());
         textMessage.setText("");
         sendByYou = true;
         paneChat.setVvalue(paneChat.getVmax());
@@ -166,7 +164,7 @@ public class IRCController implements Initializable {
       File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
       if(file != null) {
         byte[] data = FileUtils.readFileToByteArray(file);
-        obj.uploadFile(this.userId, this.nbServ, data, file.getName());
+        ServerConstante.SERVER.uploadFile(this.userId, this.nbServ, data, file.getName());
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -229,7 +227,7 @@ public class IRCController implements Initializable {
   private void printAllChat(VBox vBox) {
     ArrayList<Message> messages;
     try {
-      messages = obj.getMessages();
+      messages = ServerConstante.SERVER.getMessages();
       for (Message message : messages) {
         vBox.getChildren().add(createMessage(message));
       }
@@ -245,7 +243,7 @@ public class IRCController implements Initializable {
   private void printLastMessage(VBox vBox) {
     ArrayList<Message> messages;
     try {
-      messages = obj.getMessages(1);
+      messages = ServerConstante.SERVER.getMessages(1);
       if (messages.size() != 0 && !lastMessage.equals(messages.get(0))) {
         lastMessage = messages.get(0);
         vBox.getChildren().add(createMessage(messages.get(0)));

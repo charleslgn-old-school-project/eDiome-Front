@@ -5,28 +5,29 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
+
 public class Utilisateur implements Serializable {
 
-    public Utilisateur() {
-    }
-
-
-    private int noUtilisateur;
+    private int id;
     private String nom;
     private String prenom;
     private String identifiant;
-    private String mot_de_passe;
-    private Date date_naissance;
-    private Date date_inscription;
-    private String mail_pro;
-    private String telephone_pro;
+    private String password;
+    private Date birthDate;
+    private Date registrationDate;
+    private String mailPro;
+    private String telephonePro;
 
-    public int getNoUtilisateur() {
-        return noUtilisateur;
+    public Utilisateur() {
+        this.id = -1;
     }
 
-    public void setNoUtilisateur(int no_utilisateur) {
-        this.noUtilisateur = no_utilisateur;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -45,7 +46,6 @@ public class Utilisateur implements Serializable {
         this.prenom = prenom;
     }
 
-
     public String getIdentifiant() {
         return identifiant;
     }
@@ -54,46 +54,44 @@ public class Utilisateur implements Serializable {
         this.identifiant = identifiant;
     }
 
-    public String getMot_de_passe() {
-        return mot_de_passe;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMot_de_passe(String mot_de_passe) {
-        this.mot_de_passe = mot_de_passe;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Date getDate_naissance() {
-        return date_naissance;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setDate_naissance(Date date_naissance) {
-        this.date_naissance = date_naissance;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public Date getDate_inscription() {
-        return date_inscription;
+    public Date getRegistrationDate() {
+        return registrationDate;
     }
 
-    public void setDate_inscription(Date date_inscription) {
-        this.date_inscription = date_inscription;
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
-
-    public String getMail_pro() {
-        return mail_pro;
+    public String getMailPro() {
+        return mailPro;
     }
 
-    public void setMail_pro(String mail_pro) {
-        this.mail_pro = mail_pro;
+    public void setMailPro(String mailPro) {
+        this.mailPro = mailPro;
     }
 
-
-    public String getTelephone_pro() {
-        return telephone_pro;
+    public String getTelephonePro() {
+        return telephonePro;
     }
 
-    public void setTelephone_pro(String telephone_pro) {
-        this.telephone_pro = telephone_pro;
+    public void setTelephonePro(String telephonePro) {
+        this.telephonePro = telephonePro;
     }
 
     @Override
@@ -101,12 +99,12 @@ public class Utilisateur implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Utilisateur that = (Utilisateur) o;
-        return noUtilisateur == that.noUtilisateur && Objects.equals(nom, that.nom) && Objects.equals(prenom, that.prenom) && Objects.equals(identifiant, that.identifiant) && Objects.equals(mot_de_passe, that.mot_de_passe) && Objects.equals(date_naissance, that.date_naissance) && Objects.equals(date_inscription, that.date_inscription) && Objects.equals(mail_pro, that.mail_pro) && Objects.equals(telephone_pro, that.telephone_pro);
+        return id == that.id && Objects.equals(nom, that.nom) && Objects.equals(prenom, that.prenom) && Objects.equals(identifiant, that.identifiant) && Objects.equals(password, that.password) && Objects.equals(birthDate, that.birthDate) && Objects.equals(registrationDate, that.registrationDate) && Objects.equals(mailPro, that.mailPro) && Objects.equals(telephonePro, that.telephonePro);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(noUtilisateur, nom, prenom, identifiant, mot_de_passe, date_naissance, date_inscription, mail_pro, telephone_pro);
+        return Objects.hash(id, nom, prenom, identifiant, password, birthDate, registrationDate, mailPro, telephonePro);
     }
 }
 
