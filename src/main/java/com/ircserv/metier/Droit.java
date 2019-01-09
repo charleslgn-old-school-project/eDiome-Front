@@ -1,24 +1,27 @@
 package com.ircserv.metier;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 
 public class Droit implements Serializable {
 
-    int id_droit;
-    String libelle;
-    String description;
+    private int id;
+    private String libelle;
+    private String description;
 
 
     public Droit() {
+        this.id = -1;
     }
 
-    public int getId_droit() {
-        return id_droit;
+    public int getId() {
+        return id;
     }
 
-    public void setId_droit(int id_droit) {
-        this.id_droit = id_droit;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLibelle() {
@@ -35,5 +38,20 @@ public class Droit implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Droit droit = (Droit) o;
+        return id == droit.id &&
+                Objects.equals(libelle, droit.libelle) &&
+                Objects.equals(description, droit.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, libelle, description);
     }
 }

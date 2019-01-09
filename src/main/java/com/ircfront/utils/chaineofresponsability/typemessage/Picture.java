@@ -25,9 +25,9 @@ public class Picture extends NodeFinder {
   @Override
   protected Node resolve1(Message message) {
     try {
-      PieceJointe pj = message.getId_pj();
-      if (pj != null && pj.getId_type_pj().getLibelle().equals("picture")) {
-        String res = message.getId_pj().getChemin();
+      PieceJointe pj = message.getPieceJointe();
+      if (pj != null && pj.getTypePieceJointe().getLibelle().equals("picture")) {
+        String res = message.getPieceJointe().getChemin();
         ImageView imageView = new ImageView();
         File file = new File(res);
         Image img = new Image(file.toURI().toString());

@@ -4,6 +4,7 @@ package com.ircserv.metier;
 import java.io.Serializable;
 import java.util.Objects;
 
+
 public class Server implements Serializable {
   private int id;
   private String name;
@@ -15,7 +16,9 @@ public class Server implements Serializable {
     this.createur=user;
   }
 
-  public Server() {}
+  public Server() {
+    this.id=-1;
+  }
 
   public Server(String name, Utilisateur user) {
     this(-1, name, user);

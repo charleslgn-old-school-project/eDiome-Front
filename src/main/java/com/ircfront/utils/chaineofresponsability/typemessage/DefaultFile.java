@@ -19,7 +19,7 @@ public class DefaultFile extends NodeFinder {
 
   @Override
   protected Node resolve1(Message message) {
-    if (message.getId_pj() != null) {
+    if (message.getPieceJointe() != null) {
       return NodeFinderUtils.getFileFormat(message);
     } else {
       return null;

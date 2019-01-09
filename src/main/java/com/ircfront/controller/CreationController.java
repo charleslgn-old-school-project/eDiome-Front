@@ -51,9 +51,9 @@ public class CreationController implements Initializable {
           Utilisateur user = new Utilisateur();
           user.setNom(nom.getText());
           user.setPrenom(prenom.getText());
-          user.setMot_de_passe(HashPassword.hash(pasword1.getText()));
-          user.setTelephone_pro(tel_pro.getText());
-          user.setMail_pro(mail_pro.getText());
+          user.setPassword(HashPassword.hash(pasword1.getText()));
+          user.setTelephonePro(tel_pro.getText());
+          user.setMailPro(mail_pro.getText());
           user.setIdentifiant(nom.getText()+"_"+prenom.getText());
         int id = ServerConstante.MENU.createUser(user);
         XMLDataFinder.setPseudo((nom.getText()+"_"+prenom.getText()));
