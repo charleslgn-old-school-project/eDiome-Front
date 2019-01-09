@@ -15,4 +15,5 @@ public interface ServerInterface extends Remote{
     void uploadFile(int userId, int servId, byte[] data, String filename) throws RemoteException;
     List<Utilisateur> getAllUserNotInServer() throws RemoteException;
     List<Utilisateur> getAllUserInServer() throws RemoteException;
+    int createUser(Utilisateur utilisateur) throws RemoteException;
 }
