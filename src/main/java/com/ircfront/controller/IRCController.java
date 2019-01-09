@@ -106,8 +106,10 @@ public class IRCController implements Initializable {
       String ip = ServerConstante.IP;
       LocateRegistry.getRegistry(port);
 
-      obj = (ServerInterface) Naming.lookup("//" + ip + ":" + port + "/serv" + nbServ);
+      ServerConstante.SERVER = (ServerInterface) Naming.lookup("//" + ip + ":" + port + "/serv" + nbServ);
       printChat(true);
+
+      obj = ServerConstante.SERVER;
 
     } catch (MalformedURLException | RemoteException | NotBoundException e) {
       e.printStackTrace();
