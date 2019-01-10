@@ -30,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.*;
@@ -79,6 +80,9 @@ public class IRCController implements Initializable {
 
   @FXML
   private JFXButton addUserButton;
+
+  @FXML
+  private JFXButton delUserButton;
 
   private ServerInterface obj;
 
@@ -291,38 +295,6 @@ public class IRCController implements Initializable {
     //add all content
     hBoxtotal.getChildren().add(vBox);
     return hBoxtotal;
-  }
-
-  @FXML
-  void addUser(ActionEvent event) {
-      // Ici lance la fenêtre d'ajout utilisateur
-    try {
-      Stage st = new Stage();
-      st.initModality(Modality.WINDOW_MODAL);
-      st.initOwner(Main.getPrimaryStage().getScene().getWindow());
-      st.initStyle(StageStyle.UNDECORATED);
-      AdduserController addusercontroller = new AdduserController(nbServ);
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/adduser.fxml"));
-      loader.setController(addusercontroller);
-      Parent root = loader.load();
-      Scene scene = new Scene(root);
-      st.setScene(scene);
-      st.show();
-
-      // Center la fenêtre
-      /*Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-      st.setX((primScreenBounds.getWidth() - st.getWidth()) / 2);
-      st.setY((primScreenBounds.getHeight() - st.getHeight()) / 2);
-      st.setResizable(false);*/
-      // à la fermeture de la fenêtre, recréer le menu de server (pour afficher le serveur nouvellement créé)
-
-      root.getScene().getWindow().setOnHiding(event2 -> {
-        st.close();
-      });
-
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
   }
 
   /**

@@ -103,13 +103,6 @@
                </padding>
             </HBox>
             <HBox alignment="CENTER_LEFT" maxHeight="40.0" minHeight="40.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-               <children>
-                  <JFXButton fx:id="addUserButton" onAction="#addUser" prefHeight="30.0" prefWidth="204.0" text="Ajouter un utilisateur">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </JFXButton>
-               </children>
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
