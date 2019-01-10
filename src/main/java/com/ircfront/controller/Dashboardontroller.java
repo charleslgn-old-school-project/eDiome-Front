@@ -381,10 +381,10 @@ public class Dashboardontroller implements Initializable {
             st.show();
 
             // Center la fenêtre
-            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            /*Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
             st.setX((primScreenBounds.getWidth() - st.getWidth()) / 2);
             st.setY((primScreenBounds.getHeight() - st.getHeight()) / 2);
-            st.setResizable(false);
+            st.setResizable(false);*/
             // à la fermeture de la fenêtre, recréer le menu de server (pour afficher le serveur nouvellement créé)
 
             root.getScene().getWindow().setOnHiding(event -> {

@@ -3,6 +3,7 @@ package com.ircfront.controller;
 import com.ircfront.utils.XMLDataFinder;
 import com.ircfront.utils.constante.ServerConstante;
 import com.ircserv.metier.Server;
+import com.ircserv.metier.Utilisateur;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.event.ActionEvent;
@@ -27,71 +28,95 @@ public class AdduserController implements Initializable {
 
     private int nbServ;
 
-    public AdduserController(int nbServ){
+    public AdduserController(int nbServ) {
         this.nbServ = nbServ;
     }
 
+    List<Utilisateur> users;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Style
-        String color = XMLDataFinder.getTheme();
-        vbox.getStylesheets().add(getClass().getResource("../../../gui/css/main-" + color + ".css").toExternalForm());
-        System.out.println(this.nbServ);
+        try {
+            // Style
+            String color = XMLDataFinder.getTheme();
+            vbox.getStylesheets().add(getClass().getResource("../../../gui/css/main-" + color + ".css").toExternalForm());
+            System.out.println(this.nbServ);
 
-        // Charger les utilisateurs
-        List<String> users = Arrays.asList("cyril", "sup2", "sup3");
-        vbox.setSpacing(20);
-        vbox.setPadding(new Insets(10, 10, 0, 10));
-        vbox.setAlignment(Pos.TOP_CENTER);
+            // Charger les utilisateurs
+            users = ServerConstante.SERVER.getAllUserNotInServer();
 
-        // Une Checkbox pour chaque utilisateur
-        for (String user : users) {
-            JFXCheckBox checkBox = new JFXCheckBox(user);
-            vbox.getChildren().add(checkBox);
+            vbox.setSpacing(20);
+            vbox.setPadding(new Insets(10, 10, 0, 10));
+            vbox.setAlignment(Pos.TOP_LEFT);
+
+            // Une Checkbox pour chaque utilisateur
+            for (Utilisateur user : users) {
+                JFXCheckBox checkBox = new JFXCheckBox(user.getPrenom() + " " + user.getNom());
+                vbox.getChildren().add(checkBox);
+            }
+
+            VBox center = new VBox();
+            vbox.getChildren().add(center);
+            center.setSpacing(20);
+            center.setPadding(new Insets(10, 10, 10, 10));
+            center.setAlignment(Pos.CENTER);
+
+            // Bouton d'ajout
+            JFXButton add = new JFXButton("+");
+            add.setButtonType(JFXButton.ButtonType.RAISED);
+            add.getStyleClass().add("addserverbutton");
+            add.setPrefSize(80, 80);
+            center.getChildren().add(add);
+
+            add.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    addusers();
+                }
+            });
+
+            // Bouton pour fermer la popup
+            JFXButton annuler = new JFXButton("Annuler");
+            annuler.setButtonType(JFXButton.ButtonType.FLAT);
+            annuler.setPrefSize(200, 50);
+            center.getChildren().add(annuler);
+
+            annuler.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    Stage stage = (Stage) annuler.getScene().getWindow();
+                    stage.close();
+                }
+            });
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
-
-        // Bouton d'ajout
-        JFXButton add = new JFXButton("+");
-        add.setButtonType(JFXButton.ButtonType.RAISED);
-        add.getStyleClass().add("addserverbutton");
-        add.setPrefSize(80, 80);
-        vbox.getChildren().add(add);
-
-        add.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                addusers();
-            }
-        });
-
-        // Bouton pour fermer la popup
-        JFXButton annuler = new JFXButton("Annuler");
-        annuler.setButtonType(JFXButton.ButtonType.FLAT);
-        annuler.setPrefSize(200, 50);
-        vbox.getChildren().add(annuler);
-
-        annuler.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                Stage stage = (Stage) annuler.getScene().getWindow();
-                stage.close();
-            }
-        });
     }
 
     /**
      * Ajoute les utilisateurs cochés dans le serveur
      */
-    private void addusers(){
+    private void addusers() {
+        try{
         for (Node checkBox : vbox.getChildren()) {
-            if(checkBox instanceof JFXCheckBox){
-                if(((JFXCheckBox) checkBox).isSelected()) {
+            if (checkBox instanceof JFXCheckBox) {
+                if (((JFXCheckBox) checkBox).isSelected()) {
                     String userToAdd = ((JFXCheckBox) checkBox).getText();
-                    System.out.println(userToAdd);
-                    // Appeler la méthode d'ajout dans la bdd
+                    for (Utilisateur user : users) {
+                        String identite = user.getPrenom() + " " + user.getNom();
+                        if (identite.equals(userToAdd)) {
+                            ServerConstante.SERVER.linkUserToServer(user);
+                            continue;
+                        }
+                    }
                 }
             }
         }
 
         Stage stage = (Stage) vbox.getScene().getWindow();
         stage.close();
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
     }
 }
