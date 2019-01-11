@@ -1,8 +1,14 @@
 package com.ircfront.controller;
 
 import com.ircfront.Utils.ControllerUtils;
+import com.ircfront.start.Main;
 import com.ircfront.utils.XMLDataFinder;
 import com.ircfront.utils.constante.ServerConstante;
+import com.ircfront.utils.lang.Lang;
+import com.ircfront.utils.lang.Translate;
+import com.ircfront.utils.lang.langage.EN;
+import com.ircfront.utils.lang.typetrad.ColorName;
+import com.ircfront.utils.lang.typetrad.MenuName;
 import com.ircserv.metier.Server;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -11,7 +17,6 @@ import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,15 +37,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import com.ircfront.utils.lang.Lang;
-import com.ircfront.utils.lang.Translate;
-import com.ircfront.utils.lang.langage.EN;
-import com.ircfront.utils.lang.typetrad.ColorName;
-import com.ircfront.utils.lang.typetrad.MenuName;
-import com.ircfront.start.Main;
 
 import javax.swing.*;
-import javax.swing.plaf.OptionPaneUI;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -160,7 +158,6 @@ public class Dashboardontroller implements Initializable {
      */
     private void loadFxml(int nbServ) {
         try {
-
             pnZoneTravail.getChildren().clear();
             IRCController ircController = new IRCController(nbServ, this.nbUser);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/IRC.fxml"));
@@ -394,16 +391,14 @@ public class Dashboardontroller implements Initializable {
         List<Server> servers;
         try {
             VBox vBox = new VBox();
-            //vBox.setAlignment(Pos.TOP_CENTER);
             vBox.getStyleClass().add("menu-bar-2");
-            vBox.setSpacing(20);
-            vBox.setPadding(new Insets(10, 10, 0, 10));
+            vBox.setSpacing(10);
+            vBox.setPadding(new Insets(10, 10, 20, 10));
             vBox.setAlignment(Pos.TOP_CENTER);
 
             ImageView iw = new ImageView();
 
             Image logo = new Image("image/logov4.png");
-            //Image logo = new Image("https://www.pngarts.com/files/3/Letter-A-PNG-High-Quality-Image.png", true);
             iw.setImage(logo);
             iw.setFitHeight(34.5);
             iw.setFitWidth(150);
@@ -414,6 +409,7 @@ public class Dashboardontroller implements Initializable {
                 JFXButton jfxButton = new JFXButton(server.getName());
                 jfxButton.setPrefSize(Double.MAX_VALUE, 60);
                 jfxButton.setOnAction(event -> {
+                    // Vérifier à l'aide d'une requête la connexion au serveur
                     AffichageIRCClick(server.getId());
                     lbTitre.setText(server.getName());
                 });
@@ -436,8 +432,11 @@ public class Dashboardontroller implements Initializable {
             addnewserver.setOnAction(e -> addNewServer());
             vBox.getChildren().add(addnewserver);
 
-
-            drawer.setSidePane(vBox);
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.getStyleClass().add("menu-bar-2");
+            scrollPane.setFitToWidth(true);
+            scrollPane.setContent(vBox);
+            drawer.setSidePane(scrollPane);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -479,14 +478,14 @@ public class Dashboardontroller implements Initializable {
         ContextMenu contextMenu = new ContextMenu();
         MenuItem adduser = new MenuItem("Ajouter un utilisateur");
         adduser.setOnAction(e -> ManageUsers(server.getId(), true, contextMenu));
-        MenuItem deluser = new MenuItem("retirer un utilisateur");
+        MenuItem deluser = new MenuItem("Retirer un utilisateur");
         deluser.setOnAction(e -> ManageUsers(server.getId(), false, contextMenu));
         MenuItem quitserv = new MenuItem("Quitter le serveur");
-        quitserv.setOnAction(e -> System.out.println("Méthode à faire"));
+        quitserv.setOnAction(e -> quitServer(server.getId(), contextMenu));
+        quitserv.setStyle("-text-color:red;");
         MenuItem delserv = new MenuItem("Supprimer le serveur");
-        delserv.setOnAction(e -> quitServer());
-        MenuItem quitServ = new MenuItem("Supprimer le serveur");
-        quitServ.setOnAction(e -> quitServer());
+        delserv.setOnAction(e -> delServer(server.getId(), contextMenu));
+        delserv.setStyle("-text-color:red;");
         contextMenu.getItems().addAll(adduser, deluser, quitserv, delserv);
         return contextMenu;
     }
@@ -505,26 +504,40 @@ public class Dashboardontroller implements Initializable {
      * Supprime le serveur
      * A tester
      */
-    private void delServer(Server server, ContextMenu contextMenu){
+    private void delServer(int server, ContextMenu contextMenu){
         try {
             contextMenu.hide();
-            int reponse = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer ce serveur", "Confirmation", JOptionPane.YES_NO_CANCEL_OPTION);
+            int reponse = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer ce serveur ?", "Confirmation", JOptionPane.YES_NO_CANCEL_OPTION);
             if (reponse == 0) {
                 // Supprimer le serveur
-                System.out.println("je supprime le serveur" + server.getId());
-                ServerConstante.MENU.deleteServer(server.getId());
+                System.out.println("je supprime le serveur" + server);
+                ServerConstante.MENU.deleteServer(server);
                 Alert succes = new Alert(Alert.AlertType.CONFIRMATION);
                 succes.setTitle("Suppression du serveur");
                 succes.setHeaderText("Serveur supprimé");
                 succes.setContentText("Le serveur a été supprimé avec succès");
+                this.addServ();
             }
         }catch (Exception ex){
             System.out.println(ex);
         }
     }
 
-    private void quitServer(){
-
+    private void quitServer(int server, ContextMenu contextMenu){
+        try {
+            contextMenu.hide();
+            int reponse = JOptionPane.showConfirmDialog(null, "Voulez-vous quitter ce serveur ?", "Confirmation", JOptionPane.YES_NO_CANCEL_OPTION);
+            if (reponse == 0) {
+                // Méthode pour sortir du serveur
+                //ServerConstante.SERVER.
+                Alert succes = new Alert(Alert.AlertType.CONFIRMATION);
+                succes.setTitle("Retait du serveur");
+                succes.setHeaderText("Sortie du serveur");
+                succes.setContentText("Vous êtes sorti du serveur");
+            }
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
     }
 
 }

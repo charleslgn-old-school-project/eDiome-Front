@@ -1,6 +1,10 @@
 package com.ircfront.controller;
 
+import com.ircfront.Utils.ControllerUtils;
 import com.ircfront.start.Main;
+import com.ircfront.utils.HashPassword;
+import com.ircfront.utils.XMLDataFinder;
+import com.ircfront.utils.constante.ServerConstante;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
@@ -11,11 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import com.ircfront.utils.XMLDataFinder;
-import com.ircfront.Utils.ControllerUtils;
-import com.ircfront.utils.constante.ServerConstante;
-import com.ircfront.utils.HashPassword;
 
 import java.net.URL;
 import java.util.ResourceBundle;

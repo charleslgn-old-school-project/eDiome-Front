@@ -1,8 +1,7 @@
 package com.ircfront.controller;
-import com.ircfront.start.Main;
+
 import com.ircfront.utils.XMLDataFinder;
 import com.ircfront.utils.constante.ServerConstante;
-import com.ircserv.inter.MenuInterface;
 import com.ircserv.metier.Server;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -11,16 +10,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.net.URL;
-import java.nio.file.Paths;
-import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
 import java.util.ResourceBundle;
 
 public class AddNewServerController implements Initializable {

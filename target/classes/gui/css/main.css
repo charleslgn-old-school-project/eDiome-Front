@@ -1,5 +1,5 @@
-@import url("object/menu-bar.css");
 @import url("object/chat.css");
+@import url("object/menu-bar.css");
 @import url("object/button.css");
 @import url("object/button-dashboard.css");
 @import url("object/button-close.css");
@@ -18,3 +18,12 @@
 .pn-zone-travail {
     -fx-background-color:  -third-color;
 }
+
+.scroll-bar {
+    -fx-font-size: 2px;
+}
+
+.scroll-bar:hover, .scroll-bar:pressed {
+    -fx-font-size: 15px;
+}
+
