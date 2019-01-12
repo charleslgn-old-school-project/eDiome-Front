@@ -1,0 +1,5 @@
+.jfx-check-box {
+    -jfx-checked-color: -checkedcolor;
+    -jfx-unchecked-color: -uncheckedcolor;
+    -fx-text-fill : -text-color;
+}
