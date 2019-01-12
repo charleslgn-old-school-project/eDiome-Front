@@ -135,7 +135,7 @@ public class IRCController implements Initializable {
   private void send() {
     try {
       if (!textMessage.getText().trim().equalsIgnoreCase("")) {
-        ServerConstante.SERVER.send(this.userId, this.nbServ, this.textMessage.getText());
+        ServerConstante.SERVER.send(this.userId, this.textMessage.getText());
         textMessage.setText("");
         sendByYou = true;
         paneChat.setVvalue(paneChat.getVmax());
@@ -154,7 +154,7 @@ public class IRCController implements Initializable {
       File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
       if(file != null) {
         byte[] data = FileUtils.readFileToByteArray(file);
-        ServerConstante.SERVER.uploadFile(this.userId, this.nbServ, data, file.getName());
+        ServerConstante.SERVER.uploadFile(this.userId, data, file.getName());
       }
     } catch (IOException e) {
       e.printStackTrace();
