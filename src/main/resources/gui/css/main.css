@@ -9,6 +9,7 @@
 @import url("object/progress-bar.css");
 @import url("object/progress-indicator.css");
 @import url("object/addserver-button.css");
+@import url("object/checkbox.css");
 
 .root{
     -fx-font-size: 13pt;
@@ -26,4 +27,6 @@
 .scroll-bar:hover, .scroll-bar:pressed {
     -fx-font-size: 15px;
 }
+
+
 

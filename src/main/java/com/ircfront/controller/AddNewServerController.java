@@ -44,6 +44,8 @@ public class AddNewServerController implements Initializable {
                 stage.close();
             }
         });
+        addServerButton.getStyleClass().add("addserverbutton");
+        closeButton.getStyleClass().add("addserverbutton");
 
         String color = XMLDataFinder.getTheme();
         vbox.getStylesheets().add(getClass().getResource("../../../gui/css/main-" + color + ".css").toExternalForm());

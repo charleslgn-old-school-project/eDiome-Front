@@ -15,6 +15,9 @@
     -scroll-bar-color         : Lavender;
 
     -separator-color : rgb(17,17,17);
+
+    -checkedcolor : green;
+    -uncheckedcolor : black;
 }
 
 

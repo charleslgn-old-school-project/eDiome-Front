@@ -62,7 +62,7 @@ public class Dashboardontroller implements Initializable {
     @FXML
     private BorderPane pnZoneTravail;
     @FXML
-    private Label lbTitre;
+    private Label lbTitre, lblName;
     @FXML
     private JFXHamburger hamburger;
     @FXML
@@ -77,7 +77,7 @@ public class Dashboardontroller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createDrawer();
-
+        lblName.setText(XMLDataFinder.getPseudo());
         addServ();
         BorderPane.setAlignment(this.pnZoneTravail, Pos.CENTER);
 
@@ -402,11 +402,11 @@ public class Dashboardontroller implements Initializable {
             iw.setImage(logo);
             iw.setFitHeight(34.5);
             iw.setFitWidth(150);
-            vBox.getChildren().add(iw);
 
             servers = ServerConstante.MENU.findServerByUser(nbUser);
             for (Server server : servers) {
                 JFXButton jfxButton = new JFXButton(server.getName());
+                jfxButton.getStyleClass().add("addserverbutton");
                 jfxButton.setPrefSize(Double.MAX_VALUE, 60);
                 jfxButton.setOnAction(event -> {
                     // Vérifier à l'aide d'une requête la connexion au serveur
@@ -430,13 +430,26 @@ public class Dashboardontroller implements Initializable {
             addnewserver.getStyleClass().add("addserverbutton");
             addnewserver.setPrefSize(60, 60);
             addnewserver.setOnAction(e -> addNewServer());
-            vBox.getChildren().add(addnewserver);
+            addnewserver.setMinSize(60,60);
+            //vBox.getChildren().add(addnewserver);
 
             ScrollPane scrollPane = new ScrollPane();
             scrollPane.getStyleClass().add("menu-bar-2");
             scrollPane.setFitToWidth(true);
             scrollPane.setContent(vBox);
-            drawer.setSidePane(scrollPane);
+
+            VBox slider = new VBox();
+            slider.getStyleClass().add("menu-bar-2");
+            slider.setSpacing(10);
+            slider.setPadding(new Insets(10, 10, 20, 10));
+            slider.setAlignment(Pos.TOP_CENTER);
+
+            slider.getChildren().add(iw);
+            slider.getChildren().add(scrollPane);
+            slider.getChildren().add(addnewserver);
+
+            //drawer.setSidePane(scrollPane);
+            drawer.setSidePane(slider);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -480,13 +493,18 @@ public class Dashboardontroller implements Initializable {
         adduser.setOnAction(e -> ManageUsers(server.getId(), true, contextMenu));
         MenuItem deluser = new MenuItem("Retirer un utilisateur");
         deluser.setOnAction(e -> ManageUsers(server.getId(), false, contextMenu));
+        MenuItem droits = new MenuItem("Gérer les droits");
+        droits.setOnAction(e -> gestionDroits(server.getId(), contextMenu));
+        droits.setStyle("-text-color:orange;");
+        MenuItem separator = new MenuItem("");
+        separator.setDisable(true);
         MenuItem quitserv = new MenuItem("Quitter le serveur");
         quitserv.setOnAction(e -> quitServer(server.getId(), contextMenu));
         quitserv.setStyle("-text-color:red;");
         MenuItem delserv = new MenuItem("Supprimer le serveur");
         delserv.setOnAction(e -> delServer(server.getId(), contextMenu));
         delserv.setStyle("-text-color:red;");
-        contextMenu.getItems().addAll(adduser, deluser, quitserv, delserv);
+        contextMenu.getItems().addAll(adduser, deluser, droits, separator, quitserv, delserv);
         return contextMenu;
     }
 
@@ -512,10 +530,11 @@ public class Dashboardontroller implements Initializable {
                 // Supprimer le serveur
                 System.out.println("je supprime le serveur" + server);
                 ServerConstante.MENU.deleteServer(server);
-                Alert succes = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert succes = new Alert(Alert.AlertType.INFORMATION);
                 succes.setTitle("Suppression du serveur");
                 succes.setHeaderText("Serveur supprimé");
                 succes.setContentText("Le serveur a été supprimé avec succès");
+                succes.show();
                 this.addServ();
             }
         }catch (Exception ex){
@@ -530,13 +549,43 @@ public class Dashboardontroller implements Initializable {
             if (reponse == 0) {
                 // Méthode pour sortir du serveur
                 //ServerConstante.SERVER.
-                Alert succes = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert succes = new Alert(Alert.AlertType.INFORMATION);
                 succes.setTitle("Retait du serveur");
                 succes.setHeaderText("Sortie du serveur");
                 succes.setContentText("Vous êtes sorti du serveur");
+                succes.show();
             }
         }catch (Exception ex){
             System.out.println(ex);
+        }
+    }
+
+    /**
+     * Gestion des droits
+     * @param server
+     * @param contextMenu
+     */
+    private void gestionDroits(int server, ContextMenu contextMenu){
+        contextMenu.hide();
+        try {
+            ManageRights manageRights = new ManageRights(server);
+            Stage st = new Stage();
+            st.initModality(Modality.WINDOW_MODAL);
+            st.initOwner(Main.getPrimaryStage().getScene().getWindow());
+            st.initStyle(StageStyle.UNDECORATED);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/managerights.fxml"));
+            loader.setController(manageRights);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            st.setScene(scene);
+            st.show();
+
+            root.getScene().getWindow().setOnHiding(event2 -> {
+                st.close();
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

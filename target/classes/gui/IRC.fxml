@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +13,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="1250.0" styleClass="pn-zone-travail" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"> <!-- fx:controller="controller.IRCController"> -->
    <bottom>
@@ -37,7 +35,7 @@
                         <Insets bottom="5.0" right="10.0" top="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <JFXButton fx:id="btnemoji" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#displayEmoji" prefHeight="30.0" prefWidth="50.0" text="😀">
+                  <JFXButton fx:id="btnemoji" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#displayEmoji" prefHeight="40.0" prefWidth="50.0" text="😀">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
@@ -69,50 +67,6 @@
          </content>
       </ScrollPane>
    </center>
-   <top>
-      <GridPane>
-         <BorderPane.margin>
-            <Insets bottom="15.0" top="10.0" />
-         </BorderPane.margin>
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <HBox alignment="CENTER_RIGHT" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" GridPane.columnIndex="1">
-               <children>
-                  <Label fx:id="lblPseudo" maxWidth="1.7976931348623157E308" prefHeight="17.0" text="Pseudo : ">
-                     <font>
-                        <Font name="Segoe UI Emoji" size="15.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="textPseudo" prefHeight="26.0" prefWidth="196.0">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets right="20.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" maxHeight="40.0" minHeight="40.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </HBox>
-         </children>
-      </GridPane>
-   </top>
    <left>
       <Pane prefHeight="200.0" prefWidth="20.0" />
    </left>
@@ -127,4 +81,7 @@
          </children>
       </AnchorPane>
    </right>
+   <top>
+      <Pane maxHeight="20.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </top>
 </BorderPane>

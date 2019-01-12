@@ -15,5 +15,8 @@
     -scroll-bar-color         : rgb(125, 148, 158);
 
     -separator-color : rgb(238,238,238);
+
+    -checkedcolor : green;
+    -uncheckedcolor : black;
 }
 

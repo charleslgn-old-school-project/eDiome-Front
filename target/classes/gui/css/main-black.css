@@ -15,7 +15,13 @@
     -scroll-bar-color         : white;
 
     -separator-color : rgb(17,17,17);
+
+    -checkedcolor : red;
+    -uncheckedcolor : black;
+
 }
+
+
 
 
 

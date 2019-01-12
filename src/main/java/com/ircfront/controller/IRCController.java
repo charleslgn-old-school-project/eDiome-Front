@@ -39,6 +39,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class IRCController implements Initializable {
@@ -72,12 +73,6 @@ public class IRCController implements Initializable {
   @FXML
   private VBox VboxMere;
 
-  @FXML
-  private JFXButton addUserButton;
-
-  @FXML
-  private JFXButton delUserButton;
-
   private ServerInterface obj;
 
   private int nbServ;
@@ -90,12 +85,10 @@ public class IRCController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    textPseudo.setText(XMLDataFinder.getPseudo());
 
-    textPseudo.setDisable(true);
-
+    btnSend.getStyleClass().add("addserverbutton");
+    btnemoji  .getStyleClass().add("addserverbutton");
     paneChat.setVvalue(paneChat.getVmax());
-
     borderPane.setOnMouseClicked(e -> ScrollPaneEmoji.setVisible(false));
 
     textMessage.setOnKeyPressed(event -> {
@@ -132,7 +125,6 @@ public class IRCController implements Initializable {
   }
 
   private void translate() {
-    lblPseudo.setText(Translate.haveIt(LabelName.PSEUDO, Main.getLangue().label) + " : ");
     btnSend.setText(Translate.haveIt(ButonName.SEND, Main.getLangue().butonName));
   }
 
@@ -143,7 +135,7 @@ public class IRCController implements Initializable {
   private void send() {
     try {
       if (!textMessage.getText().trim().equalsIgnoreCase("")) {
-        ServerConstante.SERVER.send(this.userId, this.nbServ, textMessage.getText().trim());
+        ServerConstante.SERVER.send(this.userId, this.nbServ, this.textMessage.getText());
         textMessage.setText("");
         sendByYou = true;
         paneChat.setVvalue(paneChat.getVmax());
@@ -223,7 +215,7 @@ public class IRCController implements Initializable {
    * initialize chat
    */
   private void printAllChat(VBox vBox) {
-    ArrayList<Message> messages;
+    List<Message> messages;
     try {
       messages = ServerConstante.SERVER.getMessages();
       for (Message message : messages) {
@@ -239,7 +231,7 @@ public class IRCController implements Initializable {
    * add the last message if someone send a new message
    */
   private void printLastMessage(VBox vBox) {
-    ArrayList<Message> messages;
+    List<Message> messages;
     try {
       messages = ServerConstante.SERVER.getMessages(1);
       if (messages.size() != 0 && !lastMessage.equals(messages.get(0))) {
