@@ -12,12 +12,16 @@ import com.sun.jna.platform.win32.WinUser;
 import com.vdurmont.emoji.EmojiParser;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -155,5 +159,22 @@ public class ControllerUtils {
 
     public static void load(FXMLLoader loader) {
         load(loader, -1);
+    }
+
+    public static VBox createVBox(){
+        VBox vBox = new VBox();
+        vBox.getStyleClass().add("menu-bar-2");
+        vBox.setSpacing(10);
+        vBox.setPadding(new Insets(10, 10, 20, 10));
+        vBox.setAlignment(Pos.TOP_CENTER);
+        return vBox;
+    }
+
+    public static Stage createStage(){
+        Stage st = new Stage();
+        st.initModality(Modality.WINDOW_MODAL);
+        st.initOwner(Main.getPrimaryStage().getScene().getWindow());
+        st.initStyle(StageStyle.UNDECORATED);
+        return st;
     }
 }

@@ -17,7 +17,7 @@ public interface MenuInterface extends Remote {
 
     int connect(String user, String psw) throws RemoteException;
 
-    String getUserName(int id) throws RemoteException;
+    Utilisateur getUser(int id) throws RemoteException;
 
     int createUser(Utilisateur utilisateur) throws RemoteException;
 
