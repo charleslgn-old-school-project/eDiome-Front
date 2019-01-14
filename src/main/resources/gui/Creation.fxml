@@ -6,6 +6,7 @@
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -38,7 +39,12 @@
             <JFXTextField fx:id="prenom" />
             <Label />
             <Label text="Password" />
-            <JFXPasswordField fx:id="pasword1" onKeyReleased="#setStrong" />
+            <HBox prefHeight="24.0" prefWidth="210.0" spacing="5.0">
+               <children>
+                  <JFXPasswordField fx:id="pasword1" onKeyReleased="#setStrong" prefHeight="40.0" prefWidth="160.0" />
+                  <JFXButton mnemonicParsing="false" onAction="#showInfo" prefHeight="42.0" prefWidth="41.0" text="?" />
+               </children>
+            </HBox>
             <JFXProgressBar fx:id="passwordStrongValidator" prefHeight="11.0" prefWidth="200.0" progress="0.5" style="-: ;">
                <VBox.margin>
                   <Insets top="5.0" />

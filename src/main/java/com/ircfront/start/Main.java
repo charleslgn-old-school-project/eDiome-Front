@@ -10,6 +10,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
+
 public class Main extends Application {
 
   private static Lang langue;
@@ -23,12 +25,13 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) {
     try {
-      com.sun.javafx.util.Logging.getJavaFXLogger().setLevel(sun.util.logging.PlatformLogger.Level.OFF);
+      //com.sun.javafx.util.Logging.getJavaFXLogger().setLevel(sun.util.logging.PlatformLogger.Level.OFF);
       prStage = primaryStage;
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/splash-screen.fxml"));
+      System.out.println(new File("").getAbsolutePath());
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/splash-screen.fxml"));
       Parent root = loader.load();
       Font.loadFont("Roboto-Black.ttf", 10);
-      primaryStage.getIcons().add(new Image(getClass().getResource("../../../image/ediome.png").toString()));
+      primaryStage.getIcons().add(new Image(getClass().getResource("/image/ediome.png").toString()));
       primaryStage.initStyle(StageStyle.UNDECORATED);
       primaryStage.setScene(new Scene(root));
       primaryStage.show();

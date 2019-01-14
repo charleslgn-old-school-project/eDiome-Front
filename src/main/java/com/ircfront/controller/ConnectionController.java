@@ -46,7 +46,7 @@ public class ConnectionController implements Initializable {
   }
 
   public void createConnection() {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/Creation.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/Creation.fxml"));
     ControllerUtils.load(loader);
     ((Stage) panParent.getScene().getWindow()).close();
   }
@@ -84,7 +84,7 @@ public class ConnectionController implements Initializable {
   }
 
   private void loadIRC(int userId) {
-    ControllerUtils.load(new FXMLLoader(getClass().getResource("../../../gui/dashboard.fxml")), userId);
+    ControllerUtils.load(new FXMLLoader(getClass().getResource("/gui/dashboard.fxml")), userId);
     ((Stage) panParent.getScene().getWindow()).close();
   }
 

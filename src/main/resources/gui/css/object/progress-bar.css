@@ -5,3 +5,7 @@
 .bar{
     -fx-background-color: -second-color;
 }
+
+.red-bar    > .bar { -fx-background-color: red;    }
+.orange-bar > .bar { -fx-background-color: orange; }
+.green-bar  > .bar { -fx-background-color: green;  }

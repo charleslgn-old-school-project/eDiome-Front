@@ -1,0 +1,45 @@
+<html><head>
+  <SCRIPT src="http://java.com/js/dtjava.js"></SCRIPT>
+<script>
+    function launchApplication(jnlpfile) {
+        dtjava.launch(            {
+                url : 'eDiome.jnlp'
+            },
+            {
+                javafx : '8.0+',
+                jvmargs : '-Xms512m -Xmx1024m '
+            },
+            {}
+        );
+        return false;
+    }
+</script>
+
+<script>
+    function javafxEmbedcom.javafx.main() {
+        dtjava.embed(
+            {
+                id : 'com.javafx.main',
+                url : 'eDiome.jnlp',
+                placeholder : 'javafx-app-placeholder',
+                width : '1024',
+                height : '768'
+            },
+            {
+                javafx : '8.0+',
+                jvmargs : '-Xms512m -Xmx1024m '
+            },
+            {}
+        );
+    }
+    <!-- Embed FX application into web page once page is loaded -->
+    dtjava.addOnloadCallback(javafxEmbedcom.javafx.main);
+</script>
+
+</head><body>
+<h2>Test page for <b>eDiome</b></h2>
+  <b>Webstart:</b> <a href='eDiome.jnlp' onclick="return launchApplication('eDiome.jnlp');">click to launch this app as webstart</a><br><hr><br>
+
+  <!-- Applet will be inserted here -->
+  <div id='javafx-app-placeholder'></div>
+</body></html>

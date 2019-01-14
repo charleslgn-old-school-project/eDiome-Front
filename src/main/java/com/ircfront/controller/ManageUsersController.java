@@ -17,10 +17,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.net.URL;
 import java.rmi.Naming;
@@ -48,7 +50,7 @@ public class ManageUsersController implements Initializable {
             ServerConstante.SERVER = (ServerInterface) Naming.lookup("//" + ServerConstante.IP + ":" + ServerConstante.PORT + "/serv" + nbServ);
             // Style
             String color = XMLDataFinder.getTheme();
-            vbox.getStylesheets().add(getClass().getResource("../../../gui/css/main-" + color + ".css").toExternalForm());
+            vbox.getStylesheets().add(getClass().getResource("/gui/css/main-" + color + ".css").toExternalForm());
             vbox.setPadding(new Insets(10, 10, 10, 10));
             vbox.setSpacing(10);
             //vbox.setAlignment(Pos.BASELINE_CENTER);
@@ -111,14 +113,16 @@ public class ManageUsersController implements Initializable {
                 case 3:
                     for (UtilisateurDroitServer uds : utilisateurDroitServers) {
                         String identite = uds.getUser().getPrenom() + " " + uds.getUser().getNom();
-                        vboxprinc.getChildren().add(new Label(identite));
+                        HBox hbox = new HBox(new Label(identite));
+                        hbox.setSpacing(20);
+                        hbox.setAlignment(Pos.TOP_LEFT);
+                        vboxprinc.setSpacing(20);
+                        vboxprinc.getChildren().add(hbox);
                     }
                     break;
             }
 
             scrollPane.setContent(vboxprinc);
-            //vbox.getChildren().add(scrollPane);
-
 
             // Bouton d'ajout
             String actionLabel = null;
@@ -132,7 +136,7 @@ public class ManageUsersController implements Initializable {
 
             JFXButton add = new JFXButton(actionLabel);
             add.setButtonType(JFXButton.ButtonType.RAISED);
-            add.getStyleClass().add("addserverbutton");
+            add.getStyleClass().add("button");
             add.setPrefSize(typeChoix == 2 ? 200 : 50, 50);
             add.setMinSize(typeChoix == 2 ? 200 : 50, 50);
             vboxBottom.getChildren().add(add);
@@ -154,7 +158,7 @@ public class ManageUsersController implements Initializable {
             annuler.setButtonType(JFXButton.ButtonType.FLAT);
             annuler.setPrefSize(200, 50);
             annuler.setMinSize(200, 50);
-            annuler.getStyleClass().add("addserverbutton");
+            annuler.getStyleClass().add("button");
             vboxBottom.getChildren().add(annuler);
 
 
@@ -185,6 +189,7 @@ public class ManageUsersController implements Initializable {
      */
     private void addusers() {
         try {
+            boolean isAjoute = false;
             for (Node checkBox : vboxprinc.getChildren()) {
                 if (checkBox instanceof JFXCheckBox) {
                     if (((JFXCheckBox) checkBox).isSelected()) {
@@ -194,17 +199,24 @@ public class ManageUsersController implements Initializable {
                 }
             }
 
-            Alert succes = new Alert(Alert.AlertType.INFORMATION);
-            succes.setTitle("Ajout d'un utilisateur");
-            succes.setHeaderText("Ajout dans le serveur");
-            succes.setContentText("L'utilisateur a été ajouté avec succès.");
-            succes.show();
+            if(isAjoute){
+                Alert succes = new Alert(Alert.AlertType.INFORMATION);
+                succes.initStyle(StageStyle.UNDECORATED);
+                DialogPane dialogPane = succes.getDialogPane();
+                dialogPane.setPrefSize(500,300);
+                dialogPane.getStylesheets().add("gui/css/main-" + XMLDataFinder.getTheme() + ".css");dialogPane.getStyleClass().add("alert");
+                succes.setTitle("Ajout d'un utilisateur");
+                succes.setHeaderText("Ajout dans le serveur");
+                succes.setContentText("L'utilisateur a été ajouté avec succès.");
+                succes.show();
+            }
 
             close();
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
     }
 
     /**

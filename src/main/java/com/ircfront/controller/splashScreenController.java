@@ -50,14 +50,14 @@ public class splashScreenController implements Initializable {
         LocateRegistry.getRegistry(ServerConstante.PORT);
         ServerConstante.MENU = (MenuInterface) Naming.lookup("//" + ServerConstante.IP + ":" + ServerConstante.PORT + "/menu");
         Platform.runLater(() -> {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/Connection.fxml"));
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/Connection.fxml"));
           ControllerUtils.load(loader);
           ((Stage) panParent.getScene().getWindow()).close();
         });
       } catch (NotBoundException | MalformedURLException | RemoteException e) {
         e.printStackTrace();
         identifiant.setText("We can't find any connection");
-        progressIndicator.setStyle("-fx-progress-color: red;");
+        progressIndicator.setStyle("-fx-background-color: red;");
       }
       return null;
     }

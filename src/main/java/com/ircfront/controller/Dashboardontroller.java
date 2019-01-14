@@ -92,17 +92,11 @@ public class Dashboardontroller implements Initializable {
         //language Management
         Main.setLangue(getLang(XMLDataFinder.getLangage()));
         new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                translate();
-            }
-        }.start();
-
-        new AnimationTimer() {
             private long lastUpdate = 0;
 
             @Override
             public void handle(long now) {
+                translate();
                 if ((now - lastUpdate) >= 1_000_000_000) {
                     addServ();
                     lastUpdate = now;
@@ -173,7 +167,7 @@ public class Dashboardontroller implements Initializable {
         try {
             pnZoneTravail.getChildren().clear();
             IRCController ircController = new IRCController(nbServ, this.nbUser);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/IRC.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/IRC.fxml"));
             loader.setController(ircController);
             Pane mainPane = loader.load();
             pnZoneTravail.setCenter(mainPane);
@@ -272,7 +266,7 @@ public class Dashboardontroller implements Initializable {
 
     @FXML
     public void disconnect() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/Connection.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/Connection.fxml"));
         XMLDataFinder.setPassword("");
         ControllerUtils.load(loader);
         ((Stage) pnPrincipal.getScene().getWindow()).close();
@@ -304,7 +298,7 @@ public class Dashboardontroller implements Initializable {
             st.initOwner(pnPrincipal.getScene().getWindow());
             st.initStyle(StageStyle.UNDECORATED);
 
-            Parent root = FXMLLoader.load(getClass().getResource("../../../gui/propos.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/gui/propos.fxml"));
             Scene scene = new Scene(root);
             st.setScene(scene);
             st.setResizable(false);
@@ -330,7 +324,7 @@ public class Dashboardontroller implements Initializable {
             MenuItem mnu = (MenuItem) node;
             String color = (String) mnu.getUserData();
             Main.getPrimaryStage().getScene().getStylesheets().clear();
-            Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("../../../gui/css/main-" + color + ".css").toExternalForm());
+            Main.getPrimaryStage().getScene().getStylesheets().add(getClass().getResource("/gui/css/main-" + color + ".css").toExternalForm());
             XMLDataFinder.setTheme(color);
         }
     }
@@ -342,7 +336,7 @@ public class Dashboardontroller implements Initializable {
         try {
             Stage st = ControllerUtils.createStage();
             AddNewServerController addNewServerController = new AddNewServerController(nbUser);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/NewServer.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/NewServer.fxml"));
             loader.setController(addNewServerController);
             Pane root = loader.load();
             Scene scene = new Scene(root);
@@ -375,47 +369,47 @@ public class Dashboardontroller implements Initializable {
                 iw.setFitWidth(150);
 
                 for (Server server : servers) {
-                    JFXButton jfxButton = new JFXButton(server.getName());
-                    jfxButton.getStyleClass().add("addserverbutton");
-                    jfxButton.setPrefSize(Double.MAX_VALUE, 60);
-                    jfxButton.setOnAction(event -> {
-                        AffichageIRCClick(server.getId());
-                        lbTitre.setText(server.getName());
-                    });
+                JFXButton jfxButton = new JFXButton(server.getName());
+                jfxButton.getStyleClass().add("button");
+                jfxButton.setPrefSize(Double.MAX_VALUE, 60);
+                jfxButton.setOnAction(event -> {
+                    // Vérifier à l'aide d'une requête la connexion au serveur
+                    AffichageIRCClick(server.getId());
+                    lbTitre.setText(server.getName());
+                });
 
-                    ContextMenu contextMenu = createContextMenu(server);
-                    jfxButton.setOnMouseClicked(event -> {
-                        if (contextMenu != null) {
-                            if (event.getButton() == MouseButton.SECONDARY) {
-                                contextMenu.show(jfxButton, event.getScreenX(), event.getScreenY());
-                            } else {
-                                contextMenu.hide();
-                            }
-                        }
-                    });
-                    vBox.getChildren().add(jfxButton);
-                }
+                ContextMenu contextMenu = createContextMenu(server);
+                jfxButton.setOnMouseClicked(event -> {
+                    if (event.getButton() == MouseButton.SECONDARY) {
+                        contextMenu.show(jfxButton, event.getScreenX(), event.getScreenY());
+                    } else {
+                        contextMenu.hide();
+                    }
+                });
+                vBox.getChildren().add(jfxButton);
+            }
 
-                JFXButton addnewserver = new JFXButton("+");
-                    addnewserver.setButtonType(JFXButton.ButtonType.RAISED);
-                    addnewserver.getStyleClass().add("addserverbutton");
-                    addnewserver.setPrefSize(60, 60);
-                    addnewserver.setOnAction(e -> addNewServer());
-                    addnewserver.setMinSize(60, 60);
+            JFXButton addnewserver = new JFXButton("+");
+            addnewserver.setButtonType(JFXButton.ButtonType.RAISED);
+            addnewserver.getStyleClass().add("button");
+            addnewserver.setPrefSize(60, 60);
+            addnewserver.setOnAction(e -> addNewServer());
+            addnewserver.setMinSize(60, 60);
+            //vBox.getChildren().add(addnewserver);
 
-                ScrollPane scrollPane = new ScrollPane();
-                scrollPane.getStyleClass().add("menu-bar-2");
-                scrollPane.setFitToWidth(true);
-                scrollPane.setContent(vBox);
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.getStyleClass().add("menu-bar-2");
+            scrollPane.setFitToWidth(true);
+            scrollPane.setContent(vBox);
 
-                VBox slider = ControllerUtils.createVBox();
+            VBox slider = ControllerUtils.createVBox();
 
-                slider.getChildren().add(iw);
-                slider.getChildren().add(scrollPane);
-                slider.getChildren().add(addnewserver);
+            slider.getChildren().add(iw);
+            slider.getChildren().add(scrollPane);
+            slider.getChildren().add(addnewserver);
 
-                //drawer.setSidePane(scrollPane);
-                drawer.setSidePane(slider);
+            //drawer.setSidePane(scrollPane);
+            drawer.setSidePane(slider);
             }
             oldListServ = servers;
         } catch (RemoteException e) {
@@ -430,7 +424,7 @@ public class Dashboardontroller implements Initializable {
         // Ici lance la fenêtre d'ajout utilisateur
         try {
             Stage st = ControllerUtils.createStage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../gui/adduser.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/adduser.fxml"));
             loader.setController(controller);
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -458,13 +452,13 @@ public class Dashboardontroller implements Initializable {
             ImageView iw = new ImageView(new Image("image/king.png"));
             iw.setFitWidth(20);
             iw.setFitHeight(20);
-            HBox hb = new HBox(iw, new Label("Vous contrôler tout le serveur"));
+            HBox hb = new HBox(iw, new Label("Vous contrôlez tout le serveur"));
             hb.setAlignment(Pos.CENTER_LEFT);
             hb.setSpacing(10);
             CustomMenuItem title = new CustomMenuItem();
             title.setContent(hb);
 
-            MenuItem seeuser = new MenuItem("Voir les utlisateurs");
+            MenuItem seeuser = new MenuItem("Voir les utilisateurs");
             SeparatorMenuItem separator = new SeparatorMenuItem();
             MenuItem adduser = new MenuItem("Ajouter un utilisateur");
             MenuItem deluser = new MenuItem("Retirer un utilisateur");
@@ -520,12 +514,23 @@ public class Dashboardontroller implements Initializable {
     private void delServer(int server, ContextMenu contextMenu) {
         try {
             contextMenu.hide();
-            int reponse = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer ce serveur ?", "Confirmation", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (reponse == 0) {
+            OptionDialogController optionDialogController = new OptionDialogController("Voulez-vous supprimer ce serveur ?", "Confirmation");
+            Stage st = ControllerUtils.createStage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/dialogQuestion.fxml"));
+            loader.setController(optionDialogController);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            st.setScene(scene);
+            st.showAndWait();
+            if (optionDialogController.getData() == true) {
                 // Supprimer le serveur
-                System.out.println("je supprime le serveur" + server);
                 ServerConstante.MENU.deleteServer(server);
                 Alert succes = new Alert(Alert.AlertType.INFORMATION);
+                succes.initStyle(StageStyle.UNDECORATED);
+                DialogPane dialogPane = succes.getDialogPane();
+                dialogPane.setPrefSize(500,300);
+                dialogPane.getStylesheets().add("gui/css/main-" + XMLDataFinder.getTheme() + ".css");
+                dialogPane.getStyleClass().add("alert");
                 succes.setTitle("Suppression du serveur");
                 succes.setHeaderText("Serveur supprimé");
                 succes.setContentText("Le serveur a été supprimé avec succès");
@@ -546,6 +551,11 @@ public class Dashboardontroller implements Initializable {
                 Utilisateur user = ServerConstante.MENU.getUser(nbUser);
                 ServerConstante.SERVER.unlinkUserToServer(user);
                 Alert succes = new Alert(Alert.AlertType.INFORMATION);
+                succes.initStyle(StageStyle.UNDECORATED);
+                DialogPane dialogPane = succes.getDialogPane();
+                dialogPane.setPrefSize(500,300);
+                dialogPane.getStylesheets().add("gui/css/main-" + XMLDataFinder.getTheme() + ".css");
+                dialogPane.getStyleClass().add("alert");
                 succes.setTitle("Retait du serveur");
                 succes.setHeaderText("Sortie du serveur");
                 succes.setContentText("Vous êtes sorti du serveur");
