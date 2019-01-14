@@ -1,7 +1,8 @@
 package com.ircfront.controller;
 
-import com.ircfront.Utils.ControllerUtils;
+import com.ircfront.utils.ControllerUtils;
 import com.ircfront.start.Main;
+import com.ircfront.utils.MoveUtils;
 import com.ircfront.utils.XMLDataFinder;
 import com.ircfront.utils.constante.ServerConstante;
 import com.ircfront.utils.lang.Lang;
@@ -50,8 +51,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class Dashboardontroller implements Initializable {
-    private static double xOffset = 0;
-    private static double yOffset = 0;
 
     @FXML
     private MenuBar mnuBar;
@@ -88,9 +87,7 @@ public class Dashboardontroller implements Initializable {
         //Si l'utilisateur clique sur la zone d'irc, le drawer se fermera
         pnZoneTravail.setOnMouseClicked(e -> drawer.close());
         //windows move management
-        mnuBar.setOnMousePressed(this::mousePressed);
-        mnuBar.setOnMouseDragged(this::mouseDrag);
-        mnuBar.setOnMouseReleased(this::mouseRelease);
+        MoveUtils.moveEvent(mnuBar);
 
         //language Management
         Main.setLangue(getLang(XMLDataFinder.getLangage()));
@@ -198,45 +195,6 @@ public class Dashboardontroller implements Initializable {
         fadeTransition.setCycleCount(2);
         fadeTransition.setAutoReverse(true);
         fadeTransition.play();
-    }
-
-    /**
-     * call to move the window
-     */
-    private void mouseDrag(MouseEvent event) {
-        Main.getPrimaryStage().setMaximized(false);
-        setOpacity(0.8);
-
-        if (Main.getPrimaryStage().getY() != event.getScreenY()) {
-            Main.getPrimaryStage().setX(event.getScreenX() - xOffset);
-            Main.getPrimaryStage().setY(event.getScreenY() - yOffset);
-        }
-    }
-
-    /**
-     * change opacity
-     */
-    private void setOpacity(double opacity) {
-        pnPrincipal.getScene().getWindow().setOpacity(opacity);
-    }
-
-    /**
-     * replace the window if it is out of the screen
-     */
-    private void mouseRelease(MouseEvent event) {
-        mouseClicked(event);
-        if (Main.getPrimaryStage().getY() < 0) {
-            Main.getPrimaryStage().setY(0);
-        }
-        setOpacity(1);
-    }
-
-    /**
-     * move the window
-     */
-    private void mousePressed(MouseEvent event) {
-        xOffset = event.getSceneX();
-        yOffset = event.getSceneY();
     }
 
     /**

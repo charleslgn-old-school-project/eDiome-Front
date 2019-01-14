@@ -1,4 +1,4 @@
-package com.ircfront.Utils;
+package com.ircfront.utils;
 
 import com.ircfront.controller.Dashboardontroller;
 import com.ircfront.utils.XMLDataFinder;

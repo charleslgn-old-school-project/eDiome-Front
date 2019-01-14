@@ -1,6 +1,6 @@
 package com.ircfront.controller;
 
-import com.ircfront.Utils.ControllerUtils;
+import com.ircfront.utils.ControllerUtils;
 import com.ircfront.utils.constante.ServerConstante;
 import com.ircserv.inter.MenuInterface;
 import javafx.application.Platform;

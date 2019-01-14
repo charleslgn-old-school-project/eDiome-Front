@@ -11,8 +11,6 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -26,7 +24,6 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.rmi.Naming;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -39,14 +36,11 @@ public class ManageUsersController implements Initializable {
     private int droit;
     private int typeChoix;
 
-    public ManageUsersController(int nbServ, int droit, int typeChoix) {
+    ManageUsersController(int nbServ, int droit, int typeChoix) {
         this.nbServ = nbServ;
         this.droit = droit;
         this.typeChoix = typeChoix;
     }
-
-    private List<Utilisateur> users;
-    private List<UtilisateurDroitServer> utilisateurDroitServers;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -73,15 +67,16 @@ public class ManageUsersController implements Initializable {
             vboxBottom.setAlignment(Pos.CENTER);
 
             // Charger les utilisateurs
-            utilisateurDroitServers = ServerConstante.SERVER.getAllDroit();
+            List<UtilisateurDroitServer> utilisateurDroitServers = ServerConstante.SERVER.getAllDroit();
             List<Droit> droits = ServerConstante.MENU.getDroit();
 
             switch (typeChoix) {
                 case 0:
-                    users = ServerConstante.SERVER.getAllUserNotInServer();
+                    List<Utilisateur> users = ServerConstante.SERVER.getAllUserNotInServer();
                     for (Utilisateur user : users) {
                         vboxprinc.setSpacing(50);
                         JFXCheckBox checkBox = new JFXCheckBox(user.getPrenom() + " " + user.getNom());
+                        checkBox.setUserData(user);
                         vboxprinc.getChildren().add(checkBox);
                     }
                     break;
@@ -92,18 +87,17 @@ public class ManageUsersController implements Initializable {
                         JFXToggleButton toggleButton = new JFXToggleButton();
                         toggleButton.setText(user.getPrenom() + " " + user.getNom());
                         toggleButton.setSelected(true);
+                        toggleButton.setUserData(user);
                         vboxprinc.getChildren().add(toggleButton);
                     }
                     break;
                 case 2:
                     droits.remove(4);
-                    for (int i = 0; i <= droit; i++) {
-                        droits.remove(0);
-                    }
+                    droits.subList(0, droit + 1).clear();
                     for (UtilisateurDroitServer uds : utilisateurDroitServers) {
                         if (uds.getDroit().getId() > droit) {
                             String identite = uds.getUser().getPrenom() + " " + uds.getUser().getNom();
-                            JFXComboBox jfxComboBox = new JFXComboBox();
+                            JFXComboBox<Droit> jfxComboBox = new JFXComboBox<>();
                             jfxComboBox.setItems(FXCollections.observableArrayList(droits));
                             jfxComboBox.getSelectionModel().select(uds.getDroit().getId() - 1);
                             jfxComboBox.setUserData(uds.getUser());
@@ -182,7 +176,7 @@ public class ManageUsersController implements Initializable {
             gridPane.getColumnConstraints().add(new ColumnConstraints(280));
             vbox.getChildren().add(gridPane);
         } catch (Exception ex) {
-            System.out.println(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -194,14 +188,8 @@ public class ManageUsersController implements Initializable {
             for (Node checkBox : vboxprinc.getChildren()) {
                 if (checkBox instanceof JFXCheckBox) {
                     if (((JFXCheckBox) checkBox).isSelected()) {
-                        String userToAdd = ((JFXCheckBox) checkBox).getText();
-                        for (Utilisateur user : users) {
-                            String identite = user.getPrenom() + " " + user.getNom();
-                            if (identite.equals(userToAdd)) {
-                                ServerConstante.SERVER.linkUserToServer(user);
-                                continue;
-                            }
-                        }
+                        Utilisateur user = (Utilisateur) checkBox.getUserData();
+                        ServerConstante.SERVER.linkUserToServer(user);
                     }
                 }
             }
@@ -215,7 +203,7 @@ public class ManageUsersController implements Initializable {
             close();
 
         } catch (Exception ex) {
-            System.out.println(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -226,14 +214,8 @@ public class ManageUsersController implements Initializable {
         try {
             for (Node toggleButton : vboxprinc.getChildren()) {
                 if (toggleButton instanceof JFXToggleButton && !((JFXToggleButton) toggleButton).isSelected()) {
-                    String userToAdd = ((JFXToggleButton) toggleButton).getText();
-                    for (Utilisateur user : users) {
-                        String identite = user.getPrenom() + " " + user.getNom();
-                        if (identite.equals(userToAdd)) {
-                            ServerConstante.SERVER.unlinkUserToServer(user);
-                            continue;
-                        }
-                    }
+                    Utilisateur user = (Utilisateur) toggleButton.getUserData();
+                    ServerConstante.SERVER.unlinkUserToServer(user);
                 }
             }
             close();

@@ -2,11 +2,9 @@ package com.ircfront.controller;
 
 import com.ircfront.utils.XMLDataFinder;
 import com.ircfront.utils.constante.ServerConstante;
-import com.ircserv.metier.Server;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
@@ -32,17 +30,15 @@ public class AddNewServerController implements Initializable {
 
     private int userId;
 
-    public AddNewServerController(int userId){
+    AddNewServerController(int userId){
         this.userId = userId;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        closeButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                Stage stage = (Stage) closeButton.getScene().getWindow();
-                stage.close();
-            }
+        closeButton.setOnAction(e -> {
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
         });
         addServerButton.getStyleClass().add("addserverbutton");
         closeButton.getStyleClass().add("addserverbutton");
@@ -54,7 +50,7 @@ public class AddNewServerController implements Initializable {
     @FXML
     void addserver(ActionEvent event) {
         try {
-            Server serv = ServerConstante.MENU.createNewServer(serverName.getText(), userId);
+            ServerConstante.MENU.createNewServer(serverName.getText(), userId);
             Stage stage = (Stage) closeButton.getScene().getWindow();
             stage.close();
         } catch (RemoteException e) {

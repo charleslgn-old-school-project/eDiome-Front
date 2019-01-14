@@ -1,6 +1,6 @@
 package com.ircfront.controller;
 
-import com.ircfront.Utils.ControllerUtils;
+import com.ircfront.utils.ControllerUtils;
 import com.ircfront.start.Main;
 import com.ircfront.utils.DateUtils;
 import com.ircfront.utils.XMLDataFinder;
