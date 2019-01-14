@@ -86,8 +86,8 @@ public class IRCController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-    btnSend.getStyleClass().add("addserverbutton");
-    btnemoji  .getStyleClass().add("addserverbutton");
+    btnSend.getStyleClass().add("button");
+    btnemoji  .getStyleClass().add("button");
     paneChat.setVvalue(paneChat.getVmax());
     borderPane.setOnMouseClicked(e -> ScrollPaneEmoji.setVisible(false));
 

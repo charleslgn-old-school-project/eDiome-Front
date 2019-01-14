@@ -408,7 +408,7 @@ public class Dashboardontroller implements Initializable {
             servers = ServerConstante.MENU.findServerByUser(nbUser);
             for (Server server : servers) {
                 JFXButton jfxButton = new JFXButton(server.getName());
-                jfxButton.getStyleClass().add("addserverbutton");
+                jfxButton.getStyleClass().add("button");
                 jfxButton.setPrefSize(Double.MAX_VALUE, 60);
                 jfxButton.setOnAction(event -> {
                     // Vérifier à l'aide d'une requête la connexion au serveur
@@ -429,7 +429,7 @@ public class Dashboardontroller implements Initializable {
 
             JFXButton addnewserver = new JFXButton("+");
             addnewserver.setButtonType(JFXButton.ButtonType.RAISED);
-            addnewserver.getStyleClass().add("addserverbutton");
+            addnewserver.getStyleClass().add("button");
             addnewserver.setPrefSize(60, 60);
             addnewserver.setOnAction(e -> addNewServer());
             addnewserver.setMinSize(60, 60);
@@ -503,7 +503,7 @@ public class Dashboardontroller implements Initializable {
             ImageView iw = new ImageView(new Image("image/king.png"));
             iw.setFitWidth(20);
             iw.setFitHeight(20);
-            HBox hb = new HBox(iw, new Label("Vous contrôler tout le serveur"));
+            HBox hb = new HBox(iw, new Label("Vous contrôlez tout le serveur"));
             hb.setAlignment(Pos.CENTER_LEFT);
             hb.setSpacing(10);
             CustomMenuItem title = new CustomMenuItem();
@@ -564,12 +564,17 @@ public class Dashboardontroller implements Initializable {
     private void delServer(int server, ContextMenu contextMenu) {
         try {
             contextMenu.hide();
-            int reponse = JOptionPane.showConfirmDialog(null, "Voulez-vous supprimer ce serveur ?", "Confirmation", JOptionPane.YES_NO_CANCEL_OPTION);
+            JOptionPane jOptionPane = new JOptionPane();
+            int reponse = jOptionPane.showConfirmDialog(null, "Voulez-vous supprimer ce serveur ?", "Confirmation", JOptionPane.YES_NO_CANCEL_OPTION);
             if (reponse == 0) {
                 // Supprimer le serveur
                 System.out.println("je supprime le serveur" + server);
                 ServerConstante.MENU.deleteServer(server);
                 Alert succes = new Alert(Alert.AlertType.INFORMATION);
+                succes.initStyle(StageStyle.UNDECORATED);
+                DialogPane dialogPane = succes.getDialogPane();
+                dialogPane.getStylesheets().add("gui/css/main-" + XMLDataFinder.getTheme() + ".css");
+                dialogPane.getStyleClass().add("alert");
                 succes.setTitle("Suppression du serveur");
                 succes.setHeaderText("Serveur supprimé");
                 succes.setContentText("Le serveur a été supprimé avec succès");
@@ -589,6 +594,10 @@ public class Dashboardontroller implements Initializable {
                 // Méthode pour sortir du serveur
                 //ServerConstante.SERVER.
                 Alert succes = new Alert(Alert.AlertType.INFORMATION);
+                succes.initStyle(StageStyle.UNDECORATED);
+                DialogPane dialogPane = succes.getDialogPane();
+                dialogPane.getStylesheets().add("gui/css/main-" + XMLDataFinder.getTheme() + ".css");
+                dialogPane.getStyleClass().add("alert");
                 succes.setTitle("Retait du serveur");
                 succes.setHeaderText("Sortie du serveur");
                 succes.setContentText("Vous êtes sorti du serveur");

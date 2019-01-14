@@ -1,15 +1,15 @@
 @import url("object/chat.css");
 @import url("object/menu-bar.css");
 @import url("object/button.css");
-@import url("object/button-dashboard.css");
-@import url("object/button-close.css");
 @import url("object/menu-emoji.css");
 @import url("object/profile-logo.css");
 @import url("object/audio-player.css");
 @import url("object/progress-bar.css");
 @import url("object/progress-indicator.css");
-@import url("object/addserver-button.css");
 @import url("object/checkbox.css");
+@import url("object/toggle.css");
+@import url("object/button-close.css");
+@import url("object/alert.css");
 
 .root{
     -fx-font-size: 13pt;

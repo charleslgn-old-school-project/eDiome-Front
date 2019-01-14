@@ -9,7 +9,7 @@
 
 <HBox alignment="CENTER" prefHeight="45.0" prefWidth="300.0" spacing="10.0" styleClass="pn-zone-travail" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ToggleButton fx:id="playPause" mnemonicParsing="false" onAction="#playPauseClicked" prefHeight="35.0" prefWidth="45.0" snapToPixel="false" styleClass="button-dashboard">
+      <ToggleButton fx:id="playPause" mnemonicParsing="false" onAction="#playPauseClicked" prefHeight="35.0" prefWidth="45.0" snapToPixel="false" styleClass="button">
          <graphic>
             <ImageView fx:id="igmPlay">
                <image>
@@ -17,7 +17,7 @@
                </image>
             </ImageView>
          </graphic></ToggleButton>
-      <Button fx:id="stop" mnemonicParsing="false" onAction="#stopClicked" prefHeight="35.0" prefWidth="45.0" styleClass="button-dashboard">
+      <Button fx:id="stop" mnemonicParsing="false" onAction="#stopClicked" prefHeight="35.0" prefWidth="45.0" styleClass="button">
          <graphic>
             <ImageView>
                <image>

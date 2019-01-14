@@ -1,4 +1,13 @@
-.button{
+.alert{
+    -fx-background-color:-first-color;
+    -fx-text-fill : -text-color;
+}
+
+.alert:header *.header-panel{
+    -fx-background-color: -second-color;
+}
+
+.alert .button{
     -fx-background-radius: 50px;
     -fx-text-fill: -text-color;
     -fx-border-color: -third-color;

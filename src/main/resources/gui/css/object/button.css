@@ -1,10 +1,9 @@
-.button {
-    -fx-background-radius: 10;
+.button{
+    -fx-background-radius: 50px;
+    -fx-text-fill: -text-color;
+    -fx-border-color: -third-color;
+    -fx-border-radius: 50px;
+    -fx-border-width: 2px;
     -fx-background-color: -first-color;
-    -fx-font-size: 16px;
-    -fx-text-fill: -button-text-color;
-}
-
-.jfx-button {
     -jfx-disable-visual-focus: true;
 }

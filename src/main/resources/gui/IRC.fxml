@@ -40,12 +40,12 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#attachments" prefHeight="30.0" prefWidth="50.0" text="+">
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#attachments" prefHeight="40.0" prefWidth="50.0" text="+">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="btnSend" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#send" prefHeight="31.0" prefWidth="109.0" text="Envoyer">
+                  <JFXButton fx:id="btnSend" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#send" prefHeight="40.0" prefWidth="109.0" text="Envoyer">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

@@ -19,10 +19,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.net.URL;
 import java.rmi.Naming;
@@ -105,6 +107,7 @@ public class ManageUsersController implements Initializable {
                         HBox hbox = new HBox(jfxComboBox, new Label(identite));
                         hbox.setSpacing(20);
                         hbox.setAlignment(Pos.TOP_LEFT);
+                        vboxprinc.setSpacing(20);
                         vboxprinc.getChildren().add(hbox);
                     }
                 }
@@ -113,6 +116,7 @@ public class ManageUsersController implements Initializable {
                 List<Droit> droits = ServerConstante.MENU.getDroit();
                 for (UtilisateurDroitServer uds : utilisateurDroitServers) {
                     String identite = uds.getUser().getPrenom() + " " + uds.getUser().getNom();
+                    vboxprinc.setSpacing(10);
                     vboxprinc.getChildren().add(new Label(identite));
                 }
             }
@@ -133,7 +137,7 @@ public class ManageUsersController implements Initializable {
 
             JFXButton add = new JFXButton(actionLabel);
             add.setButtonType(JFXButton.ButtonType.RAISED);
-            add.getStyleClass().add("addserverbutton");
+            add.getStyleClass().add("button");
             add.setPrefSize(typeChoix == 2 ? 200 : 50, 50);
             add.setMinSize(typeChoix == 2 ? 200 : 50, 50);
             vboxBottom.getChildren().add(add);
@@ -155,7 +159,7 @@ public class ManageUsersController implements Initializable {
             annuler.setButtonType(JFXButton.ButtonType.FLAT);
             annuler.setPrefSize(200, 50);
             annuler.setMinSize(200, 50);
-            annuler.getStyleClass().add("addserverbutton");
+            annuler.getStyleClass().add("button");
             vboxBottom.getChildren().add(annuler);
 
 
@@ -186,6 +190,7 @@ public class ManageUsersController implements Initializable {
      */
     private void addusers() {
         try {
+            boolean isAjoute = false;
             for (Node checkBox : vboxprinc.getChildren()) {
                 if (checkBox instanceof JFXCheckBox) {
                     if (((JFXCheckBox) checkBox).isSelected()) {
@@ -194,6 +199,7 @@ public class ManageUsersController implements Initializable {
                             String identite = user.getPrenom() + " " + user.getNom();
                             if (identite.equals(userToAdd)) {
                                 ServerConstante.SERVER.linkUserToServer(user);
+                                isAjoute = true;
                                 continue;
                             }
                         }
@@ -201,17 +207,23 @@ public class ManageUsersController implements Initializable {
                 }
             }
 
-            Alert succes = new Alert(Alert.AlertType.INFORMATION);
-            succes.setTitle("Ajout d'un utilisateur");
-            succes.setHeaderText("Ajout dans le serveur");
-            succes.setContentText("L'utilisateur a été ajouté avec succès.");
-            succes.show();
+            if(isAjoute){
+                Alert succes = new Alert(Alert.AlertType.INFORMATION);
+                succes.initStyle(StageStyle.UNDECORATED);
+                DialogPane dialogPane = succes.getDialogPane();
+                dialogPane.getStylesheets().add("gui/css/main-" + XMLDataFinder.getTheme() + ".css");dialogPane.getStyleClass().add("alert");
+                succes.setTitle("Ajout d'un utilisateur");
+                succes.setHeaderText("Ajout dans le serveur");
+                succes.setContentText("L'utilisateur a été ajouté avec succès.");
+                succes.show();
+            }
 
             close();
 
         } catch (Exception ex) {
             System.out.println(ex);
         }
+
     }
 
     /**

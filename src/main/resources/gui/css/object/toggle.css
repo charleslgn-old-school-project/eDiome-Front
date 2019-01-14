@@ -1,0 +1,5 @@
+.jfx-toggle-button {
+    -jfx-toggle-color: -checkedcolor;
+    -jfx-untoggle-color: -uncheckedcolor;
+    -fx-text-fill : -text-color;
+}
