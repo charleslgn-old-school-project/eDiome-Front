@@ -10,6 +10,7 @@
 @import url("object/toggle.css");
 @import url("object/button-close.css");
 @import url("object/alert.css");
+@import url("object/combobox.css");
 
 .root{
     -fx-font-size: 13pt;

@@ -1,0 +1,5 @@
+.jfx-combo-box {
+    -jfx-focus-color: -checkedcolor;
+    -jfx-unfocus-color: -text-color;
+    -fx-prompt-text-fill: -text-color;
+}

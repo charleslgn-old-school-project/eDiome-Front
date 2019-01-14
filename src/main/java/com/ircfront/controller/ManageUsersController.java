@@ -75,30 +75,49 @@ public class ManageUsersController implements Initializable {
             vboxBottom.setAlignment(Pos.CENTER);
 
             // Charger les utilisateurs
-            if (typeChoix == 0) {
-                users = ServerConstante.SERVER.getAllUserNotInServer();
-                for (Utilisateur user : users) {
-                    vboxprinc.setSpacing(50);
-                    JFXCheckBox checkBox = new JFXCheckBox(user.getPrenom() + " " + user.getNom());
-                    vboxprinc.getChildren().add(checkBox);
-                }
-            } else if (typeChoix == 1) {
-                users = ServerConstante.SERVER.getAllUserInServer();
-                for (Utilisateur user : users) {
-                    vboxprinc.setSpacing(1);
-                    JFXToggleButton toggleButton = new JFXToggleButton();
-                    toggleButton.setText(user.getPrenom() + " " + user.getNom());
-                    toggleButton.setSelected(true);
-                    vboxprinc.getChildren().add(toggleButton);
-                }
-            } else if (typeChoix == 2) {
-                utilisateurDroitServers = ServerConstante.SERVER.getAllDroit();
-                List<Droit> droits = ServerConstante.MENU.getDroit();
-                for (int i = 0 ; i <= droit ; i++){
-                    droits.remove(0);
-                }
-                for (UtilisateurDroitServer uds : utilisateurDroitServers) {
-                    if(uds.getDroit().getId() > droit) {
+            utilisateurDroitServers = ServerConstante.SERVER.getAllDroit();
+            List<Droit> droits = ServerConstante.MENU.getDroit();
+
+            switch (typeChoix) {
+                case 0:
+                    users = ServerConstante.SERVER.getAllUserNotInServer();
+                    for (Utilisateur user : users) {
+                        vboxprinc.setSpacing(50);
+                        JFXCheckBox checkBox = new JFXCheckBox(user.getPrenom() + " " + user.getNom());
+                        vboxprinc.getChildren().add(checkBox);
+                    }
+                    break;
+                case 1:
+                    users = ServerConstante.SERVER.getAllUserInServer();
+                    for (Utilisateur user : users) {
+                        vboxprinc.setSpacing(1);
+                        JFXToggleButton toggleButton = new JFXToggleButton();
+                        toggleButton.setText(user.getPrenom() + " " + user.getNom());
+                        toggleButton.setSelected(true);
+                        vboxprinc.getChildren().add(toggleButton);
+                    }
+                    break;
+                case 2:
+                    //droits.remove(4);
+                    for (int i = 0; i <= droit; i++) {
+                        droits.remove(0);
+                    }
+                    for (UtilisateurDroitServer uds : utilisateurDroitServers) {
+                        if (uds.getDroit().getId() > droit) {
+                            String identite = uds.getUser().getPrenom() + " " + uds.getUser().getNom();
+                            JFXComboBox jfxComboBox = new JFXComboBox();
+                            jfxComboBox.setItems(FXCollections.observableArrayList(droits));
+                            jfxComboBox.getSelectionModel().select(uds.getDroit().getId() - 1);
+                            jfxComboBox.setUserData(uds.getUser());
+                            HBox hbox = new HBox(jfxComboBox, new Label(identite));
+                            hbox.setSpacing(20);
+                            hbox.setAlignment(Pos.TOP_LEFT);
+                            vboxprinc.getChildren().add(hbox);
+                        }
+                    }
+                    break;
+                case 3:
+                    for (UtilisateurDroitServer uds : utilisateurDroitServers) {
                         String identite = uds.getUser().getPrenom() + " " + uds.getUser().getNom();
                         JFXComboBox jfxComboBox = new JFXComboBox();
                         jfxComboBox.setItems(FXCollections.observableArrayList(droits));
@@ -110,20 +129,10 @@ public class ManageUsersController implements Initializable {
                         vboxprinc.setSpacing(20);
                         vboxprinc.getChildren().add(hbox);
                     }
-                }
-            } else if (typeChoix == 3) {
-                utilisateurDroitServers = ServerConstante.SERVER.getAllDroit();
-                List<Droit> droits = ServerConstante.MENU.getDroit();
-                for (UtilisateurDroitServer uds : utilisateurDroitServers) {
-                    String identite = uds.getUser().getPrenom() + " " + uds.getUser().getNom();
-                    vboxprinc.setSpacing(10);
-                    vboxprinc.getChildren().add(new Label(identite));
-                }
+                    break;
             }
 
             scrollPane.setContent(vboxprinc);
-            //vbox.getChildren().add(scrollPane);
-
 
             // Bouton d'ajout
             String actionLabel = null;
@@ -180,7 +189,7 @@ public class ManageUsersController implements Initializable {
             gridPane.getRowConstraints().get(1).setPercentHeight(30);
             gridPane.getColumnConstraints().add(new ColumnConstraints(280));
             vbox.getChildren().add(gridPane);
-        } catch (Exception ex) {
+        }catch (Exception ex) {
             System.out.println(ex);
         }
     }
@@ -211,6 +220,7 @@ public class ManageUsersController implements Initializable {
                 Alert succes = new Alert(Alert.AlertType.INFORMATION);
                 succes.initStyle(StageStyle.UNDECORATED);
                 DialogPane dialogPane = succes.getDialogPane();
+                dialogPane.setPrefSize(500,300);
                 dialogPane.getStylesheets().add("gui/css/main-" + XMLDataFinder.getTheme() + ".css");dialogPane.getStyleClass().add("alert");
                 succes.setTitle("Ajout d'un utilisateur");
                 succes.setHeaderText("Ajout dans le serveur");
@@ -235,7 +245,11 @@ public class ManageUsersController implements Initializable {
                 if (toggleButton instanceof JFXToggleButton && !((JFXToggleButton) toggleButton).isSelected()) {
                     String userToAdd = ((JFXToggleButton) toggleButton).getText();
                     for (Utilisateur user : users) {
-
+                        String identite = user.getPrenom() + " " + user.getNom();
+                        if (identite.equals(userToAdd)) {
+                            ServerConstante.SERVER.unlinkUserToServer(user);
+                            continue;
+                        }
                     }
                 }
             }
@@ -253,10 +267,10 @@ public class ManageUsersController implements Initializable {
     private void setUsersDroit() {
         try {
             for (Node box : vboxprinc.getChildren()) {
-                HBox hBox = (HBox)box;
+                HBox hBox = (HBox) box;
                 JFXComboBox jfxComboBox = (JFXComboBox) hBox.getChildren().get(0);
-                Utilisateur user = (Utilisateur)jfxComboBox.getUserData();
-                Droit droit = (Droit)jfxComboBox.getSelectionModel().getSelectedItem();
+                Utilisateur user = (Utilisateur) jfxComboBox.getUserData();
+                Droit droit = (Droit) jfxComboBox.getSelectionModel().getSelectedItem();
                 ServerConstante.SERVER.setDroit(user, droit);
             }
             close();
