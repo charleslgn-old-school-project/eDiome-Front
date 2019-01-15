@@ -27,7 +27,7 @@ public class Picture extends NodeFinder {
     try {
       PieceJointe pj = message.getPieceJointe();
       if (pj != null && pj.getTypePieceJointe().getLibelle().equals("picture")) {
-        String res = message.getPieceJointe().getChemin();
+        String res = "../"+message.getPieceJointe().getChemin();
         ImageView imageView = new ImageView();
         File file = new File(res);
         Image img = new Image(file.toURI().toString());

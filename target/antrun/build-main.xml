@@ -3,12 +3,12 @@
 <target name="main">
   <taskdef classname="com.sun.javafx.tools.ant.DeployFXTask" name="jfxdeploy" classpathref="maven.plugin.classpath"/>
   <taskdef classname="com.sun.javafx.tools.ant.FXSignJarTask" name="jfxsignjar" classpathref="maven.plugin.classpath"/>
-  <jfxdeploy nativeBundles="all" outfile="eDiome" width="1024" height="768" outdir="C:\Users\ligony\Documents\cours LP\condProj\eDiome\IRCFront\target/deploy">
+  <jfxdeploy nativeBundles="all" outfile="eDiome" width="1024" height="768" outdir="C:\Users\Lucas\IdeaProjects\IRCFront\target/deploy">
     <info title="eDiome"/>
     <application mainClass="com.javafx.main.Main" name="eDiome"/>
     <resources>
-      <fileset includes="*.jar" dir="C:\Users\ligony\Documents\cours LP\condProj\eDiome\IRCFront\target"/>
-      <fileset includes="*.jar" dir="C:\Users\ligony\Documents\cours LP\condProj\eDiome\IRCFront\target/dependency"/>
+      <fileset includes="*.jar" dir="C:\Users\Lucas\IdeaProjects\IRCFront\target"/>
+      <fileset includes="*.jar" dir="C:\Users\Lucas\IdeaProjects\IRCFront\target/dependency"/>
     </resources>
     <platform javafx="8.0+">
       <jvmarg value="-Xms512m"/>

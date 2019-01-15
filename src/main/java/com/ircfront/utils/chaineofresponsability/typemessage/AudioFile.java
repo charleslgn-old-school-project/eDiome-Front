@@ -23,9 +23,9 @@ public class AudioFile extends NodeFinder {
     try {
       PieceJointe pj = message.getPieceJointe();
       if (pj != null && pj.getTypePieceJointe().getLibelle().equals("audio")) {
-        String res = message.getPieceJointe().getChemin();
+        String res = "../"+message.getPieceJointe().getChemin();
         AudioPlayerController fxmlDocumentController = new AudioPlayerController(res);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/../../gui/audio-player.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/audio-player.fxml"));
         fxmlLoader.setController(fxmlDocumentController);
         return fxmlLoader.load();
       }
