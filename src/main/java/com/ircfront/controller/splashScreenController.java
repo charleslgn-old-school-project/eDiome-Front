@@ -26,7 +26,6 @@ public class splashScreenController implements Initializable {
   @FXML
   ProgressIndicator progressIndicator;
 
-
   @FXML
   GridPane panParent;
 
