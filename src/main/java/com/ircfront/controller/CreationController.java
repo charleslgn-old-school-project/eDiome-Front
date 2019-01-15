@@ -63,7 +63,7 @@ public class CreationController implements Initializable {
     try {
       String psw1 = pasword1.getText();
       String psw2 = pasword2.getText();
-      if (psw1.equals(psw2) && telValidity && melValidity && passwordStrongValidator.getProgress() == 1.){
+      if (psw1.equals(psw2) && telValidity && melValidity && passwordStrongValidator.getProgress() >= 0.6){
           Utilisateur user = new Utilisateur();
           user.setNom(nom.getText());
           user.setPrenom(prenom.getText());
@@ -107,22 +107,21 @@ public class CreationController implements Initializable {
     tel = tel.replace("+33" , "0");
     telValidity = tel.matches("0[1-9][0-9]{8}");
     tel_pro.setEffect(new DropShadow(10, telValidity ? Color.GREEN : Color.RED));
-    System.out.println(tel);
   }
 
   @FXML
   public void setStrong(){
     String pass = pasword1.getText();
     double res = 0.;
-    if(pass.split("[0-9]").length > 1){
+    if(pass.matches("(.)*[0-9](.)*")){
       res += 0.1;
     }
-    if(pass.split("[A-Z]").length > 1){
+    if(pass.matches("(.)*[A-Z](.)*")){
       res += 0.1;
     }
-    if(pass.split("[a-z]").length > 1){
+    if(pass.matches("(.)*[a-z](.)*")){
       res += 0.1;
-    } if(pass.split("[!@#$%^&*(),.?\":{}|<>]").length > 1){
+    } if(pass.matches("(.)*[!@#$%^&*(),.?\":{}|<>](.)*")){
       res += 0.1;
     }
     double self = pass.length() > 7 ? 1. : pass.length()/8.;
