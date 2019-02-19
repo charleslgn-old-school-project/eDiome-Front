@@ -21,7 +21,16 @@ An IRC is a online chat, which made a group able to discuss with each other by t
 
  more in the trello [here](https://trello.com/b/AjUTBUOB)
  
- the end of the project is in 3 months
+ <table>
+    <tr>
+        <th>Beginning of the project</th>
+        <td>11-15-2018</td>
+    </tr>
+    <tr>
+        <th>End of the project</th>
+        <td>01-15-2019</td>
+    </tr>
+</table>
  
 ## Run the project
 - start a server
