@@ -9,6 +9,11 @@ Project made by
     <span style="color:blue; font-family:Georgia;">LIGONY Charles</span> and
     <span style="color:blue; font-family:Georgia;">NOEL Loic</span> as part of the <b>project management</b>
     
+[![Ligony Charles](https://img.shields.io/badge/Charles-LinkedIn-1E90E7.svg)](https://www.linkedin.com/in/charles-ligony-893177134/)
+[![Challouatte Cyril](https://img.shields.io/badge/Cyril-LinkedIn-1E90E7.svg)](https://www.linkedin.com/in/cyril-challouatte-824021160/)
+[![Cuoco Lucas](https://img.shields.io/badge/Lucas-LinkedIn-1E90E7.svg)](https://www.linkedin.com/in/lucas-cuoco-31962a146/)
+[![Noël Loïc](https://img.shields.io/badge/Loïc-LinkedIn-1E90E7.svg)](https://www.linkedin.com/in/loicnoelpro/)   
+
 ## project description
 An IRC is a online chat, which made a group able to discuss with each other by text, image, document or voice.
 
