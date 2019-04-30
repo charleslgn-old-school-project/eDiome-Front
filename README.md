@@ -51,4 +51,4 @@ An IRC is a online chat, which made a group able to discuss with each other by t
 Grades :  
 
 Technical    ![grade](https://img.shields.io/badge/17-20-00BB00.svg)  
-Management :   ![grade](https://img.shields.io/badge/0-20-00BB00.svg)
+Management :   ![grade](https://img.shields.io/badge/15-20-00BB00.svg)
